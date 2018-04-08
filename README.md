@@ -1,5 +1,6 @@
-# NgGames
+# h82 - Games
 
+Games made with Angular by hetty82.\
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
 ## Development server
@@ -16,7 +17,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `npm run test` to execute the unit tests via [Jest](https://facebook.github.io/jest/).
+Run `npm run test` to execute the unit tests via [Jest](https://facebook.github.io/jest/).\
 Run `npm run test:watch` to run and watch the unit tests.
 
 ## Running end-to-end tests
