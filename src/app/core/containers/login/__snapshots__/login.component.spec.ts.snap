@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginComponent should match snapshot 1`] = `
+<app-login>
+  <p>
+     login works!
+  
+  </p>
+</app-login>
+`;

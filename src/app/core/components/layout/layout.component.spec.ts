@@ -1,4 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { NO_ERRORS_SCHEMA } from '@angular/core'
+import { TestBed, async, ComponentFixture } from '@angular/core/testing'
+import { RouterTestingModule } from '@angular/router/testing'
 
 import { LayoutComponent } from './layout.component'
 
@@ -8,8 +10,10 @@ describe('LayoutComponent', () => {
   let fixture: ComponentFixture<LayoutComponent>
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LayoutComponent ]
+    TestBed.configureCompiler({ preserveWhitespaces: false } as any).configureTestingModule({
+      declarations: [ LayoutComponent ],
+      imports: [ RouterTestingModule ],
+      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents()
   }))
@@ -20,7 +24,11 @@ describe('LayoutComponent', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  it('should create component', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('should match snapshot', () => {
+    expect(fixture).toMatchSnapshot()
   })
 })

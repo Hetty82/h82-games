@@ -1,17 +1,32 @@
-import { TestBed, async } from '@angular/core/testing'
+import { NO_ERRORS_SCHEMA } from '@angular/core'
+import { TestBed, async, ComponentFixture } from '@angular/core/testing'
+
 import { NotFoundComponent } from './not-found.component'
 
+
 describe('NotFoundComponent', () => {
+  let component: NotFoundComponent
+  let fixture: ComponentFixture<NotFoundComponent>
+
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        NotFoundComponent
-      ],
-    }).compileComponents()
+    TestBed.configureCompiler({ preserveWhitespaces: false } as any).configureTestingModule({
+      declarations: [ NotFoundComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ],
+    })
+    .compileComponents()
   }))
-  it('should create the component', async(() => {
-    const fixture = TestBed.createComponent(NotFoundComponent)
-    const component = fixture.debugElement.componentInstance
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(NotFoundComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
+
+  it('should create component', () => {
     expect(component).toBeTruthy()
-  }))
+  })
+
+  it('should match snapshot', () => {
+    expect(fixture).toMatchSnapshot()
+  })
 })

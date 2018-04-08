@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppComponent should match snapshot 1`] = `
+<app-root
+  title={[Function String]}
+>
+  <app-layout>
+    <h1>
+      Games
+    </h1>
+    <h2>
+      Made with Angular by hetty82
+    </h2>
+  </app-layout>
+</app-root>
+`;

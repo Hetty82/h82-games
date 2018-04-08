@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { FridayComponent } from './friday.component'
@@ -8,8 +9,9 @@ describe('FridayComponent', () => {
   let fixture: ComponentFixture<FridayComponent>
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ FridayComponent ]
+    TestBed.configureCompiler({ preserveWhitespaces: false } as any).configureTestingModule({
+      declarations: [ FridayComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents()
   }))
@@ -20,7 +22,11 @@ describe('FridayComponent', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  it('should create component', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('should match snapshot', () => {
+    expect(fixture).toMatchSnapshot()
   })
 })

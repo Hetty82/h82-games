@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFoundComponent should match snapshot 1`] = `
+<app-not-found>
+  <p>
+     Oops, page not found..
+  
+  </p>
+</app-not-found>
+`;
