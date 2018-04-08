@@ -2,6 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { GamesComponent } from './games.component'
+import { GamesService } from '../../services'
 
 
 describe('GamesComponent', () => {
@@ -11,6 +12,14 @@ describe('GamesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureCompiler({ preserveWhitespaces: false } as any).configureTestingModule({
       declarations: [ GamesComponent ],
+      providers: [
+        {
+          provide: GamesService,
+          useValue: {
+            getGames: jest.fn()
+          }
+        }
+      ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents()

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router'
 
 import * as fromComponents from './components'
 import * as fromContainers from './containers'
+import * as fromServices from './services'
 
 
 @NgModule({
@@ -19,4 +20,11 @@ import * as fromContainers from './containers'
     fromContainers.AppComponent,
   ],
 })
-export class CoreModule { }
+export class CoreModule {
+  static forRoot() {
+    return {
+      ngModule: CoreModule,
+      providers: fromServices.services,
+    }
+  }
+}

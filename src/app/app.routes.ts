@@ -2,10 +2,8 @@
 
 import { Routes } from '@angular/router'
 
-// import { AuthGuard } from './auth/services/auth-guard.service'
+import * as containers from './core/containers'
 
-import { NotFoundComponent } from './core/containers'
-import { GamesComponent } from './core/containers'
 
 export const routes: Routes = [
   {
@@ -14,11 +12,15 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'login',
+    component: containers.LoginComponent,
+  },
+  {
     path: 'games',
-    component: GamesComponent,
+    component: containers.GamesComponent,
   },
   {
     path: '**',
-    component:  NotFoundComponent,
+    component: containers.NotFoundComponent,
   },
 ]
