@@ -1,20 +1,19 @@
 <header class="header">
-  <div class="container">
-    <div class="left">
-      <ng-content></ng-content>
-    </div>
+  <div class="left">
+    <h1 class="title">{{ title }}</h1>
+    <p>{{ subTitle }}</p>
+  </div>
 
-    <div class="right">
-      <a routerLink="/login" routerLinkActive="active">Login</a>
-      <a routerLink="/games" routerLinkActive="active">Games</a>
-    </div>
+  <div class="center">
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+    <a routerLink="/games" routerLinkActive="active">Games</a>
+  </div>
+
+  <div class="right">
+    [ account ]
   </div>
 </header>
 
 <main class="main">
-  <div class="container">
-    --/ router-outlet \--
-    <router-outlet></router-outlet>
-    --\ router-outlet /--
-  </div>
+  <router-outlet></router-outlet>
 </main>

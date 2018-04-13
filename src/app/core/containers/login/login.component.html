@@ -1,5 +1,7 @@
-<h2>User list</h2>
+<section class="container">
+  <h1 class="page-title">User list</h1>
 
-<ul>
-  <li *ngFor="let user of (users$ | async)">{{ user.name }}</li>
-</ul>
+  <ul>
+    <li *ngFor="let user of (users$ | async)">{{ user.name }}</li>
+  </ul>
+</section>

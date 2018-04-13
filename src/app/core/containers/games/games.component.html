@@ -1,5 +1,8 @@
-<h2>Game list</h2>
+<section class="container">
+  <h1 class="page-title">Game list</h1>
 
-<ul>
-  <li *ngFor="let game of (games$ | async)">{{ game.name }}</li>
-</ul>
+  <ul>
+    <li *ngFor="let game of (games$ | async)">{{ game.name }}</li>
+  </ul>
+</section>
+

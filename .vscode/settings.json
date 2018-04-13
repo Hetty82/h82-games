@@ -1,3 +1,7 @@
 {
   "tslint.autoFixOnSave": true,
+  "csscomb.preset": {
+  },
+  "csscomb.formatOnSave": false,
+
 }

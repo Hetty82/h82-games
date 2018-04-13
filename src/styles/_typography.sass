@@ -2,14 +2,15 @@ html
   font-size: 16px
 
 body
-  font-family: $font-family-sans
+  font-family: $font-family-default
   font-size: 1em
   line-height: 1.5
+  color: $text-color
 
 h1,
 h2,
 h3
-  font-family: $font-family-serif
+  font-family: $font-family-special
   margin-bottom: $spacing-default
   font-weight: bold
   line-height: 1.2
@@ -24,3 +25,11 @@ p
   &:last-child
     margin: 0
 
+ul,
+ol
+  margin: 0
+  padding: 0
+  list-style: none
+
+.page-title
+  font-size: $font-size-xs
