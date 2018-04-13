@@ -2,7 +2,8 @@
 
 import { Routes } from '@angular/router'
 
-import * as containers from './core/containers'
+import * as fromContainers from './core/containers'
+import * as fromComponents from './core/components'
 
 
 export const routes: Routes = [
@@ -13,14 +14,18 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: containers.LoginComponent,
+    component: fromContainers.LoginComponent,
   },
   {
     path: 'games',
-    component: containers.GamesComponent,
+    component: fromContainers.GamesComponent,
+  },
+  {
+    path: 'friday',
+    loadChildren: './friday/friday.module#FridayModule',
   },
   {
     path: '**',
-    component: containers.NotFoundComponent,
+    component: fromComponents.NotFoundComponent,
   },
 ]

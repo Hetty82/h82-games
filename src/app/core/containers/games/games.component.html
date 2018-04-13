@@ -1,9 +1,14 @@
 <section class="container">
-  <h1 class="page-title">Game list</h1>
+  <h1 class="page-title">Choose game:</h1>
 
   <ul class="list">
-    <li *ngFor="let game of (games$ | async)"(click)="selectGame(game.id)" class="item">
-      {{ game.name }}
+    <li *ngIf="!(user$ | async)" class="item">
+      Please login if you want to play a game.
+    </li>
+
+    <li *ngFor="let game of (games$ | async)" class="item">
+      <button (click)="selectGame(game.name)" class="button" [disabled]="!game.accessible || !(user$ | async)">{{ game.name }}</button>
+      <span *ngIf="(user$ | async) && !game.accessible">(coming soon)</span>
     </li>
   </ul>
 </section>

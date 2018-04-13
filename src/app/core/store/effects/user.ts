@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 
-import { Effect, Actions } from '@ngrx/effects'
+import { Effect, Actions, ofType } from '@ngrx/effects'
 import { of } from 'rxjs/observable/of'
 import { map, switchMap, catchError, tap } from 'rxjs/operators'
 
@@ -18,7 +18,8 @@ export class UserEffects {
   ) {}
 
   @Effect()
-  loadUsers$ = this.actions$.ofType(userActions.LOAD_USERS).pipe(
+  loadUsers$ = this.actions$.pipe(
+    ofType(userActions.LOAD_USERS),
     switchMap(() => {
       return this.userService
         .getUsers()
@@ -30,12 +31,14 @@ export class UserEffects {
   )
 
   @Effect({ dispatch: false })
-  selectUser$ = this.actions$.ofType(userActions.SELECT_USER).pipe(
+  selectUser$ = this.actions$.pipe(
+    ofType(userActions.SELECT_USER),
     tap(() => this.router.navigate(['/games']))
   )
 
   @Effect({ dispatch: false })
-  deselectUser$ = this.actions$.ofType(userActions.DESELECT_USER).pipe(
+  deselectUser$ = this.actions$.pipe(
+    ofType(userActions.DESELECT_USER),
     tap(() => this.router.navigate(['/login']))
   )
 }

@@ -15,6 +15,7 @@ import * as fromRoot from '../../../store'
 })
 export class GamesComponent implements OnInit {
   games$ = this.store.pipe(select(fromRoot.getGames))
+  user$ = this.store.pipe(select(fromRoot.getCurrentUser))
 
   constructor(private store: Store<fromRoot.State>) {
     this.store.pipe(
@@ -26,5 +27,9 @@ export class GamesComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  selectGame(name: string) {
+    this.store.dispatch(new fromRoot.SelectGame(name))
   }
 }

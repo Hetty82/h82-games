@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { RouterModule } from '@angular/router'
 
 // import * as fromComponents from './components'
-import * as fromContainers from './containers'
+import { routes } from './friday.routes'
 
+import * as fromContainers from './containers'
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ],
   declarations: [
     // ...fromComponents.components,

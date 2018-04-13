@@ -2,13 +2,19 @@
   color: $white
   background: $blue
 
-  &:hover,
-  &:focus
-    background: darken($blue, 5%)
+  &:enabled
+    &:hover,
+    &:focus
+      background: darken($blue, 8%)
 
   &.-warning
     background: $yellow
 
-    &:hover,
-    &:focus
-      background: darken($yellow, 10%)
+    &:enabled
+      &:hover,
+      &:focus
+        background: darken($yellow, 12%)
+
+  &:disabled
+    background: $bg-disabled
+    cursor: not-allowed

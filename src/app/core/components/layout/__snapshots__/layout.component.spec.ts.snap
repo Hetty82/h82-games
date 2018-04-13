@@ -1,12 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LayoutComponent should match snapshot 1`] = `
-<app-layout>
-  <header /><main>
-     --/ router-outlet -- 
+<app-layout
+  store={[Function Store]}
+  user$={[Function Store]}
+>
+  <header
+    class="header"
+  >
+    <div
+      class="left"
+    >
+      <h1
+        class="title"
+      >
+        
+      </h1>
+      <p>
+        
+      </p>
+    </div>
+    <div
+      class="center"
+    >
+      <a
+        href="/games"
+        ng-reflect-router-link="/games"
+        ng-reflect-router-link-active="active"
+        routerlink="/games"
+        routerlinkactive="active"
+      >
+        Games
+      </a>
+    </div>
+    <div
+      class="right"
+    >
+      
+      <a
+        href="/login"
+        ng-reflect-router-link="/login"
+        ng-reflect-router-link-active="active"
+        routerlink="/login"
+        routerlinkactive="active"
+      >
+        Login
+      </a>
+      
+    </div>
+  </header><main
+    class="main"
+  >
     <router-outlet />
-     -- router-outlet /--
-  
   </main>
 </app-layout>
 `;

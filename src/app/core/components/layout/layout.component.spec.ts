@@ -1,8 +1,11 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { TestBed, async, ComponentFixture } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
+import { StoreModule } from '@ngrx/store'
 
 import { LayoutComponent } from './layout.component'
+
+import * as fromRoot from '../../../store'
 
 
 describe('LayoutComponent', () => {
@@ -12,7 +15,10 @@ describe('LayoutComponent', () => {
   beforeEach(async(() => {
     TestBed.configureCompiler({ preserveWhitespaces: false } as any).configureTestingModule({
       declarations: [ LayoutComponent ],
-      imports: [ RouterTestingModule ],
+      imports: [
+        RouterTestingModule,
+        StoreModule.forRoot(fromRoot.reducers)
+      ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents()

@@ -1,8 +1,11 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { TestBed, async, ComponentFixture } from '@angular/core/testing'
+import { StoreModule } from '@ngrx/store'
 
 import { UserService } from '../../services'
 import { LoginComponent } from './login.component'
+
+import * as fromRoot from '../../../store'
 
 
 describe('LoginComponent', () => {
@@ -12,14 +15,7 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureCompiler({ preserveWhitespaces: false } as any).configureTestingModule({
       declarations: [ LoginComponent ],
-      providers: [
-        {
-          provide: UserService,
-          useValue: {
-            getUsers: jest.fn()
-          }
-        }
-      ],
+      imports: [ StoreModule.forRoot(fromRoot.reducers) ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents()

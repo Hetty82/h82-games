@@ -2,13 +2,22 @@
 
 exports[`LoginComponent should match snapshot 1`] = `
 <app-login
-  userService={[Function Object]}
-  users$="undefined"
+  store={[Function Store]}
+  users$={[Function Store]}
 >
-  <h2>
-    User list
-  </h2><ul>
-    
-  </ul>
+  <section
+    class="container"
+  >
+    <h1
+      class="page-title"
+    >
+      Choose player:
+    </h1>
+    <ul
+      class="list"
+    >
+      
+    </ul>
+  </section>
 </app-login>
 `;

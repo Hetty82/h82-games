@@ -2,13 +2,29 @@
 
 exports[`GamesComponent should match snapshot 1`] = `
 <app-games
-  games$="undefined"
-  gamesService={[Function Object]}
+  games$={[Function Store]}
+  store={[Function Store]}
+  user$={[Function Store]}
 >
-  <h2>
-    Game list
-  </h2><ul>
-    
-  </ul>
+  <section
+    class="container"
+  >
+    <h1
+      class="page-title"
+    >
+      Choose game:
+    </h1>
+    <ul
+      class="list"
+    >
+      
+      <li
+        class="item"
+      >
+         Please login if you want to play a game. 
+      </li>
+      
+    </ul>
+  </section>
 </app-games>
 `;

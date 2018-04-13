@@ -1,28 +1,23 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core'
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-import { StoreModule } from '@ngrx/store'
 
-import { GamesComponent } from './games.component'
-import { GamesService } from '../../services'
-
-import * as fromRoot from '../../../store'
+import { HeaderComponent } from './header.component'
 
 
-describe('GamesComponent', () => {
-  let component: GamesComponent
-  let fixture: ComponentFixture<GamesComponent>
+describe('HeaderComponent', () => {
+  let component: HeaderComponent
+  let fixture: ComponentFixture<HeaderComponent>
 
   beforeEach(async(() => {
     TestBed.configureCompiler({ preserveWhitespaces: false } as any).configureTestingModule({
-      declarations: [ GamesComponent ],
-      imports: [ StoreModule.forRoot(fromRoot.reducers) ],
+      declarations: [ HeaderComponent ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents()
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GamesComponent)
+    fixture = TestBed.createComponent(HeaderComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

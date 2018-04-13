@@ -9,7 +9,6 @@ import { StoreModule } from '@ngrx/store'
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store'
 
 import { CoreModule } from './core/core.module'
-import { FridayModule } from './friday/friday.module'
 
 import { AppComponent } from './core/containers'
 
@@ -22,10 +21,12 @@ import { environment } from '../environments/environment'
 @NgModule({
   bootstrap: [ AppComponent ],
   imports: [
+    // Angular
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
 
+    // Ngrx
     EffectsModule.forRoot(fromStore.coreEffects),
     StoreModule.forRoot(fromStore.reducers, { metaReducers: fromStore.metaReducers }),
     // DevTools Instrumentation must be imported after importing StoreModule
@@ -35,8 +36,8 @@ import { environment } from '../environments/environment'
     }),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
 
+    // h82
     CoreModule.forRoot(),
-    FridayModule,
   ],
   providers: [
     {
