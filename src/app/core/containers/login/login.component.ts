@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
+import { Store, select } from '@ngrx/store'
+
+import { take } from 'rxjs/operators'
 
 import { UserService } from '../../services'
 import { User } from '../../interfaces/user.interface'
+
+import * as fromStore from '../../../store'
 
 
 @Component({
@@ -11,11 +15,16 @@ import { User } from '../../interfaces/user.interface'
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  users$: Observable<User[]> = this.userService.getUsers()
+  users$ = this.store.pipe(select(fromStore.getUsers))
 
-  constructor(
-    private userService: UserService
-  ) { }
+  constructor(private store: Store<fromStore.State>) {
+    this.store.pipe(
+      take(1),
+      select(fromStore.getUsersLoaded)
+    ).subscribe(loaded => {
+      if (!loaded) this.store.dispatch(new fromStore.LoadUsers())
+    })
+  }
 
   ngOnInit() {
   }
