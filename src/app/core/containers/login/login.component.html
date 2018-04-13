@@ -1,7 +1,9 @@
 <section class="container">
-  <h1 class="page-title">User list</h1>
+  <h1 class="page-title">Choose player:</h1>
 
-  <ul>
-    <li *ngFor="let user of (users$ | async)">{{ user.name }}</li>
+  <ul class="list">
+    <li *ngFor="let user of (users$ | async)" (click)="selectPlayer(user.id)" class="item">
+      <button class="button">{{ user.name }}</button>
+    </li>
   </ul>
 </section>

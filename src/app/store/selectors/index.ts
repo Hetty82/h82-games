@@ -19,6 +19,7 @@ export const getGames = createSelector(getGameEntities, getGameIds, (entities, i
 // User feature from CoreModule
 export const getUserState = createFeatureSelector<fromUser.State>('user')
 
+export const getCurrentUserId = createSelector(getUserState, fromUser.getCurrentUserId)
 export const getUserEntities = createSelector(getUserState, fromUser.getEntities)
 export const getUserIds = createSelector(getUserState, fromUser.getIds)
 export const getUsersLoaded = createSelector(getUserState, fromUser.getLoaded)
@@ -26,5 +27,9 @@ export const getUsersLoading = createSelector(getUserState, fromUser.getLoading)
 
 export const getUsers = createSelector(getUserEntities, getUserIds, (entities, ids) => {
   return ids.map(id => entities[id])
+})
+
+export const getCurrentUser = createSelector(getUserEntities, getCurrentUserId, (entities, id) => {
+  return entities[id]
 })
 

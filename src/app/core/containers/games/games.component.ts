@@ -5,7 +5,8 @@ import { take } from 'rxjs/operators'
 import { GamesService } from '../../services'
 import { Game } from '../../interfaces/game.interface'
 
-import * as fromStore from '../../../store'
+import * as fromRoot from '../../../store'
+
 
 @Component({
   selector: 'app-games',
@@ -13,14 +14,14 @@ import * as fromStore from '../../../store'
   styleUrls: ['./games.component.sass']
 })
 export class GamesComponent implements OnInit {
-  games$ = this.store.pipe(select(fromStore.getGames))
+  games$ = this.store.pipe(select(fromRoot.getGames))
 
-  constructor(private store: Store<fromStore.State>) {
+  constructor(private store: Store<fromRoot.State>) {
     this.store.pipe(
       take(1),
-      select(fromStore.getGamesLoaded)
+      select(fromRoot.getGamesLoaded)
     ).subscribe(loaded => {
-      if (!loaded) this.store.dispatch(new fromStore.LoadGames())
+      if (!loaded) this.store.dispatch(new fromRoot.LoadGames())
     })
   }
 

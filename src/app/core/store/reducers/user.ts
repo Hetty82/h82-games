@@ -8,6 +8,7 @@ interface UserEntities  {
 }
 
 export interface State {
+  currentUserId: number
   entities: UserEntities
   ids: number[]
   loaded: boolean
@@ -15,6 +16,7 @@ export interface State {
 }
 
 const initialState: State = {
+  currentUserId: null,
   entities: { },
   ids: [],
   loaded: false,
@@ -60,11 +62,26 @@ export function reducer(state: State = initialState, action: fromUser.UserAction
       }
     }
 
+    case fromUser.SELECT_USER: {
+      return {
+        ...state,
+        currentUserId: action.payload
+      }
+    }
+
+    case fromUser.DESELECT_USER: {
+      return {
+        ...state,
+        currentUserId: null
+      }
+    }
+
     default:
       return state
   }
 }
 
+export const getCurrentUserId = (state: State) => state.currentUserId
 export const getEntities = (state: State) => state.entities
 export const getIds = (state: State) => state.ids
 export const getLoaded = (state: State) => state.loaded

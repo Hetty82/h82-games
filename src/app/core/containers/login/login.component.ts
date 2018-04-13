@@ -6,7 +6,7 @@ import { take } from 'rxjs/operators'
 import { UserService } from '../../services'
 import { User } from '../../interfaces/user.interface'
 
-import * as fromStore from '../../../store'
+import * as fromRoot from '../../../store'
 
 
 @Component({
@@ -15,17 +15,21 @@ import * as fromStore from '../../../store'
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  users$ = this.store.pipe(select(fromStore.getUsers))
+  users$ = this.store.pipe(select(fromRoot.getUsers))
 
-  constructor(private store: Store<fromStore.State>) {
+  constructor(private store: Store<fromRoot.State>) {
     this.store.pipe(
       take(1),
-      select(fromStore.getUsersLoaded)
+      select(fromRoot.getUsersLoaded)
     ).subscribe(loaded => {
-      if (!loaded) this.store.dispatch(new fromStore.LoadUsers())
+      if (!loaded) this.store.dispatch(new fromRoot.LoadUsers())
     })
   }
 
   ngOnInit() {
+  }
+
+  selectPlayer(id: number) {
+    this.store.dispatch(new fromRoot.SelectUser(id))
   }
 }

@@ -55,9 +55,8 @@ export class CustomRouterStateSerializer implements fromRouter.RouterStateSerial
   serialize(routerState: RouterStateSnapshot): RouterStateUrl {
     let route = routerState.root
 
-    while (route.firstChild) {
+    while (route.firstChild)
       route = route.firstChild
-    }
 
     const { url, root: { queryParams } } = routerState
     const { params } = route
