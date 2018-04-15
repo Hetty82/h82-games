@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable'
 
 import { environment } from '../../../environments/environment'
 
-import { User } from '../interfaces/user.interface'
+import { User } from '../models/user.interface'
 
 
 @Injectable()

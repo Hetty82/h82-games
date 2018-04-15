@@ -1,5 +1,4 @@
-import { createFeatureSelector } from '@ngrx/store'
-import { Game } from '../../interfaces/game.interface'
+import { Game } from '../../models/game.interface'
 
 import * as fromGames from '../actions/games'
 
@@ -15,7 +14,7 @@ export interface State {
 }
 
 const initialState: State = {
-  entities: { },
+  entities: {},
   ids: [],
   loaded: false,
   loading: false,

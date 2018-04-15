@@ -1,18 +1,10 @@
 import { RouterStateSnapshot, Params } from '@angular/router'
-
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer,
-} from '@ngrx/store'
-
-import * as fromRouter from '@ngrx/router-store'
+import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store'
 import { storeFreeze } from 'ngrx-store-freeze'
 
 import { environment } from '../../../environments/environment'
 
+import * as fromRouter from '@ngrx/router-store'
 import * as fromGames from '../../core/store/reducers/games'
 import * as fromUser from '../../core/store/reducers/user'
 

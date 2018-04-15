@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store'
 
-import { User } from '../../interfaces/user.interface'
+import { User } from '../../models/user.interface'
 
 
 export type UserError = any

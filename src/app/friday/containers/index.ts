@@ -1,7 +1,10 @@
-import { FridayComponent } from './friday/friday.component'
+import { ActiveGameComponent } from './active-game/active-game.component'
+import { GamesComponent } from './games/games.component'
 
 export const containers: any[] = [
-  FridayComponent,
+  ActiveGameComponent,
+  GamesComponent,
 ]
 
-export * from './friday/friday.component'
+export * from './active-game/active-game.component'
+export * from './games/games.component'

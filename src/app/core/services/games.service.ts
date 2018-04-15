@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable'
 
 import { environment } from '../../../environments/environment'
 
-import { Game } from '../interfaces/game.interface'
+import { Game } from '../models/game.interface'
 
 
 @Injectable()

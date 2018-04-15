@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GamesComponent should match snapshot 1`] = `
+<app-fr-games
+  gamesState$="undefined"
+  store={[Function Object]}
+  user$="undefined"
+>
+  <section
+    class="container"
+  >
+    <h1>
+      Welcome to Friday, the game!
+    </h1>
+    <p>
+       Here's the current user: 
+    </p>
+    <pre>
+      null
+    </pre>
+    <p>
+      Choose your game from the list or start a new one:
+    </p>
+    <p>
+       Here's the games state: 
+    </p>
+    <pre>
+      null
+    </pre>
+    <button
+      class="button"
+    >
+      Create a new game
+    </button>
+  </section>
+</app-fr-games>
+`;

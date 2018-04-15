@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store'
 
-import { Game } from '../../interfaces/game.interface'
+import { Game } from '../../models/game.interface'
 
 
 export type GameError = any

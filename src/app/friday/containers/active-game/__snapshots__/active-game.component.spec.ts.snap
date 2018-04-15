@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActiveGameComponent should match snapshot 1`] = `
+<app-fr-active-game
+  activeGameState$="undefined"
+  store={[Function Object]}
+>
+  <section
+    class="container"
+  >
+    <h1>
+       You are in an active game :) 
+    </h1>
+    <p>
+       Here's the active game state: 
+    </p>
+    <pre>
+      null
+    </pre>
+  </section>
+</app-fr-active-game>
+`;

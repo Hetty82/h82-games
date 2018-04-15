@@ -1,0 +1,19 @@
+<section class="container">
+  <h1>Welcome to Friday, the game!</h1>
+
+  <p>
+    Here's the current user:
+  </p>
+
+  <pre>{{ user$ | async | json }}</pre>
+
+  <p>Choose your game from the list or start a new one:</p>
+
+  <p>
+    Here's the games state:
+  </p>
+
+  <pre>{{ gamesState$ | async | json }}</pre>
+
+  <button class="button">Create a new game</button>
+</section>

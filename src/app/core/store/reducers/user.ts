@@ -1,5 +1,4 @@
-import { createFeatureSelector } from '@ngrx/store'
-import { User } from '../../interfaces/user.interface'
+import { User } from '../../models/user.interface'
 
 import * as fromUser from '../actions/user'
 
@@ -17,7 +16,7 @@ export interface State {
 
 const initialState: State = {
   currentUserId: null,
-  entities: { },
+  entities: {},
   ids: [],
   loaded: false,
   loading: false,
