@@ -8,8 +8,12 @@ const baseUrl = 'http://localhost:3000'
 
 export const environment: Environment = {
   api: {
-    users: `${baseUrl}/users`,
-    games: `${baseUrl}/games`,
+    friday: {
+      gameDetails: baseUrl + '/friday/game-details/:id',
+      games: baseUrl + '/friday/games',
+    },
+    games: baseUrl + '/games',
+    users: baseUrl + '/users',
   },
   production: false,
 }

@@ -18,4 +18,3 @@ export const reducers: ActionReducerMap<State> = {
 export const getFridayState = createFeatureSelector<State>(
   'friday'
 )
-

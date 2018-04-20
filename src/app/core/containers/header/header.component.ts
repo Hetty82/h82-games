@@ -22,6 +22,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.store.dispatch( new fromRoot.DeselectUser() )
+    this.store.dispatch(new fromRoot.DeselectUser())
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 
 import * as fromStore from '../../store'
+import { Game } from '../../models/game.model'
 
 
 @Component({
@@ -19,8 +20,8 @@ export class GamesComponent implements OnInit {
   ngOnInit() {
   }
 
-  createGame(event) {
-    console.log('let\'s create a game')
+  createGame(userId) {
+    this.store.dispatch(new fromStore.CreateGame(new Game(userId)))
   }
 
   selectGame(event) {

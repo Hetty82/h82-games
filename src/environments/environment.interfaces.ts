@@ -3,7 +3,13 @@ export interface Environment {
   production?: boolean
 }
 
-interface Api {
-  users: string
+interface FridayApi {
+  gameDetails: string
   games: string
+}
+
+interface Api {
+  friday: FridayApi
+  games: string
+  users: string
 }

@@ -1,19 +1,19 @@
 <section class="container">
   <h1>Welcome to Friday, the game!</h1>
 
-  <p>
-    Here's the current user:
-  </p>
+  <ng-container *ngIf="(user$ | async) as user; else login">
+    <p>[ current user state ]</p>
+    <pre class="code">{{ user | json }}</pre>
 
-  <pre>{{ user$ | async | json }}</pre>
+    <p>Choose your game from the list or start a new one:</p>
 
-  <p>Choose your game from the list or start a new one:</p>
+    <p>[ games state ]</p>
+    <pre class="code">{{ gamesState$ | async | json }}</pre>
 
-  <p>
-    Here's the games state:
-  </p>
+    <button class="button" (click)="createGame(user.id)">Create a new game</button>
+  </ng-container>
 
-  <pre>{{ gamesState$ | async | json }}</pre>
-
-  <button class="button">Create a new game</button>
+  <ng-template #login>
+    <a routerLink="/login">Login</a>
+  </ng-template>
 </section>

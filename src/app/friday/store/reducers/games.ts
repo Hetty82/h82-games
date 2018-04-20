@@ -1,4 +1,4 @@
-import { Game } from '../../models/game'
+import { Game } from '../../models/game.model'
 
 // import * as fromGames from '../actions/games'
 
