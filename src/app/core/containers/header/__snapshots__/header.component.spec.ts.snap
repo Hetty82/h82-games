@@ -1,10 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeaderComponent should match snapshot 1`] = `
-<app-header>
-  <p>
-     header works!
-  
-  </p>
+<app-header
+  store={[Function Object]}
+  user$="undefined"
+>
+  <header
+    class="header"
+  >
+    <div
+      class="left"
+    >
+      <h1
+        class="title"
+      >
+        
+      </h1>
+      <p>
+        
+      </p>
+    </div>
+    <div
+      class="center"
+    >
+      <a
+        routerlink="/games"
+        routerlinkactive="active"
+      >
+        Games
+      </a>
+    </div>
+    <div
+      class="right"
+    >
+      
+      <a
+        routerlink="/login"
+        routerlinkactive="active"
+      >
+        Login
+      </a>
+      
+    </div>
+  </header>
 </app-header>
 `;

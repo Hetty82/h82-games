@@ -17,7 +17,7 @@ import * as fromServices from './services'
     ...fromContainers.containers,
   ],
   exports: [
-    fromContainers.AppComponent,
+    fromComponents.AppComponent,
   ],
 })
 export class CoreModule {

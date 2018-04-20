@@ -10,7 +10,7 @@ import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router
 
 import { CoreModule } from './core/core.module'
 
-import { AppComponent } from './core/containers'
+import { AppComponent } from './core/components'
 
 import * as fromStore from './store'
 
