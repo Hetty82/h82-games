@@ -9,3 +9,9 @@ export enum Round {
 export interface GameDetails {
   currentRound: Round
 }
+
+export const createTestGameDetails = (currentRound = Round.INITIAL): GameDetails => {
+  return {
+    currentRound,
+  }
+}

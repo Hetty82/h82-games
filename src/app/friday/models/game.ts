@@ -15,3 +15,15 @@ export interface Game {
   startDate: Date
   userId: number
 }
+
+const date = new Date(2018, 4, 20)
+
+export const createTestGame = (id = 1, userId = 1): Game => {
+  return {
+    details: null,
+    difficulty: Difficulty.LEVEL_1,
+    id,
+    startDate: date,
+    userId,
+  }
+}
