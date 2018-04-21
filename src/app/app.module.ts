@@ -36,7 +36,7 @@ import { environment } from '../environments/environment'
     }),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
 
-    // h82
+    // Own
     CoreModule.forRoot(),
   ],
   providers: [

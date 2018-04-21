@@ -97,9 +97,10 @@
       "never"
     ],
     "trailing-comma": [
-      true, {
+      true,
+      {
         "multiline": "always",
-        "singleline": "never",
+        "singleline": "never"
       }
     ],
     "triple-equals": [

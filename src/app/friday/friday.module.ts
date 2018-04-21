@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 
+import { SharedModule } from '../shared/shared.module'
+
 import { routes } from './friday.routes'
 
 import * as fromComponents from './components'
@@ -22,6 +24,9 @@ import * as fromStore from './store'
     // Ngrx
     EffectsModule.forFeature(fromStore.fridayEffects),
     StoreModule.forFeature('friday', fromStore.reducers ),
+
+    // Other
+    SharedModule,
   ],
   declarations: [
     ...fromComponents.components,

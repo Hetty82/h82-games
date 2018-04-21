@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
 
+import { SharedModule } from '../shared/shared.module'
+
 import * as fromComponents from './components'
 import * as fromContainers from './containers'
 import * as fromServices from './services'
@@ -11,6 +13,7 @@ import * as fromServices from './services'
   imports: [
     CommonModule,
     RouterModule,
+    SharedModule,
   ],
   declarations: [
     ...fromComponents.components,
