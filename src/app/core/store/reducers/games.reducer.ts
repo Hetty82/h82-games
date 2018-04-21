@@ -1,6 +1,6 @@
 import { Game } from '../../models/game.interface'
 
-import * as fromGames from '../actions/games'
+import * as fromGames from '../actions/games.actions'
 
 interface GameEntities  {
   [id: number]: Game

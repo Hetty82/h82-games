@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store'
 
 import * as fromFeature from '../reducers'
-import * as fromGames from '../reducers/games'
+import * as fromGames from '../reducers/games.reducer'
 
 
 export const getGamesState = createSelector(fromFeature.getFridayState, (state: fromFeature.State) => state.games)

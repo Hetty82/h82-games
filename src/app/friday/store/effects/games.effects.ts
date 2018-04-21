@@ -5,7 +5,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects'
 import { of } from 'rxjs/observable/of'
 import { map, switchMap, catchError, tap, mergeMap } from 'rxjs/operators'
 
-import * as gamesActions from '../actions/games'
+import * as gamesActions from '../actions/games.actions'
 import * as fromServices from '../../services'
 
 

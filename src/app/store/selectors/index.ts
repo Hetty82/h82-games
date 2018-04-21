@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
 
-import * as fromGames from '../../core/store/reducers/games'
-import * as fromUser from '../../core/store/reducers/user'
+import * as fromGames from '../../core/store/reducers/games.reducer'
+import * as fromUser from '../../core/store/reducers/user.reducer'
 
 
 // Game feature from CoreModule

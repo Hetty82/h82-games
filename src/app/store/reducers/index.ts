@@ -5,8 +5,8 @@ import { storeFreeze } from 'ngrx-store-freeze'
 import { environment } from '../../../environments/environment'
 
 import * as fromRouter from '@ngrx/router-store'
-import * as fromGames from '../../core/store/reducers/games'
-import * as fromUser from '../../core/store/reducers/user'
+import * as fromGames from '../../core/store/reducers/games.reducer'
+import * as fromUser from '../../core/store/reducers/user.reducer'
 
 
 export interface State {

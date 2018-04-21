@@ -1,7 +1,7 @@
-import { GamesEffects } from './games'
+import { GamesEffects } from './games.effects'
 
 export const fridayEffects: any[] = [
   GamesEffects,
 ]
 
-export * from './games'
+export * from './games.effects'

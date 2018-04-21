@@ -1,6 +1,6 @@
 import { User } from '../../models/user.interface'
 
-import * as fromUser from '../actions/user'
+import * as fromUser from '../actions/user.actions'
 
 interface UserEntities  {
   [id: number]: User

@@ -1,2 +1,2 @@
-export * from './games'
-export * from './user'
+export * from './games.actions'
+export * from './user.actions'
