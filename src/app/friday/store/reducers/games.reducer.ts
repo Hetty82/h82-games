@@ -1,4 +1,4 @@
-import { FridayGame } from '../../models/friday-game.model'
+import { FridayGame, GameError } from '../../models/friday-game.model'
 
 import * as fromGames from '../actions/games.actions'
 
@@ -9,7 +9,7 @@ interface GameEntities  {
 
 export interface State {
   entities: GameEntities
-  error: fromGames.GameError
+  error: GameError
   ids: number[]
   loaded: boolean
   loading: boolean
@@ -133,6 +133,11 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
         loading: false,
         loaded: true,
       }
+    }
+
+
+    case fromGames.RESET_GAMES_STATE: {
+      return initialState
     }
 
     default:

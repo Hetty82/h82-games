@@ -1,6 +1,13 @@
 <section class="container">
   <h1>You are in an active game :)</h1>
 
-  <p>[ active game state ]</p>
-  <pre class="code">{{ activeGameState$ | async | json }}</pre>
+  <button (click)="reset()" class="button -danger">Reset active game state</button>
+
+  <pre class="code">// full game state</pre>
+  <pre class="code">{{ game | json }}</pre>
+
+  <ng-container *ngIf="game.id">
+    <button *ngIf="!game.details" (click)="start()" class="button">Start game</button>
+    <button *ngIf="game.details" (click)="continue()" class="button">Continue game</button>
+  </ng-container>
 </section>

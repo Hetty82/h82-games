@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 
 import { Observable } from 'rxjs/Observable'
-import { tap } from 'rxjs/operators'
+import { delay } from 'rxjs/operators'
 
 import { environment } from '../../../environments/environment'
 
-import { FridayGame } from '../models/friday-game.model'
+import { FridayGame, GameId } from '../models/friday-game.model'
+import { FridayGameDetails } from '../models/friday-game-details.model'
 
 
 @Injectable()
@@ -15,21 +16,45 @@ export class GamesService {
     private http: HttpClient,
   ) { }
 
-  getGamesByUser(userId: number) {
-    const url = environment.api.friday.games + `?userId=${userId}`
-    return this.http.get(url) as Observable<FridayGame[]>
-  }
-
   createGame(game: FridayGame) {
     const url = environment.api.friday.games
-    return this.http.post(url, game) as Observable<FridayGame>
+    return this.http.post(url, game).pipe(
+      delay(1000),
+     ) as Observable<FridayGame>
   }
 
-  deleteGame(gameId: number) {
+  createGameDetails(gameId: GameId) {
+    const url = environment.api.friday.gameDetails
+    const body = new FridayGameDetails(gameId)
+    return this.http.post(url, body).pipe(
+      delay(1000),
+     ) as Observable<FridayGameDetails>
+  }
+
+  deleteGame(gameId: GameId) {
     const url = environment.api.friday.games + '/' + gameId
-    return this.http.delete(url) as Observable<number>
+    return this.http.delete(url).pipe(
+      delay(1000),
+     ) as Observable<GameId>
+  }
+  deleteGameDetails(gameId: GameId) {
+    const url = environment.api.friday.gameDetails + '/' + gameId
+    return this.http.delete(url).pipe(
+      delay(1000),
+     ) as Observable<GameId>
   }
 
-  getGameDetails() {
+  getGamesByUser(userId: number) {
+    const url = environment.api.friday.games + `?userId=${userId}`
+    return this.http.get(url).pipe(
+      delay(1000),
+     ) as Observable<FridayGame[]>
+  }
+
+  getGameDetails(gameId: GameId) {
+    const url = environment.api.friday.gameDetails + '/' + gameId
+    return this.http.get(url).pipe(
+      delay(1000),
+     ) as Observable<FridayGameDetails>
   }
 }

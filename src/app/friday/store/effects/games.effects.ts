@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { Effect, Actions, ofType } from '@ngrx/effects'
+import { Store, select } from '@ngrx/store'
+
 import { of } from 'rxjs/observable/of'
-import { map, switchMap, catchError, tap, mergeMap } from 'rxjs/operators'
+import { map, switchMap, catchError, tap, mergeMap, withLatestFrom, filter } from 'rxjs/operators'
+
+import * as fromStore from '../../store'
 
 import * as gamesActions from '../actions/games.actions'
+import * as activeGameActions from '../actions/active-game.actions'
 import * as fromServices from '../../services'
 
 
@@ -15,6 +20,7 @@ export class GamesEffects {
     private actions$: Actions,
     private gamesService: fromServices.GamesService,
     private router: Router,
+    private store: Store<fromStore.State>,
   ) {}
 
   @Effect()
@@ -32,6 +38,20 @@ export class GamesEffects {
   )
 
   @Effect()
+  createGameSuccess$ = this.actions$.pipe(
+    ofType(gamesActions.CREATE_GAME_SUCCESS),
+    map((action: gamesActions.CreateGameSuccess) => action.payload),
+    mergeMap((game) => {
+      return this.gamesService
+        .createGameDetails(game.id)
+        .pipe(
+          map(gameDetails => new gamesActions.CreateGameDetailsSuccess(gameDetails)),
+          catchError(error => of(new gamesActions.CreateGameDetailsFail(error))),
+        )
+    }),
+  )
+
+  @Effect()
   deleteGame$ = this.actions$.pipe(
     ofType(gamesActions.DELETE_GAME),
     map((action: gamesActions.DeleteGame) => action.payload),
@@ -39,10 +59,34 @@ export class GamesEffects {
       return this.gamesService
         .deleteGame(gameId)
         .pipe(
-          map(createdGame => new gamesActions.DeleteGameSuccess(gameId)),
+          map(() => new gamesActions.DeleteGameSuccess(gameId)),
           catchError(error => of(new gamesActions.DeleteGameFail(error))),
         )
     }),
+  )
+
+  @Effect()
+  deleteGameSuccess$ = this.actions$.pipe(
+    ofType(gamesActions.DELETE_GAME_SUCCESS),
+    map((action: gamesActions.DeleteGameSuccess) => action.payload),
+    mergeMap((gameId) => {
+      return this.gamesService
+        .deleteGameDetails(gameId)
+        .pipe(
+          map(() => new gamesActions.DeleteGameDetailsSuccess(gameId)),
+          catchError(error => of(new gamesActions.DeleteGameDetailsFail(error))),
+        )
+    }),
+  )
+
+  @Effect()
+  deleteGameDetailsSuccess$ = this.actions$.pipe(
+    ofType(gamesActions.DELETE_GAME_DETAILS_SUCCESS),
+    map((action: gamesActions.DeleteGameDetailsSuccess) => action.payload),
+    withLatestFrom(this.store.pipe(select(fromStore.getActiveGameId))),
+    tap(x => console.log('taplog:', x)),
+    filter(([gameId, activeGameId]) => gameId === activeGameId),
+    map(() => new activeGameActions.RemoveActiveGame()),
   )
 
   @Effect()
@@ -57,6 +101,27 @@ export class GamesEffects {
           catchError(error => of(new gamesActions.LoadGamesFail(error))),
         )
     }),
+  )
+
+  @Effect()
+  loadGameDetails$ = this.actions$.pipe(
+    ofType(gamesActions.LOAD_GAME_DETAILS),
+    map((action: gamesActions.LoadGameDetails) => action.payload),
+    mergeMap((gameId) => {
+      return this.gamesService
+        .getGameDetails(gameId)
+        .pipe(
+          map(gameDetails => new gamesActions.LoadGameDetailsSuccess(gameDetails)),
+          catchError(error => of(new gamesActions.LoadGameDetailsFail(error))),
+        )
+    }),
+  )
+
+  @Effect()
+  loadGameDetailsSuccess$ = this.actions$.pipe(
+    ofType(gamesActions.LOAD_GAME_DETAILS_SUCCESS),
+    map((action: gamesActions.LoadGameDetailsSuccess) => action.payload),
+    map((gameDetails) => new activeGameActions.SetActiveGame(gameDetails)),
   )
 
   @Effect({ dispatch: false })

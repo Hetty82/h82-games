@@ -1,58 +1,48 @@
 
-// import * as fromActiveGame from '../actions/active-game'
-import { Round } from '../../models/friday-game-details.interface'
+import { FridayGameDetails } from '../../models/friday-game-details.model'
+import { GameId } from '../../models/friday-game.model'
+
+import * as fromActiveGame from '../actions/active-game.actions'
+
 
 export interface State {
-  currentRound: Round
+  details: FridayGameDetails
+  id: GameId
 }
 
 const initialState: State = {
-  currentRound: Round.INITIAL,
+  details: null,
+  id: null,
 }
 
-// export function reducer(state: State = initialState, action: fromGames.GamesAction): State {
-export function reducer(state: State = initialState, action: any): State {
+export function reducer(state: State = initialState, action: fromActiveGame.ActiveGameAction): State {
   switch (action.type) {
-    // case fromGames.LOAD_GAMES: {
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   }
-    // }
 
-    // case fromGames.LOAD_GAMES_SUCCESS: {
-    //   const games = action.payload
+    case fromActiveGame.SET_ACTIVE_GAME: {
+      return {
+        ...state,
+        details: action.payload,
+        id: action.payload.id,
+      }
+    }
 
-    //   const entities = games.reduce((newEntities: GameEntities, game: Game) => {
-    //       return {
-    //         ...newEntities,
-    //         [game.id]: game,
-    //       }
-    //     }, { ...state.entities }
-    //   )
+    case fromActiveGame.REMOVE_ACTIVE_GAME: {
+      return {
+        ...state,
+        details: null,
+        id: null,
+      }
+    }
 
-    //   const ids = games.map(game => game.id)
-
-    //   return {
-    //     ...state,
-    //     entities,
-    //     ids,
-    //     loading: false,
-    //     loaded: true,
-    //   }
-    // }
-
-    // case fromGames.LOAD_GAMES_FAIL: {
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     loaded: false,
-    //   }
-    // }
+    case fromActiveGame.RESET_ACTIVE_GAME_STATE: {
+      return initialState
+    }
 
     default:
       return state
   }
 }
 
-export const getCurrentRound = (state: State) => state.currentRound
+
+export const getDetails = (state: State) => state.details
+export const getId = (state: State) => state.id

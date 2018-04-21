@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { StoreModule } from '@ngrx/store'
 
 import { GamesComponent } from './games.component'
-import { GamesService } from '../../services'
 
 import * as fromRoot from '../../../store'
 

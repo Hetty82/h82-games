@@ -2,26 +2,23 @@
   <h1>Welcome to Friday, the game!</h1>
 
   <ng-container *ngIf="user; else login">
-    <p>[ current user state ]</p>
-    <pre class="code">{{ user | json }}</pre>
-
     <header>
       <p>Choose your game from the list or start a new one:</p>
       <button class="button -warning" (click)="createGame(user.id)">Create a new game</button>
+      <button (click)="reset()" class="button -danger">Reset games state</button>
     </header>
 
     <ul class="list">
       <li *ngFor="let game of (games$ | async)" class="item">
         <button (click)="selectGame(game.id)" class="button">Play this game: #{{ game.id }}</button>
 
-        started: {{ game.startDate | date:'medium' }}
+        created: {{ game.createdAt | date:'medium' }}
 
         <button class="button -danger" (click)="deleteGame(game.id)">
           <app-icon name="trash"></app-icon>
         </button>
       </li>
     </ul>
-
   </ng-container>
 
   <ng-template #login>

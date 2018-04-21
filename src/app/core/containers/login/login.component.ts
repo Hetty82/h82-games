@@ -3,8 +3,6 @@ import { Store, select } from '@ngrx/store'
 
 import { take } from 'rxjs/operators'
 
-import { UserService } from '../../services'
-import { User } from '../../models/user.interface'
 
 import * as fromRoot from '../../../store'
 

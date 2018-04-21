@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 
-import { take, filter, withLatestFrom } from 'rxjs/operators'
+import { take, withLatestFrom } from 'rxjs/operators'
+import { Subscription } from 'rxjs/Subscription'
 
 import * as fromStore from '../../store'
 
-import { FridayGame } from '../../models/friday-game.model'
+import { FridayGame, GameId } from '../../models/friday-game.model'
 import { User } from '../../../core/models/user.interface'
 
 
@@ -14,18 +15,28 @@ import { User } from '../../../core/models/user.interface'
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.sass'],
 })
-export class GamesComponent implements OnInit {
+export class GamesComponent implements OnInit, OnDestroy {
   games$ = this.store.pipe(select(fromStore.getGames))
+  subs$ = new Subscription()
+
+  activeGameId: GameId
   user: User
 
   constructor(private store: Store<fromStore.State>) {
-    this.store.pipe(select(fromStore.getCurrentUser),
+    this.store.pipe(
+      select(fromStore.getCurrentUser),
       take(1),
       withLatestFrom(this.store.pipe(select(fromStore.getGamesLoaded))),
     ).subscribe(([user, loaded]) => {
       this.user = user
       if (user && !loaded) this.store.dispatch(new fromStore.LoadGames(this.user.id))
     })
+
+    this.subs$.add(
+      this.store.pipe(
+        select(fromStore.getActiveGameId),
+      ).subscribe(activeId => this.activeGameId = activeId),
+    )
   }
 
   ngOnInit() {
@@ -39,7 +50,15 @@ export class GamesComponent implements OnInit {
     this.store.dispatch(new fromStore.DeleteGame(gameId))
   }
 
-  selectGame(event) {
-    console.log('let\'s select a game')
+  reset() {
+    this.store.dispatch(new fromStore.ResetGamesState())
+  }
+
+  selectGame(gameId) {
+    if (gameId !== this.activeGameId) this.store.dispatch(new fromStore.LoadGameDetails(gameId))
+  }
+
+  ngOnDestroy() {
+    this.subs$.unsubscribe()
   }
 }

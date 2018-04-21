@@ -1,5 +1,8 @@
-import { FridayGameDetails } from './friday-game-details.interface'
+import { HttpErrorResponse } from '@angular/common/http'
 
+
+export type GameId = number
+export type GameError = HttpErrorResponse
 
 enum Difficulty {
   LEVEL_1 = 1,
@@ -9,9 +12,8 @@ enum Difficulty {
 }
 
 export class FridayGame {
-  details: FridayGameDetails
-  id: number
-  startDate = new Date()
+  id: GameId
+  createdAt = new Date()
 
   constructor(
     public userId: number,

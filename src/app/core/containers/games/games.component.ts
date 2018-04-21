@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { Store, select } from '@ngrx/store'
 import { take } from 'rxjs/operators'
 
-import { GamesService } from '../../services'
-import { Game } from '../../models/game.interface'
 
 import * as fromRoot from '../../../store'
 
