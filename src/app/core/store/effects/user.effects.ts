@@ -25,20 +25,20 @@ export class UserEffects {
         .getUsers()
         .pipe(
           map(user => new userActions.LoadUsersSuccess(user)),
-          catchError(error => of(new userActions.LoadUsersFail(error)))
+          catchError(error => of(new userActions.LoadUsersFail(error))),
         )
-    })
+    }),
   )
 
   @Effect({ dispatch: false })
   selectUser$ = this.actions$.pipe(
     ofType(userActions.SELECT_USER),
-    tap(() => this.router.navigate(['/games']))
+    tap(() => this.router.navigate(['/games'])),
   )
 
   @Effect({ dispatch: false })
   deselectUser$ = this.actions$.pipe(
     ofType(userActions.DESELECT_USER),
-    tap(() => this.router.navigate(['/login']))
+    tap(() => this.router.navigate(['/login'])),
   )
 }

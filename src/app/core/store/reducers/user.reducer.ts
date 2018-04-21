@@ -39,7 +39,7 @@ export function reducer(state: State = initialState, action: fromUser.UserAction
             ...newEntities,
             [user.id]: user,
           }
-        }, { ...state.entities }
+        }, { ...state.entities },
       )
 
       const ids = users.map(user => user.id)
@@ -64,14 +64,14 @@ export function reducer(state: State = initialState, action: fromUser.UserAction
     case fromUser.SELECT_USER: {
       return {
         ...state,
-        currentUserId: action.payload
+        currentUserId: action.payload,
       }
     }
 
     case fromUser.DESELECT_USER: {
       return {
         ...state,
-        currentUserId: null
+        currentUserId: null,
       }
     }
 

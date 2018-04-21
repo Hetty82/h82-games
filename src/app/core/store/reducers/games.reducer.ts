@@ -37,7 +37,7 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
             ...newEntities,
             [game.id]: game,
           }
-        }, { ...state.entities }
+        }, { ...state.entities },
       )
 
       const ids = games.map(game => game.id)

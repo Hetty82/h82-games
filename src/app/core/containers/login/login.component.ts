@@ -12,7 +12,7 @@ import * as fromRoot from '../../../store'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  styleUrls: ['./login.component.sass'],
 })
 export class LoginComponent implements OnInit {
   users$ = this.store.pipe(select(fromRoot.getUsers))
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private store: Store<fromRoot.State>) {
     this.store.pipe(
       take(1),
-      select(fromRoot.getUsersLoaded)
+      select(fromRoot.getUsersLoaded),
     ).subscribe(loaded => {
       if (!loaded) this.store.dispatch(new fromRoot.LoadUsers())
     })

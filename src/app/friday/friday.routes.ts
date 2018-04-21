@@ -7,7 +7,7 @@ import * as fromComponents from './components'
 export const routes: Routes = [
   {
     path: '',
-    component: fromComponents.FridayComponent
+    component: fromComponents.FridayComponent,
   },
   {
     path: ':gameId',

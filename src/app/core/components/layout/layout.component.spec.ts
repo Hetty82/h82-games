@@ -17,7 +17,7 @@ describe('LayoutComponent', () => {
       declarations: [ LayoutComponent ],
       imports: [
         RouterTestingModule,
-        StoreModule.forRoot(fromRoot.reducers)
+        StoreModule.forRoot(fromRoot.reducers),
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })

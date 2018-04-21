@@ -11,7 +11,7 @@ import { Game } from '../models/game.interface'
 @Injectable()
 export class GamesService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   getGames() {

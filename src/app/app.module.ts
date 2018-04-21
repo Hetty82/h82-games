@@ -42,7 +42,7 @@ import { environment } from '../environments/environment'
   providers: [
     {
       provide: RouterStateSerializer,
-      useClass: fromStore.CustomRouterStateSerializer
+      useClass: fromStore.CustomRouterStateSerializer,
     },
   ],
 })

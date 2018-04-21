@@ -3,7 +3,7 @@ import { UserEffects } from './user.effects'
 
 export const coreEffects: any[] = [
   GamesEffects,
-  UserEffects
+  UserEffects,
 ]
 
 export * from './games.effects'

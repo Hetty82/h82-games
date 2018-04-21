@@ -11,7 +11,7 @@ import * as fromRoot from '../../../store'
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
-  styleUrls: ['./games.component.sass']
+  styleUrls: ['./games.component.sass'],
 })
 export class GamesComponent implements OnInit {
   games$ = this.store.pipe(select(fromRoot.getGames))
@@ -20,7 +20,7 @@ export class GamesComponent implements OnInit {
   constructor(private store: Store<fromRoot.State>) {
     this.store.pipe(
       take(1),
-      select(fromRoot.getGamesLoaded)
+      select(fromRoot.getGamesLoaded),
     ).subscribe(loaded => {
       if (!loaded) this.store.dispatch(new fromRoot.LoadGames())
     })

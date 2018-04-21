@@ -18,7 +18,7 @@ describe('ActiveGameComponent', () => {
           useValue: {
             pipe: jest.fn(),
           },
-        }
+        },
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
