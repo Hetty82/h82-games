@@ -1,4 +1,4 @@
-import { GameDetails } from './game-details.interface'
+import { FridayGameDetails } from './friday-game-details.interface'
 
 
 enum Difficulty {
@@ -8,8 +8,8 @@ enum Difficulty {
   LEVEL_4 = 4,
 }
 
-export class Game {
-  details: GameDetails
+export class FridayGame {
+  details: FridayGameDetails
   id: number
   startDate = new Date()
 
@@ -19,9 +19,9 @@ export class Game {
   ) {  }
 }
 
-export const createTestGame = (id = 1, userId = 1): Game => {
+export const createTestGame = (id = 1, userId = 1): FridayGame => {
   return {
-    ...new Game(1),
+    ...new FridayGame(1),
     id,
   }
 }

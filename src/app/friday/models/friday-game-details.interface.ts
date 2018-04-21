@@ -6,11 +6,11 @@ export enum Round {
   FINAL = 4,
 }
 
-export interface GameDetails {
+export interface FridayGameDetails {
   currentRound: Round
 }
 
-export const createTestGameDetails = (currentRound = Round.INITIAL): GameDetails => {
+export const createFridayTestGameDetails = (currentRound = Round.INITIAL): FridayGameDetails => {
   return {
     currentRound,
   }

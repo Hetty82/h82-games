@@ -7,6 +7,7 @@ import * as fromGames from '../reducers/games.reducer'
 export const getGamesState = createSelector(fromFeature.getFridayState, (state: fromFeature.State) => state.games)
 
 export const getGameEntities = createSelector(getGamesState, fromGames.getEntities)
+export const getGameError = createSelector(getGamesState, fromGames.getError)
 export const getGameIds = createSelector(getGamesState, fromGames.getIds)
 export const getGamesLoaded = createSelector(getGamesState, fromGames.getLoaded)
 export const getGamesLoading = createSelector(getGamesState, fromGames.getLoading)

@@ -1,6 +1,6 @@
 
 // import * as fromActiveGame from '../actions/active-game'
-import { Round } from '../../models/game-details.interface'
+import { Round } from '../../models/friday-game-details.interface'
 
 export interface State {
   currentRound: Round

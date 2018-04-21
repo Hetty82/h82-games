@@ -1,7 +1,7 @@
 <section class="container">
   <h1>Welcome to Friday, the game!</h1>
 
-  <ng-container *ngIf="(user$ | async) as user; else login">
+  <ng-container *ngIf="user; else login">
     <p>[ current user state ]</p>
     <pre class="code">{{ user | json }}</pre>
 

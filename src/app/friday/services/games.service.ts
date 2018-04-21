@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators'
 
 import { environment } from '../../../environments/environment'
 
-import { Game } from '../models/game.model'
+import { FridayGame } from '../models/friday-game.model'
 
 
 @Injectable()
@@ -15,21 +15,16 @@ export class GamesService {
     private http: HttpClient
   ) { }
 
-  getGames(userId: number) {
+  getGamesByUser(userId: number) {
     const url = environment.api.friday.games + `?userId=${userId}`
-    return this.http.get(url) as Observable<Game[]>
+    return this.http.get(url) as Observable<FridayGame[]>
   }
 
-  createGame(game: Game) {
-    console.log('in createGame (service)')
+  createGame(game: FridayGame) {
     const url = environment.api.friday.games
-    // return this.http.post(url, game) as Observable<number>
-    return this.http.post(url, game).pipe(
-      tap(x => console.log('dolog:', x))
-    ) as Observable<Game>
+    return this.http.post(url, game) as Observable<FridayGame>
   }
 
   getGameDetails() {
-
   }
 }

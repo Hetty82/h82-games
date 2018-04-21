@@ -21,26 +21,23 @@ export class GamesEffects {
   createGame$ = this.actions$.pipe(
     ofType(gamesActions.CREATE_GAME),
     map((action: gamesActions.CreateGame) => action.payload),
-    tap(game => console.log('to service:', game)),
     mergeMap((game) => {
       return this.gamesService
         .createGame(game)
         .pipe(
-          map(createdGame => {
-            console.log('fromServer:', createdGame)
-            return new gamesActions.CreateGameSuccess(createdGame)
-          }),
+          map(createdGame => new gamesActions.CreateGameSuccess(createdGame)),
           catchError(error => of(new gamesActions.CreateGameFail(error))),
         )
     })
   )
 
+  @Effect()
   loadGames$ = this.actions$.pipe(
     ofType(gamesActions.LOAD_GAMES),
     map((action: gamesActions.LoadGames) => action.payload),
     switchMap((userId) => {
       return this.gamesService
-        .getGames(userId)
+        .getGamesByUser(userId)
         .pipe(
           map(games => new gamesActions.LoadGamesSuccess(games)),
           catchError(error => of(new gamesActions.LoadGamesFail(error))),

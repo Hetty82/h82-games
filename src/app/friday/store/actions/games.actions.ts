@@ -1,9 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store'
 
-import { Game } from '../../models/game.model'
+import { FridayGame } from '../../models/friday-game.model'
 
 
-export type GameError = any
+export type GameError = HttpErrorResponse
 export type GameId = number
 export type UserId = number
 
@@ -22,7 +23,7 @@ export const SELECT_GAME = '[Friday - Games] Select Game'
 // Actions
 export class CreateGame implements Action {
   readonly type = CREATE_GAME
-  constructor(public payload: Game) {}
+  constructor(public payload: FridayGame) {}
 }
 export class CreateGameFail implements Action {
   readonly type = CREATE_GAME_FAIL
@@ -30,7 +31,7 @@ export class CreateGameFail implements Action {
 }
 export class CreateGameSuccess implements Action {
   readonly type = CREATE_GAME_SUCCESS
-  constructor(public payload: Game) {}
+  constructor(public payload: FridayGame) {}
 }
 
 export class LoadGames implements Action {
@@ -43,7 +44,7 @@ export class LoadGamesFail implements Action {
 }
 export class LoadGamesSuccess implements Action {
   readonly type = LOAD_GAMES_SUCCESS
-  constructor(public payload: Game[]) {}
+  constructor(public payload: FridayGame[]) {}
 }
 
 export class SelectGame implements Action {
