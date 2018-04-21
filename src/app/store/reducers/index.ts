@@ -1,5 +1,7 @@
 import { RouterStateSnapshot, Params } from '@angular/router'
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store'
+
+import { localStorageSync, LocalStorageConfig } from 'ngrx-store-localstorage'
 import { storeFreeze } from 'ngrx-store-freeze'
 
 import { environment } from '../../../environments/environment'
@@ -32,8 +34,23 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   }
 }
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger, storeFreeze] : []
+const syncConfig: LocalStorageConfig = {
+  keys: [
+    'games',
+    'user',
+    'friday',
+  ],
+  rehydrate: true,
+  storage: sessionStorage,
+}
 
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync(syncConfig)(reducer)
+}
+
+export const metaReducers: MetaReducer<State>[] = !environment.production
+  ? [ logger, storeFreeze, localStorageSyncReducer ]
+  : []
 
 // Router utils
 
