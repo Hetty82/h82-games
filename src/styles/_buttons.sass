@@ -3,18 +3,22 @@
   color: $white
   background: $blue
 
-  &:enabled
-    &:hover,
-    &:focus
-      background: darken($blue, 8%)
+  =color($color, $darken-percentage)
+    background: $color
+
+    &:enabled:hover,
+    &:enabled:focus
+      background: darken($color, $darken-percentage)
+
+  &:enabled:hover,
+  &:enabled:focus
+    background: darken($blue, 8%)
 
   &.-warning
-    background: $yellow
+    +color($yellow, 12%)
 
-    &:enabled
-      &:hover,
-      &:focus
-        background: darken($yellow, 12%)
+  &.-danger
+    +color($orange, 20%)
 
   &:disabled
     background: $bg-disabled

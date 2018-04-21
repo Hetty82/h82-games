@@ -25,9 +25,9 @@ export class GamesEffects {
         .getGames()
         .pipe(
           map(games => new gamesActions.LoadGamesSuccess(games)),
-          catchError(error => of(new gamesActions.LoadGamesFail(error)))
+          catchError(error => of(new gamesActions.LoadGamesFail(error))),
         )
-    })
+    }),
   )
 
   @Effect({ dispatch: false })
@@ -37,6 +37,6 @@ export class GamesEffects {
     tap(gameName => {
       const url = '/' + gameName.toLocaleLowerCase()
       this.router.navigate([ url ])
-    })
+    }),
   )
 }

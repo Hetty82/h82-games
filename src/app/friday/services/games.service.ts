@@ -12,7 +12,7 @@ import { FridayGame } from '../models/friday-game.model'
 @Injectable()
 export class GamesService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   getGamesByUser(userId: number) {
@@ -23,6 +23,11 @@ export class GamesService {
   createGame(game: FridayGame) {
     const url = environment.api.friday.games
     return this.http.post(url, game) as Observable<FridayGame>
+  }
+
+  deleteGame(gameId: number) {
+    const url = environment.api.friday.games + '/' + gameId
+    return this.http.delete(url) as Observable<number>
   }
 
   getGameDetails() {

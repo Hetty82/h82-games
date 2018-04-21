@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http'
 import { Action } from '@ngrx/store'
 
 import { FridayGame } from '../../models/friday-game.model'
@@ -10,8 +10,12 @@ export type UserId = number
 
 // Create game
 export const CREATE_GAME = '[Friday - Games] Create Game'
-export const CREATE_GAME_FAIL = '[Friday - Games] Create Games Fail'
-export const CREATE_GAME_SUCCESS = '[Friday - Games] Create Games Success'
+export const CREATE_GAME_FAIL = '[Friday - Games] Create Game Fail'
+export const CREATE_GAME_SUCCESS = '[Friday - Games] Create Game Success'
+// Delete game
+export const DELETE_GAME = '[Friday - Games] Delete Game'
+export const DELETE_GAME_FAIL = '[Friday - Games] Delete Game Fail'
+export const DELETE_GAME_SUCCESS = '[Friday - Games] Delete Game Success'
 // Load games
 export const LOAD_GAMES = '[Friday - Games] Load Games'
 export const LOAD_GAMES_FAIL = '[Friday - Games] Load Games Fail'
@@ -32,6 +36,19 @@ export class CreateGameFail implements Action {
 export class CreateGameSuccess implements Action {
   readonly type = CREATE_GAME_SUCCESS
   constructor(public payload: FridayGame) {}
+}
+
+export class DeleteGame implements Action {
+  readonly type = DELETE_GAME
+  constructor(public payload: GameId) {}
+}
+export class DeleteGameFail implements Action {
+  readonly type = DELETE_GAME_FAIL
+  constructor(public payload: GameError) {}
+}
+export class DeleteGameSuccess implements Action {
+  readonly type = DELETE_GAME_SUCCESS
+  constructor(public payload: GameId) {}
 }
 
 export class LoadGames implements Action {
@@ -58,6 +75,9 @@ export type GamesAction =
   | CreateGame
   | CreateGameFail
   | CreateGameSuccess
+  | DeleteGame
+  | DeleteGameFail
+  | DeleteGameSuccess
   | LoadGames
   | LoadGamesFail
   | LoadGamesSuccess

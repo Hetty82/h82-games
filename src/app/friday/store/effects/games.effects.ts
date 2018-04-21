@@ -28,7 +28,21 @@ export class GamesEffects {
           map(createdGame => new gamesActions.CreateGameSuccess(createdGame)),
           catchError(error => of(new gamesActions.CreateGameFail(error))),
         )
-    })
+    }),
+  )
+
+  @Effect()
+  deleteGame$ = this.actions$.pipe(
+    ofType(gamesActions.DELETE_GAME),
+    map((action: gamesActions.DeleteGame) => action.payload),
+    mergeMap((gameId) => {
+      return this.gamesService
+        .deleteGame(gameId)
+        .pipe(
+          map(createdGame => new gamesActions.DeleteGameSuccess(gameId)),
+          catchError(error => of(new gamesActions.DeleteGameFail(error))),
+        )
+    }),
   )
 
   @Effect()
@@ -42,7 +56,7 @@ export class GamesEffects {
           map(games => new gamesActions.LoadGamesSuccess(games)),
           catchError(error => of(new gamesActions.LoadGamesFail(error))),
         )
-    })
+    }),
   )
 
   @Effect({ dispatch: false })
@@ -52,6 +66,6 @@ export class GamesEffects {
     tap(gameId => {
       const url = '/friday/' + gameId
       this.router.navigate([ url ])
-    })
+    }),
   )
 }
