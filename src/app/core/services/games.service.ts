@@ -16,6 +16,7 @@ export class GamesService {
 
   getGames() {
     const url = environment.api.games
+
     return this.http.get(url) as Observable<Game[]>
   }
 }

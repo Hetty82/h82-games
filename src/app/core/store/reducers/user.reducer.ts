@@ -48,16 +48,16 @@ export function reducer(state: State = initialState, action: fromUser.UserAction
         ...state,
         entities,
         ids,
-        loading: false,
         loaded: true,
+        loading: false,
       }
     }
 
     case fromUser.LOAD_USERS_FAIL: {
       return {
         ...state,
-        loading: false,
         loaded: false,
+        loading: false,
       }
     }
 

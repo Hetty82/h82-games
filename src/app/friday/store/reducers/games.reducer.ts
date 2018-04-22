@@ -107,8 +107,8 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
       return {
         ...state,
         error: action.payload,
-        loading: false,
         loaded: false,
+        loading: false,
       }
     }
 
@@ -130,8 +130,8 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
         entities,
         error: null,
         ids,
-        loading: false,
         loaded: true,
+        loading: false,
       }
     }
 

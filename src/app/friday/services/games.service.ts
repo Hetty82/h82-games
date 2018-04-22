@@ -18,6 +18,7 @@ export class GamesService {
 
   createGame(game: FridayGame) {
     const url = environment.api.friday.games
+
     return this.http.post(url, game).pipe(
       delay(1000),
     ) as Observable<FridayGame>
@@ -26,6 +27,7 @@ export class GamesService {
   createGameDetails(gameId: GameId) {
     const url = environment.api.friday.gameDetails
     const body = new FridayGameDetails(gameId)
+
     return this.http.post(url, body).pipe(
       delay(1000),
     ) as Observable<FridayGameDetails>
@@ -33,6 +35,7 @@ export class GamesService {
 
   deleteGame(gameId: GameId) {
     const url = environment.api.friday.games + '/' + gameId
+
     return this.http.delete(url).pipe(
       delay(1000),
     ) as Observable<GameId>
@@ -40,6 +43,7 @@ export class GamesService {
 
   deleteGameDetails(gameId: GameId) {
     const url = environment.api.friday.gameDetails + '/' + gameId
+
     return this.http.delete(url).pipe(
       delay(1000),
     ) as Observable<GameId>
@@ -47,6 +51,7 @@ export class GamesService {
 
   getGamesByUser(userId: number) {
     const url = environment.api.friday.games + `?userId=${userId}`
+
     return this.http.get(url).pipe(
       delay(1000),
     ) as Observable<FridayGame[]>
@@ -54,6 +59,7 @@ export class GamesService {
 
   getGameDetails(gameId: GameId) {
     const url = environment.api.friday.gameDetails + '/' + gameId
+
     return this.http.get(url).pipe(
       delay(1000),
     ) as Observable<FridayGameDetails>

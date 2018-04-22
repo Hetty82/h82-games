@@ -16,6 +16,7 @@ export class UserService {
 
   getUsers() {
     const url = environment.api.users
+
     return this.http.get(url) as Observable<User[]>
   }
 }

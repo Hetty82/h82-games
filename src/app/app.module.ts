@@ -31,8 +31,8 @@ import { environment } from '../environments/environment'
     StoreModule.forRoot(fromStore.reducers, { metaReducers: fromStore.metaReducers }),
     // DevTools Instrumentation must be imported after importing StoreModule
     StoreDevtoolsModule.instrument({
-      name: 'h82 Games - NgRx DevTools',
       logOnly: environment.production,
+      name: 'h82 Games - NgRx DevTools',
     }),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
 

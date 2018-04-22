@@ -5,14 +5,14 @@ import * as fromComponents from './components'
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-  ],
   declarations: [
     ...fromComponents.components,
   ],
   exports: [
     ...fromComponents.components,
+  ],
+  imports: [
+    CommonModule,
   ],
 })
 export class SharedModule { }

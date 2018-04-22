@@ -8,8 +8,8 @@ import * as fromRoot from '../../../store'
 
 @Component({
   selector: 'app-games',
-  templateUrl: './games.component.html',
   styleUrls: ['./games.component.sass'],
+  templateUrl: './games.component.html',
 })
 export class GamesComponent implements OnInit {
   games$ = this.store.pipe(select(fromRoot.getGames))

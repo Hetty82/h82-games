@@ -11,8 +11,8 @@ import { FridayGameDetails } from '../../models/friday-game-details.model'
 
 @Component({
   selector: 'app-fr-active-game',
-  templateUrl: './active-game.component.html',
   styleUrls: ['./active-game.component.sass'],
+  templateUrl: './active-game.component.html',
 })
 export class ActiveGameComponent implements OnInit, OnDestroy {
   activeId: number

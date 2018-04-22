@@ -10,17 +10,17 @@ import * as fromServices from './services'
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    SharedModule,
-  ],
   declarations: [
     ...fromComponents.components,
     ...fromContainers.containers,
   ],
   exports: [
     fromComponents.AppComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SharedModule,
   ],
 })
 export class CoreModule {

@@ -46,16 +46,16 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
         ...state,
         entities,
         ids,
-        loading: false,
         loaded: true,
+        loading: false,
       }
     }
 
     case fromGames.LOAD_GAMES_FAIL: {
       return {
         ...state,
-        loading: false,
         loaded: false,
+        loading: false,
       }
     }
 

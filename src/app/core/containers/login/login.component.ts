@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core'
 import { Store, select } from '@ngrx/store'
-
 import { take } from 'rxjs/operators'
-
 
 import * as fromRoot from '../../../store'
 
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass'],
+  templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
   users$ = this.store.pipe(select(fromRoot.getUsers))

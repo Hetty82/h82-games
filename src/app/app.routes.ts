@@ -9,23 +9,28 @@ import * as fromComponents from './core/components'
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/games',
+
     pathMatch: 'full',
+    redirectTo: '/games',
   },
   {
     path: 'login',
+
     component: fromContainers.LoginComponent,
   },
   {
     path: 'games',
+
     component: fromContainers.GamesComponent,
   },
   {
     path: 'friday',
+
     loadChildren: './friday/friday.module#FridayModule',
   },
   {
     path: '**',
+
     component: fromComponents.NotFoundComponent,
   },
 ]

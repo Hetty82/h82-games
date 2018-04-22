@@ -16,6 +16,13 @@ import * as fromStore from './store'
 
 
 @NgModule({
+  declarations: [
+    ...fromComponents.components,
+    ...fromContainers.containers,
+  ],
+  exports: [
+    fromComponents.FridayComponent,
+  ],
   imports: [
     // Angular
     CommonModule,
@@ -27,13 +34,6 @@ import * as fromStore from './store'
 
     // Other
     SharedModule,
-  ],
-  declarations: [
-    ...fromComponents.components,
-    ...fromContainers.containers,
-  ],
-  exports: [
-    fromComponents.FridayComponent,
   ],
   providers: fromServices.services,
 })

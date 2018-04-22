@@ -12,8 +12,8 @@ import { User } from '../../../core/models/user.interface'
 
 @Component({
   selector: 'app-fr-games',
-  templateUrl: './games.component.html',
   styleUrls: ['./games.component.sass'],
+  templateUrl: './games.component.html',
 })
 export class GamesComponent implements OnInit, OnDestroy {
   activeGameId: GameId
