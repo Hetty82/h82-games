@@ -7,11 +7,11 @@ export type GameError = any
 export type GameName = string
 
 // Load games
-export const LOAD_GAMES = '[Games] Load Games'
-export const LOAD_GAMES_FAIL = '[Games] Load Games Fail'
-export const LOAD_GAMES_SUCCESS = '[Games] Load Games Success'
+export const LOAD_GAMES = '[Games] Load games'
+export const LOAD_GAMES_FAIL = '[Games] Load games fail'
+export const LOAD_GAMES_SUCCESS = '[Games] Load games success'
 // Select game
-export const SELECT_GAME = '[Games] Select Game'
+export const SELECT_GAME = '[Games] Select game'
 
 
 // Actions

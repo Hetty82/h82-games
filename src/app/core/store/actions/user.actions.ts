@@ -7,12 +7,12 @@ export type UserError = any
 export type UserId = number
 
 // Load users
-export const LOAD_USERS = '[Users] Load Users'
-export const LOAD_USERS_FAIL = '[Users] Load Users Fail'
-export const LOAD_USERS_SUCCESS = '[Users] Load Users Success'
+export const LOAD_USERS = '[Users] Load users'
+export const LOAD_USERS_FAIL = '[Users] Load users fail'
+export const LOAD_USERS_SUCCESS = '[Users] Load users success'
 // Select user
-export const SELECT_USER = '[Users] Select User'
-export const DESELECT_USER = '[Users] Deselect User'
+export const SELECT_USER = '[Users] Select user'
+export const DESELECT_USER = '[Users] Deselect user'
 
 
 // Actions

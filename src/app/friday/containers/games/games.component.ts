@@ -16,11 +16,12 @@ import { User } from '../../../core/models/user.interface'
   styleUrls: ['./games.component.sass'],
 })
 export class GamesComponent implements OnInit, OnDestroy {
+  activeGameId: GameId
+  loading = false
+  user: User
+
   games$ = this.store.pipe(select(fromStore.getGames))
   subs$ = new Subscription()
-
-  activeGameId: GameId
-  user: User
 
   constructor(private store: Store<fromStore.State>) {
     this.store.pipe(
@@ -32,11 +33,13 @@ export class GamesComponent implements OnInit, OnDestroy {
       if (user && !loaded) this.store.dispatch(new fromStore.LoadGames(this.user.id))
     })
 
-    this.subs$.add(
-      this.store.pipe(
-        select(fromStore.getActiveGameId),
-      ).subscribe(activeId => this.activeGameId = activeId),
-    )
+    this.subs$.add(this.store.pipe(
+      select(fromStore.getActiveGameId),
+    ).subscribe(activeId => this.activeGameId = activeId))
+
+    this.subs$.add(this.store.pipe(
+      select(fromStore.getGamesLoading),
+    ).subscribe(loading => this.loading = loading))
   }
 
   ngOnInit() {

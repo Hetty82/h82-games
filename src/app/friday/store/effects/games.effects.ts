@@ -66,7 +66,7 @@ export class GamesEffects {
   )
 
   @Effect()
-  deleteGameSuccess$ = this.actions$.pipe(
+  deleteGameSuccess1$ = this.actions$.pipe(
     ofType(gamesActions.DELETE_GAME_SUCCESS),
     map((action: gamesActions.DeleteGameSuccess) => action.payload),
     mergeMap((gameId) => {
@@ -80,11 +80,10 @@ export class GamesEffects {
   )
 
   @Effect()
-  deleteGameDetailsSuccess$ = this.actions$.pipe(
-    ofType(gamesActions.DELETE_GAME_DETAILS_SUCCESS),
-    map((action: gamesActions.DeleteGameDetailsSuccess) => action.payload),
+  deleteGameSuccess2$ = this.actions$.pipe(
+    ofType(gamesActions.DELETE_GAME_SUCCESS),
+    map((action: gamesActions.DeleteGameSuccess) => action.payload),
     withLatestFrom(this.store.pipe(select(fromStore.getActiveGameId))),
-    tap(x => console.log('taplog:', x)),
     filter(([gameId, activeGameId]) => gameId === activeGameId),
     map(() => new activeGameActions.RemoveActiveGame()),
   )
@@ -107,7 +106,7 @@ export class GamesEffects {
   loadGameDetails$ = this.actions$.pipe(
     ofType(gamesActions.LOAD_GAME_DETAILS),
     map((action: gamesActions.LoadGameDetails) => action.payload),
-    mergeMap((gameId) => {
+    switchMap((gameId) => {
       return this.gamesService
         .getGameDetails(gameId)
         .pipe(

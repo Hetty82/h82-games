@@ -4,8 +4,9 @@ import { select, Store } from '@ngrx/store'
 import { Subscription } from 'rxjs/Subscription'
 
 import * as fromStore from '../../store'
-
 import { State } from '../../store/reducers/active-game.reducer'
+
+import { FridayGameDetails } from '../../models/friday-game-details.model'
 
 
 @Component({
@@ -14,17 +15,27 @@ import { State } from '../../store/reducers/active-game.reducer'
   styleUrls: ['./active-game.component.sass'],
 })
 export class ActiveGameComponent implements OnInit, OnDestroy {
-  game: State
+  activeId: number
+  game: FridayGameDetails
+  loading = false
+  state: State
+
   subs$ = new Subscription()
 
+
   constructor(private store: Store<fromStore.State>) {
-    this.subs$.add(
-      this.store.pipe(select(fromStore.getActiveGameState))
-        .subscribe(game => {
-          this.game = game
-        }),
-    )
-  }
+    this.subs$.add(this.store.pipe(
+      select(fromStore.getActiveGameState),
+    ).subscribe(state => {
+      this.state = state
+      this.activeId = state.id
+      this.game = state.details
+    }))
+
+    this.subs$.add(this.store.pipe(
+      select(fromStore.getGamesLoading),
+    ).subscribe(loading => this.loading = loading))
+ }
 
   ngOnInit() {
   }

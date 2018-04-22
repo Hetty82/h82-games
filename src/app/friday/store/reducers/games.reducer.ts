@@ -136,6 +136,29 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
     }
 
 
+    case fromGames.LOAD_GAME_DETAILS: {
+      return {
+        ...state,
+        loading: true,
+      }
+    }
+
+    case fromGames.LOAD_GAME_DETAILS_FAIL: {
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      }
+    }
+
+    case fromGames.LOAD_GAME_DETAILS_SUCCESS: {
+      return {
+        ...state,
+        error: null,
+        loading: false,
+      }
+    }
+
     case fromGames.RESET_GAMES_STATE: {
       return initialState
     }

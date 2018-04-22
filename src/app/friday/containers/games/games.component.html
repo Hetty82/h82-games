@@ -1,20 +1,23 @@
 <section class="container">
   <h1>Welcome to Friday, the game!</h1>
+  loading: {{ loading }}
 
   <ng-container *ngIf="user; else login">
     <header>
       <p>Choose your game from the list or start a new one:</p>
-      <button class="button -warning" (click)="createGame(user.id)">Create a new game</button>
+
+      <button (click)="createGame(user.id)" class="button -warning" [disabled]="loading">Create a new game</button>
+
       <button (click)="reset()" class="button -danger">Reset games state</button>
     </header>
 
     <ul class="list">
       <li *ngFor="let game of (games$ | async)" class="item">
-        <button (click)="selectGame(game.id)" class="button">Play this game: #{{ game.id }}</button>
+        <button (click)="selectGame(game.id)" class="button" [disabled]="loading">Play this game: #{{ game.id }}</button>
 
         created: {{ game.createdAt | date:'medium' }}
 
-        <button class="button -danger" (click)="deleteGame(game.id)">
+        <button (click)="deleteGame(game.id)" class="button -danger" [disabled]="loading">
           <app-icon name="trash"></app-icon>
         </button>
       </li>

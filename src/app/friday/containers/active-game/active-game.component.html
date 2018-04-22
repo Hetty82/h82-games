@@ -4,10 +4,14 @@
   <button (click)="reset()" class="button -danger">Reset active game state</button>
 
   <pre class="code">// full game state</pre>
-  <pre class="code">{{ game | json }}</pre>
+  <pre class="code">{{ state | json }}</pre>
 
-  <ng-container *ngIf="game.id">
-    <button *ngIf="!game.details" (click)="start()" class="button">Start game</button>
-    <button *ngIf="game.details" (click)="continue()" class="button">Continue game</button>
+  <ng-container *ngIf="activeId">
+    <span *ngIf="loading">Loading...</span>
+
+    <ng-container *ngIf="!loading">
+      <button *ngIf="!game.currentRound" (click)="start()" class="button">Start game</button>
+      <button *ngIf="game.currentRound" (click)="continue()" class="button">Continue game</button>
+    </ng-container>
   </ng-container>
 </section>
