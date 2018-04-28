@@ -1,4 +1,4 @@
-import { GameId } from './friday-game.model'
+import { GameId, FridayGame, GameDifficulty } from './friday-game.model'
 
 export enum Round {
   INITIAL = 0,
@@ -9,15 +9,16 @@ export enum Round {
 }
 
 export class FridayGameDetails {
-  constructor(
-    public id: GameId,
-    public currentRound = Round.INITIAL,
-  ) { }
+  id: GameId
+  currentRound = Round.INITIAL
+  difficulty: GameDifficulty
+
+  constructor(game: FridayGame) {
+    this.id = game.id
+    this.difficulty = game.difficulty
+  }
 }
 
-export const createFridayTestGameDetails = (id: GameId, currentRound = Round.INITIAL): FridayGameDetails => {
-  return {
-    currentRound,
-    id,
-  }
+export const createFridayTestGameDetails = (game = new FridayGame(1)): FridayGameDetails => {
+  return new FridayGameDetails(game)
 }

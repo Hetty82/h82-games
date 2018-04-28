@@ -43,7 +43,7 @@ export class GamesEffects {
     map((action: gamesActions.CreateGameSuccess) => action.payload),
     mergeMap((game) => {
       return this.gamesService
-        .createGameDetails(game.id)
+        .createGameDetails(game)
         .pipe(
           map(gameDetails => new gamesActions.CreateGameDetailsSuccess(gameDetails)),
           catchError(error => of(new gamesActions.CreateGameDetailsFail(error))),

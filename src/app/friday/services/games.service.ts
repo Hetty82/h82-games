@@ -24,9 +24,9 @@ export class GamesService {
     ) as Observable<FridayGame>
   }
 
-  createGameDetails(gameId: GameId) {
+  createGameDetails(game: FridayGame) {
     const url = environment.api.friday.gameDetails
-    const body = new FridayGameDetails(gameId)
+    const body = new FridayGameDetails(game)
 
     return this.http.post(url, body).pipe(
       delay(1000),

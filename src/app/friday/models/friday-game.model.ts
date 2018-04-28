@@ -4,7 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http'
 export type GameId = number
 export type GameError = HttpErrorResponse
 
-enum Difficulty {
+export enum GameDifficulty {
   LEVEL_1 = 1,
   LEVEL_2 = 2,
   LEVEL_3 = 3,
@@ -17,13 +17,13 @@ export class FridayGame {
 
   constructor(
     public userId: number,
-    public difficulty: Difficulty = Difficulty.LEVEL_1,
+    public difficulty: GameDifficulty = GameDifficulty.LEVEL_1,
   ) {  }
 }
 
 export const createTestGame = (id = 1, userId = 1): FridayGame => {
   return {
-    ...new FridayGame(1),
+    ...new FridayGame(userId),
     id,
   }
 }
