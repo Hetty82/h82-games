@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription'
 
 import * as fromStore from '../../store'
 
-import { FridayGame, GameId } from '../../models/friday-game.model'
+import { FridayGame, GameId, GameDifficulty } from '../../models/friday-game.model'
 import { User } from '../../../core/models/user.interface'
 
 
@@ -45,8 +45,8 @@ export class GamesComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  createGame(userId) {
-    this.store.dispatch(new fromStore.CreateGame(new FridayGame(userId)))
+  createGame(userId: number, difficulty: GameDifficulty) {
+    this.store.dispatch(new fromStore.CreateGame(new FridayGame(userId, difficulty)))
   }
 
   deleteGame(gameId) {

@@ -30,8 +30,6 @@ export const LOAD_GAMES_SUCCESS = '[Friday - Games] Load games success'
 export const LOAD_GAME_DETAILS = '[Friday - Games] Load game details'
 export const LOAD_GAME_DETAILS_FAIL = '[Friday - Games] Load game details fail'
 export const LOAD_GAME_DETAILS_SUCCESS = '[Friday - Games] Load game details success'
-// Select game
-export const SELECT_GAME = '[Friday - Games] Select game'
 // Reset
 export const RESET_GAMES_STATE = '[Friday - Games] Reset games state'
 
@@ -119,10 +117,6 @@ export class ResetGamesState implements Action {
   readonly type = RESET_GAMES_STATE
 }
 
-export class SelectGame implements Action {
-  readonly type = SELECT_GAME
-  constructor(public payload: GameId) {}
-}
 
 
 // Action types
@@ -146,4 +140,3 @@ export type GamesAction =
   | LoadGameDetailsFail
   | LoadGameDetailsSuccess
   | ResetGamesState
-  | SelectGame

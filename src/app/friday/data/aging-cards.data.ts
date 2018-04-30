@@ -1,6 +1,7 @@
-import { AgingCard, AgingCardDifficulty } from '../models/cards/friday-aging-cards'
+import { AgingCardRemote, AgingCardDifficulty } from '../models/card.interfaces'
 
-export const AGING_CARDS: AgingCard[] = [
+
+export const AGING_CARDS: AgingCardRemote[] = [
   {
     amount: 1,
     // DISTRACTED - -1
@@ -42,19 +43,18 @@ export const AGING_CARDS: AgingCard[] = [
     amount: 1,
     // MORONIC - -4
     battleDataId: 17,
-    difficulty: AgingCardDifficulty.HIGH,
+    difficulty: AgingCardDifficulty.HARD,
   },
   {
     amount: 1,
     // SUICIDAL - -5
     battleDataId: 29,
-    difficulty: AgingCardDifficulty.HIGH,
+    difficulty: AgingCardDifficulty.HARD,
   },
   {
     amount: 1,
     // VERY_HUNGRY - 0
     battleDataId: 30,
-    difficulty: AgingCardDifficulty.HIGH,
+    difficulty: AgingCardDifficulty.HARD,
   },
 ]
-

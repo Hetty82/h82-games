@@ -1,6 +1,6 @@
-import { HazardCard } from '../models/cards/friday-hazard-cards'
+import { HazardCardRemote } from '../models/card.interfaces'
 
-export const HAZARD_CARDS: HazardCard[] = [
+export const HAZARD_CARDS: HazardCardRemote[] = [
   {
     amount: 1,
     // BOOKS - 0

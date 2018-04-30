@@ -1,4 +1,4 @@
-
+// Pure functions
 export function processCardAmounts<T extends { amount: number }>( cards: T[], card: T ): T[] {
   let addedCards = []
   for (let i = 0; i < card.amount; i++) {
@@ -8,6 +8,7 @@ export function processCardAmounts<T extends { amount: number }>( cards: T[], ca
   return [ ...cards, ...addedCards ]
 }
 
+// Impure functions
 export function shuffle<T>(array: T[]): T[] {
   if (!Array.isArray(array)) throw new TypeError(`Expected an Array, got ${typeof array} instead.`)
 

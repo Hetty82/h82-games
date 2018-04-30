@@ -1,17 +1,15 @@
 <section class="container">
   <h1>You are in an active game :)</h1>
+  <p>Active game id: {{ gameId }}</p>
 
   <button (click)="reset()" class="button -danger">Reset active game state</button>
 
-  <pre class="code">// full game state</pre>
-  <pre class="code">{{ state | json }}</pre>
-
-  <ng-container *ngIf="activeId">
+  <ng-container *ngIf="gameId">
     <span *ngIf="loading">Loading...</span>
 
     <ng-container *ngIf="!loading">
-      <button *ngIf="!game.currentRound" (click)="start()" class="button">Start game</button>
-      <button *ngIf="game.currentRound" (click)="continue()" class="button">Continue game</button>
+      <button *ngIf="!round" (click)="start()" class="button">Start game</button>
+      <button *ngIf="round" (click)="continue()" class="button">Continue game</button>
     </ng-container>
   </ng-container>
 </section>

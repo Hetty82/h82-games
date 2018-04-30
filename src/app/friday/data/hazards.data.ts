@@ -1,4 +1,4 @@
-import { Hazard, HazardPoints, HazardCardName } from '../models/cards/friday-hazard-cards'
+import { Hazard, HazardPoints, HazardCardName } from '../models/card.interfaces'
 
 export const HAZARDS: Hazard[] = [
   {

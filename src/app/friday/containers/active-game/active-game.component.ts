@@ -4,9 +4,9 @@ import { select, Store } from '@ngrx/store'
 import { Subscription } from 'rxjs/Subscription'
 
 import * as fromStore from '../../store'
-import { State } from '../../store/reducers/active-game.reducer'
 
-import { FridayGameDetails } from '../../models/friday-game-details.model'
+import { GameRound } from '../../models/friday-game-details.model'
+import { GameDifficulty } from '../../models/friday-game.model'
 
 
 @Component({
@@ -15,10 +15,10 @@ import { FridayGameDetails } from '../../models/friday-game-details.model'
   templateUrl: './active-game.component.html',
 })
 export class ActiveGameComponent implements OnInit, OnDestroy {
-  activeId: number
-  game: FridayGameDetails
+  difficulty: GameDifficulty
+  gameId: number
   loading = false
-  state: State
+  round: GameRound
 
   subs$ = new Subscription()
 
@@ -27,9 +27,9 @@ export class ActiveGameComponent implements OnInit, OnDestroy {
     this.subs$.add(this.store.pipe(
       select(fromStore.getActiveGameState),
     ).subscribe(state => {
-      this.state = state
-      this.activeId = state.id
-      this.game = state.details
+      this.difficulty = state.difficulty
+      this.gameId = state.id
+      this.round = state.currentRound
     }))
 
     this.subs$.add(this.store.pipe(
@@ -50,10 +50,8 @@ export class ActiveGameComponent implements OnInit, OnDestroy {
   }
 
   start() {
-    console.log('start game')
-    // this.store.dispatch(new fromStore.InitGame(this.game.id))
+    this.store.dispatch(new fromStore.InitGame(this.difficulty))
   }
-
 
   ngOnDestroy() {
     this.subs$.unsubscribe()

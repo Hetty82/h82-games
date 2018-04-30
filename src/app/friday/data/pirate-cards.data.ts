@@ -1,6 +1,6 @@
-import { PirateCard, PirateCardAbility } from '../models/cards/friday-pirate-cards'
+import { PirateCardRemote, PirateCardAbility } from '../models/card.interfaces'
 
-export const PIRATE_CARDS: PirateCard[] = [
+export const PIRATE_CARDS: PirateCardRemote[] = [
   {
     ability: PirateCardAbility.NONE,
     freeCardAmount: 6,

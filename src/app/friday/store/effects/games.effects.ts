@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core'
-import { Router } from '@angular/router'
 
 import { Effect, Actions, ofType } from '@ngrx/effects'
 import { Store, select } from '@ngrx/store'
 
 import { of } from 'rxjs/observable/of'
-import { map, switchMap, catchError, tap, mergeMap, withLatestFrom, filter } from 'rxjs/operators'
+import { map, switchMap, catchError, mergeMap, withLatestFrom, filter } from 'rxjs/operators'
 
 import * as fromStore from '../../store'
 
@@ -19,7 +18,6 @@ export class GamesEffects {
   constructor(
     private actions$: Actions,
     private gamesService: fromServices.GamesService,
-    private router: Router,
     private store: Store<fromStore.State>,
   ) {}
 
@@ -85,7 +83,7 @@ export class GamesEffects {
     map((action: gamesActions.DeleteGameSuccess) => action.payload),
     withLatestFrom(this.store.pipe(select(fromStore.getActiveGameId))),
     filter(([gameId, activeGameId]) => gameId === activeGameId),
-    map(() => new activeGameActions.RemoveActiveGame()),
+    map(() => new activeGameActions.ResetActiveGameState()),
   )
 
   @Effect()
@@ -123,13 +121,4 @@ export class GamesEffects {
     map((gameDetails) => new activeGameActions.SetActiveGame(gameDetails)),
   )
 
-  @Effect({ dispatch: false })
-  selectGame$ = this.actions$.pipe(
-    ofType(gamesActions.SELECT_GAME),
-    map((action: gamesActions.SelectGame) => action.payload),
-    tap(gameId => {
-      const url = '/friday/' + gameId
-      this.router.navigate([ url ])
-    }),
-  )
 }

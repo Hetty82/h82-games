@@ -1,4 +1,4 @@
-import { BattleData, BattleCardAbility, BattleCardName } from '../models/cards/friday-robinson-cards'
+import { BattleData, BattleCardAbility, BattleCardName } from '../models/card.interfaces'
 
 export const BATTLE_DATAS: BattleData[] = [
   {

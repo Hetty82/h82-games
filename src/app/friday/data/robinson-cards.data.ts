@@ -1,6 +1,6 @@
-import { RobinsonCard } from '../models/cards/friday-robinson-cards'
+import { RobinsonCardRemote } from '../models/card.interfaces'
 
-export const ROBINSON_CARDS: RobinsonCard[] = [
+export const ROBINSON_CARDS: RobinsonCardRemote[] = [
   {
     amount: 5,
     // DISTRACTED - -1

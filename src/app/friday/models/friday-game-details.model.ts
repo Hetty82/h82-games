@@ -1,6 +1,6 @@
 import { GameId, FridayGame, GameDifficulty } from './friday-game.model'
 
-export enum Round {
+export enum GameRound {
   INITIAL = 0,
   GREEN = 1,
   YELLOW = 2,
@@ -10,7 +10,7 @@ export enum Round {
 
 export class FridayGameDetails {
   id: GameId
-  currentRound = Round.INITIAL
+  currentRound = GameRound.INITIAL
   difficulty: GameDifficulty
 
   constructor(game: FridayGame) {
