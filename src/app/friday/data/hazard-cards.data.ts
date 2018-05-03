@@ -144,7 +144,7 @@ export const HAZARD_CARDS: HazardCardRemote[] = [
   },
 
   {
-    amount: 1,
+    amount: 2,
     // WEAPON - 4
     battleDataId: 37,
     hazardId: 5,

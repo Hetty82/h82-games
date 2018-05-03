@@ -33,6 +33,8 @@ export class ActiveGameComponent implements OnInit, OnDestroy {
       select(fromStore.getActiveGameId),
     ).subscribe(activeId => {
       if (activeId && activeId !== this.loadedGameId) {
+        if (this.loadedGameId) this.save()
+
         this.store.dispatch(new fromStore.ResetActiveGameState())
         this.store.dispatch(new fromStore.LoadGameDetails(activeId))
       }

@@ -1,14 +1,99 @@
-<section class="container">
-  <h1>You are in an active game :)</h1>
-  <p>Selected game id: {{ activeGameId }}</p>
-  <p>Current round: {{ currentRound }}</p>
+<section class="container active-game">
+  <header class="header">
+    <h1 class="title">Friday Game {{ activeGameId }} - round {{ currentRound }}</h1>
 
-  <span *ngIf="loading">Loading...</span>
+    <span *ngIf="loading" class="loader">Loading...</span>
 
-  <ng-container *ngIf="!loading && !playing">
-    <button *ngIf="!currentRound" (click)="start()" class="button">Start game #{{ loadedGameId }}</button>
-    <button *ngIf="currentRound" (click)="continue()" class="button">Continue game #{{ loadedGameId }}</button>
-  </ng-container>
+    <ng-container *ngIf="!loading && !playing" class="buttons">
+      <button *ngIf="!currentRound" (click)="start()" class="button">Start game #{{ loadedGameId }}</button>
+      <button *ngIf="currentRound" (click)="continue()" class="button">Continue game #{{ loadedGameId }}</button>
+    </ng-container>
 
-  <a routerLink="/friday">Exit and save</a>
+    <a routerLink="/friday" class="link">Exit and save</a>
+  </header>
+
+  <section *ngIf="playing" class="table">
+    <section class="game-section round">
+      Round: {{ currentRound }}
+    </section>
+
+    <section class="game-section lives">
+      Lives: {{ lives }}
+    </section>
+
+    <section class="game-section destroyed">
+      <div class="pile">
+        Destroyed:
+        <div class="cards">
+          {{ piles.destroyedCards.length }}
+        </div>
+      </div>
+    </section>
+
+    <section class="game-section hazard">
+      <div class="pile">
+        Hazard Cards:
+        <div class="cards">
+          {{ piles.hazardCardPile.length }}
+        </div>
+      </div>
+
+      <div class="pile">
+        Discarded:
+        <div class="cards">
+          {{ piles.hazardCardDiscardPile.length }}
+        </div>
+      </div>
+    </section>
+
+    <section class="game-section robinson">
+      <div class="pile">
+        Robinson Cards:
+        <div class="cards">
+          {{ piles.robinsonCardPile.length }}
+        </div>
+      </div>
+
+      <div class="pile">
+        Discarded:
+        <div class="cards">
+          {{ piles.robinsonCardDiscardPile.length }}
+        </div>
+      </div>
+    </section>
+
+    <section class="game-section aging">
+      <div class="pile">
+        Aging Cards:
+        <div class="cards">
+          {{ piles.agingCardPile.length }}
+        </div>
+      </div>
+    </section>
+
+    <section class="game-section pirates">
+      <figure *ngFor="let pirate of piles.pirateCards">
+        <img src="assets/images/pirate-front-{{pirate.id}}.png">
+        <figcaption class="hide">
+          {{ pirate | json }}
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="game-section battle">
+      Battle Area:
+      <p>
+        Hazard: {{ battle?.hazard | json }}
+      </p>
+      <p>
+        Battle Points: {{ battle?.battlePoints| json }}
+      </p>
+      <p>
+        Free Battle Cards: {{ battle?.freeBattleCards | json }}
+      </p>
+      <p>
+        Payed Battle Cards: {{ battle?.payedBattleCards | json }}
+      </p>
+    </section>
+  </section>
 </section>

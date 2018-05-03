@@ -11,21 +11,21 @@ export enum GameRound {
 }
 
 export interface Battle {
-  activeBattlePoints: number
-  activeFreeBattleCards: BattleCard[]
-  activeHazard: Hazard
-  activePayedBattleCards: BattleCard[]
+  battlePoints: number
+  freeBattleCards: BattleCard[]
+  hazard: Hazard
+  payedBattleCards: BattleCard[]
 }
 
 export interface CardPiles {
   destroyedCards: BattleCard[]
 
   agingCardPile: BattleCard[]
-  hazardCardPile: HazardCardInterface[]
   hazardCardDiscardPile: HazardCardInterface[]
+  hazardCardPile: HazardCardInterface[]
   pirateCards: PirateCardRemote[]
-  robinsonCardPile: BattleCard[]
   robinsonCardDiscardPile: BattleCard[]
+  robinsonCardPile: BattleCard[]
 }
 
 export class FridayGameDetails {

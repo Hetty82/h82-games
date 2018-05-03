@@ -11,6 +11,10 @@ export const routes: Routes = [
     component: fromComponents.FridayComponent,
     children: [
       {
+        path: '',
+        component: fromContainers.GamesComponent,
+      },
+      {
         path: ':gameId',
         component: fromContainers.ActiveGameComponent,
       },

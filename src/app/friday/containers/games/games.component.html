@@ -1,33 +1,35 @@
-<section class="container">
-  <h1>Welcome to Friday, the game!</h1>
-  loading: {{ loading }}
+<div class="container">
+  <section class="games">
+    <h1>Welcome to Friday, the game!</h1>
+    loading: {{ loading }}
 
-  <ng-container *ngIf="user; else login">
-    <header>
-      <p>Choose your game from the list or start a new one:</p>
+    <ng-container *ngIf="user; else login">
+      <header>
+        <p>Choose your game from the list or start a new one:</p>
 
-      <button (click)="createGame(user.id, 1)" class="button -warning" [disabled]="loading">Create a new game (difficulty: 1)</button>
-      <button (click)="createGame(user.id, 2)" class="button -warning" [disabled]="loading">Create a new game (difficulty: 2)</button>
-      <button (click)="createGame(user.id, 3)" class="button -warning" [disabled]="loading">Create a new game (difficulty: 3)</button>
-      <button (click)="createGame(user.id, 4)" class="button -warning" [disabled]="loading">Create a new game (difficulty: 4)</button>
+        <button (click)="createGame(user.id, 1)" class="button -warning" [disabled]="loading">Create a new game (difficulty: 1)</button>
+        <button (click)="createGame(user.id, 2)" class="button -warning" [disabled]="loading">Create a new game (difficulty: 2)</button>
+        <button (click)="createGame(user.id, 3)" class="button -warning" [disabled]="loading">Create a new game (difficulty: 3)</button>
+        <button (click)="createGame(user.id, 4)" class="button -warning" [disabled]="loading">Create a new game (difficulty: 4)</button>
 
-      <button (click)="reset()" class="button -danger">Reset games state</button>
-    </header>
+        <button (click)="reset()" class="button -danger">Reset games state</button>
+      </header>
 
-    <ul class="list">
-      <li *ngFor="let game of (games$ | async)" class="item">
-        <a routerLink="{{game.id}}" >Select this game: #{{ game.id }}, level: {{ game.difficulty }}</a>
+      <ul class="list">
+        <li *ngFor="let game of (games$ | async)" class="item">
+          <a routerLink="{{game.id}}">Select this game: #{{ game.id }}, level: {{ game.difficulty }}</a>
 
-        created: {{ game.createdAt | date:'medium' }}
+          created: {{ game.createdAt | date:'medium' }}
 
-        <button (click)="deleteGame(game.id)" class="button -danger" [disabled]="loading">
-          <app-icon name="trash"></app-icon>
-        </button>
-      </li>
-    </ul>
-  </ng-container>
+          <button (click)="deleteGame(game.id)" class="button -danger" [disabled]="loading">
+            <app-icon name="trash"></app-icon>
+          </button>
+        </li>
+      </ul>
+    </ng-container>
 
-  <ng-template #login>
-    <a routerLink="/login">Login</a>
-  </ng-template>
-</section>
+    <ng-template #login>
+      <a routerLink="/login">Login</a>
+    </ng-template>
+  </section>
+</div>

@@ -15,6 +15,16 @@ export interface State {
   piles: CardPiles
 }
 
+const initialPiles: CardPiles = {
+  agingCardPile: [],
+  destroyedCards: [],
+  hazardCardDiscardPile: [],
+  hazardCardPile: [],
+  pirateCards: [],
+  robinsonCardDiscardPile: [],
+  robinsonCardPile: [],
+}
+
 const initialState: State = {
   difficulty: null,
   id: null,
@@ -23,8 +33,7 @@ const initialState: State = {
   battle: null,
   currentRound: null,
   lives: null,
-  piles: null,
-
+  piles: initialPiles,
 }
 
 export function reducer(state: State = initialState, action: fromActiveGame.ActiveGameAction): State {
@@ -78,7 +87,10 @@ export function reducer(state: State = initialState, action: fromActiveGame.Acti
           ...overrides,
           battle: payload.battle,
           lives: payload.lives,
-          piles: payload.piles,
+          piles: {
+            ...state.piles,
+            ...payload.piles,
+          },
         }
       }
 
