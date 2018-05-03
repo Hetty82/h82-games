@@ -64,4 +64,13 @@ export class GamesService {
       delay(1000),
     ) as Observable<FridayGameDetails>
   }
+
+  saveGameDetails(gameDetails: FridayGameDetails) {
+    const url = environment.api.friday.gameDetails + '/' + gameDetails.id
+    const body = gameDetails
+
+    return this.http.put(url, body).pipe(
+      delay(1000),
+    ) as Observable<FridayGameDetails>
+  }
 }

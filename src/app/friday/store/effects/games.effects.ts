@@ -81,8 +81,8 @@ export class GamesEffects {
   deleteGameSuccess2$ = this.actions$.pipe(
     ofType(gamesActions.DELETE_GAME_SUCCESS),
     map((action: gamesActions.DeleteGameSuccess) => action.payload),
-    withLatestFrom(this.store.pipe(select(fromStore.getActiveGameId))),
-    filter(([gameId, activeGameId]) => gameId === activeGameId),
+    withLatestFrom(this.store.pipe(select(fromStore.getLoadedGameId))),
+    filter(([gameId, loadedGameId]) => gameId === loadedGameId),
     map(() => new activeGameActions.ResetActiveGameState()),
   )
 

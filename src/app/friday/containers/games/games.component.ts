@@ -57,10 +57,6 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.store.dispatch(new fromStore.ResetGamesState())
   }
 
-  selectGame(gameId) {
-    if (gameId !== this.activeGameId) this.store.dispatch(new fromStore.LoadGameDetails(gameId))
-  }
-
   ngOnDestroy() {
     this.subs$.unsubscribe()
   }

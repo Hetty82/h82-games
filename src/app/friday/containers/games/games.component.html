@@ -16,7 +16,7 @@
 
     <ul class="list">
       <li *ngFor="let game of (games$ | async)" class="item">
-        <button (click)="selectGame(game.id)" class="button" [disabled]="loading">Play this game: #{{ game.id }}, level: {{ game.difficulty }}</button>
+        <a routerLink="{{game.id}}" >Select this game: #{{ game.id }}, level: {{ game.difficulty }}</a>
 
         created: {{ game.createdAt | date:'medium' }}
 

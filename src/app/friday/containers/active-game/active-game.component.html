@@ -1,15 +1,14 @@
 <section class="container">
   <h1>You are in an active game :)</h1>
-  <p>Active game id: {{ gameId }}</p>
+  <p>Selected game id: {{ activeGameId }}</p>
+  <p>Current round: {{ currentRound }}</p>
 
-  <button (click)="reset()" class="button -danger">Reset active game state</button>
+  <span *ngIf="loading">Loading...</span>
 
-  <ng-container *ngIf="gameId">
-    <span *ngIf="loading">Loading...</span>
-
-    <ng-container *ngIf="!loading">
-      <button *ngIf="!round" (click)="start()" class="button">Start game</button>
-      <button *ngIf="round" (click)="continue()" class="button">Continue game</button>
-    </ng-container>
+  <ng-container *ngIf="!loading && !playing">
+    <button *ngIf="!currentRound" (click)="start()" class="button">Start game #{{ loadedGameId }}</button>
+    <button *ngIf="currentRound" (click)="continue()" class="button">Continue game #{{ loadedGameId }}</button>
   </ng-container>
+
+  <a routerLink="/friday">Exit and save</a>
 </section>

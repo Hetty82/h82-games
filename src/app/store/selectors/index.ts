@@ -1,8 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
 
+import * as fromRouter from '@ngrx/router-store'
 import * as fromGames from '../../core/store/reducers/games.reducer'
 import * as fromUser from '../../core/store/reducers/user.reducer'
 
+import { RouterStateUrl } from '../reducers/index'
+
+// Router state
+export const getRouterState = createFeatureSelector<fromRouter.RouterReducerState<RouterStateUrl>>('router')
 
 // Game feature from CoreModule
 export const getGamesState = createFeatureSelector<fromGames.State>('games')

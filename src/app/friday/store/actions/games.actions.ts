@@ -118,7 +118,6 @@ export class ResetGamesState implements Action {
 }
 
 
-
 // Action types
 export type GamesAction =
   | CreateGame

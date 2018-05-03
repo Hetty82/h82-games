@@ -1,52 +1,30 @@
 
-import { BattleCard } from '../../models/battle-card.model'
 import { GameId, GameDifficulty } from '../../models/friday-game.model'
-import { GameRound } from '../../models/friday-game-details.model'
-import { HazardCardInterface, PirateCardRemote, Hazard } from '../../models/card.interfaces'
+import { GameRound, Battle, CardPiles } from '../../models/friday-game-details.model'
 
 import * as fromActiveGame from '../actions/active-game.actions'
 
-
 export interface State {
-  currentRound: GameRound
-  difficulty: GameDifficulty
   id: GameId
+  difficulty: GameDifficulty
+  playing: boolean
+
+  battle: Battle
+  currentRound: GameRound
   lives: number
-
-  activeBattlePoints: number
-  activeFreeBattleCards: BattleCard[]
-  activeHazard: Hazard
-  activePayedBattleCards: BattleCard[]
-
-  destroyedCards: BattleCard[]
-
-  agingCardDeck: BattleCard[]
-  hazardCardDeck: HazardCardInterface[]
-  hazardCardDiscardPile: HazardCardInterface[]
-  pirateCardDeck: PirateCardRemote[]
-  robinsonCardDeck: BattleCard[]
-  robinsonCardDiscardPile: BattleCard[]
+  piles: CardPiles
 }
 
 const initialState: State = {
-  currentRound: null,
   difficulty: null,
   id: null,
+  playing: false,
+
+  battle: null,
+  currentRound: null,
   lives: null,
+  piles: null,
 
-  activeBattlePoints: 0,
-  activeFreeBattleCards: [],
-  activeHazard: null,
-  activePayedBattleCards: [],
-
-  destroyedCards: [],
-
-  agingCardDeck: [],
-  hazardCardDeck: [],
-  hazardCardDiscardPile: [],
-  pirateCardDeck: [],
-  robinsonCardDeck: [],
-  robinsonCardDiscardPile: [],
 }
 
 export function reducer(state: State = initialState, action: fromActiveGame.ActiveGameAction): State {
@@ -63,23 +41,50 @@ export function reducer(state: State = initialState, action: fromActiveGame.Acti
 
     case fromActiveGame.CREATE_DECK_SUCCESS: {
       const deck = action.payload
+      const piles = {
+        ...state.piles,
+        agingCardPile: deck.agingCards,
+        hazardCardPile: deck.hazardCards,
+        pirateCards: deck.pirateCards,
+        robinsonCardPile: deck.robinsonCards,
+      }
 
       return {
         ...state,
-        agingCardDeck: deck.agingCards,
-        currentRound: GameRound.GREEN,
-        hazardCardDeck: deck.hazardCards,
-        pirateCardDeck: deck.pirateCards,
-        robinsonCardDeck: deck.robinsonCards,
+        currentRound: GameRound.ONE,
+        piles,
+      }
+    }
+
+    case fromActiveGame.PLAY: {
+      return {
+        ...state,
+        playing: true,
       }
     }
 
     case fromActiveGame.SET_ACTIVE_GAME: {
+      const payload = action.payload
+
+      let overrides
+      overrides = {
+        currentRound: payload.currentRound,
+        difficulty: payload.difficulty,
+        id: payload.id,
+      }
+
+      if (payload.currentRound) {
+        overrides = {
+          ...overrides,
+          battle: payload.battle,
+          lives: payload.lives,
+          piles: payload.piles,
+        }
+      }
+
       return {
         ...state,
-        currentRound: action.payload.currentRound,
-        difficulty: action.payload.difficulty,
-        id: action.payload.id,
+        ...overrides,
       }
     }
 
@@ -93,6 +98,6 @@ export function reducer(state: State = initialState, action: fromActiveGame.Acti
 }
 
 
+export const getCurrentRound = (state: State) => state.currentRound
 export const getDifficulty = (state: State) => state.difficulty
 export const getId = (state: State) => state.id
-export const getCurrentRound = (state: State) => state.currentRound
