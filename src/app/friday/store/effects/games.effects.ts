@@ -9,7 +9,7 @@ import { map, switchMap, catchError, mergeMap, withLatestFrom, filter } from 'rx
 import * as fromStore from '../../store'
 
 import * as gamesActions from '../actions/games.actions'
-import * as activeGameActions from '../actions/active-game.actions'
+import * as outerGameActions from '../actions/outer-game.actions'
 import * as fromServices from '../../services'
 
 
@@ -81,9 +81,9 @@ export class GamesEffects {
   deleteGameSuccess2$ = this.actions$.pipe(
     ofType(gamesActions.DELETE_GAME_SUCCESS),
     map((action: gamesActions.DeleteGameSuccess) => action.payload),
-    withLatestFrom(this.store.pipe(select(fromStore.getLoadedGameId))),
+    withLatestFrom(this.store.pipe(select(fromStore.getActiveGameId))),
     filter(([gameId, loadedGameId]) => gameId === loadedGameId),
-    map(() => new activeGameActions.ResetActiveGameState()),
+    map(() => new outerGameActions.ResetActiveGame()),
   )
 
   @Effect()
@@ -113,12 +113,4 @@ export class GamesEffects {
         )
     }),
   )
-
-  @Effect()
-  loadGameDetailsSuccess$ = this.actions$.pipe(
-    ofType(gamesActions.LOAD_GAME_DETAILS_SUCCESS),
-    map((action: gamesActions.LoadGameDetailsSuccess) => action.payload),
-    map((gameDetails) => new activeGameActions.SetActiveGame(gameDetails)),
-  )
-
 }

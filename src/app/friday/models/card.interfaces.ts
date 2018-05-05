@@ -1,6 +1,25 @@
+export type BattleComboId = number
+export type HazardComboId = number
+
+export type AgingCardId = number
+export type HazardCardId = number
+export type PirateCardId = number
+export type RobinsonCardId = number
+
 
 export interface CardRemote {
   readonly amount: number
+  readonly id: number
+}
+
+export interface CardsRemote {
+  battleCombos: BattleCombo[],
+  hazardCombos: HazardCombo[],
+
+  agingCards: AgingCardRemote[],
+  hazardCards: HazardCardRemote[],
+  pirateCards: PirateCardRemote[],
+  robinsonCards: RobinsonCardRemote[],
 }
 
 export enum BattleCardAbility {
@@ -56,20 +75,17 @@ export enum BattleCardName {
   WEAPON = 'weapon',
 }
 
-export interface BattleData {
+export interface BattleCombo {
   readonly ability: BattleCardAbility
   readonly battlePoints: number
-  readonly id: number
+  readonly id: BattleComboId
+  readonly isAgingCard: boolean
   readonly name: BattleCardName
 }
 
 // RobinsonCards
 export interface RobinsonCardRemote extends CardRemote {
-  readonly battleDataId: number
-}
-
-export interface RobinsonCardInterface {
-  readonly battleData: BattleData
+  readonly battleComboId: BattleComboId
 }
 
 // Aging cards
@@ -80,12 +96,7 @@ export enum AgingCardDifficulty {
 
 export interface AgingCardRemote extends CardRemote {
   readonly difficulty: AgingCardDifficulty
-  readonly battleDataId: number
-}
-
-export interface AgingCardInterface {
-  readonly difficulty: AgingCardDifficulty
-  readonly battleData: BattleData
+  readonly battleComboId: BattleComboId
 }
 
 // Hazard cards
@@ -105,7 +116,7 @@ export enum HazardCardName {
   WITH_THE_RAFT_TO_THE_WRECK = 'With the raft to the wreck',
 }
 
-export interface Hazard {
+export interface HazardCombo {
   readonly freeCardAmount: number
   readonly hazardPoints: HazardPoints
   readonly id: number
@@ -113,14 +124,8 @@ export interface Hazard {
 }
 
 export interface HazardCardRemote extends CardRemote {
-  readonly battleDataId: number
-  readonly hazardId: number
-}
-
-export interface HazardCardInterface {
-  readonly battleData: BattleData
-  readonly hazard: Hazard
-  readonly id: number
+  readonly battleComboId: number
+  readonly hazardComboId: number
 }
 
 // PirateCards don't extend Card: there is simply one of each.
@@ -140,4 +145,11 @@ export interface PirateCardRemote {
 
   freeCardAmount: number // if null: needs to be calculated at the start of the final
   hazardPoints: number // if null: needs to be calculated at the start of the final
+}
+
+export interface Deck {
+  agingCardDeck: BattleComboId[],
+  hazardCardDeck: HazardCardId[],
+  pirateCardIds: PirateCardId[],
+  robinsonCardDeck: BattleComboId[],
 }

@@ -5,56 +5,65 @@ export const AGING_CARDS: AgingCardRemote[] = [
   {
     amount: 1,
     // DISTRACTED - -1
-    battleDataId: 4,
+    battleComboId: 5,
     difficulty: AgingCardDifficulty.NORMAL,
+    id: 1,
   },
   {
     amount: 1,
     // HUNGRY - 0
-    battleDataId: 14,
+    battleComboId: 15,
     difficulty: AgingCardDifficulty.NORMAL,
+    id: 2,
   },
   {
     amount: 2,
     // SCARED - 0
-    battleDataId: 24,
+    battleComboId: 25,
     difficulty: AgingCardDifficulty.NORMAL,
+    id: 3,
   },
   {
     amount: 2,
     // STUPID - -2
-    battleDataId: 28,
+    battleComboId: 29,
     difficulty: AgingCardDifficulty.NORMAL,
+    id: 4,
   },
   {
     amount: 1,
     // VERY_STUPID - -3
-    battleDataId: 31,
+    battleComboId: 32,
     difficulty: AgingCardDifficulty.NORMAL,
+    id: 5,
   },
   {
     amount: 1,
     // VERY_TIRED - 0
-    battleDataId: 32,
+    battleComboId: 33,
     difficulty: AgingCardDifficulty.NORMAL,
+    id: 6,
   },
 
   {
     amount: 1,
     // MORONIC - -4
-    battleDataId: 17,
+    battleComboId: 18,
     difficulty: AgingCardDifficulty.HARD,
+    id: 7,
   },
   {
     amount: 1,
     // SUICIDAL - -5
-    battleDataId: 29,
+    battleComboId: 30,
     difficulty: AgingCardDifficulty.HARD,
+    id: 8,
   },
   {
     amount: 1,
     // VERY_HUNGRY - 0
-    battleDataId: 30,
+    battleComboId: 31,
     difficulty: AgingCardDifficulty.HARD,
+    id: 9,
   },
 ]

@@ -1,6 +1,6 @@
-import { Hazard, HazardPoints, HazardCardName } from '../models/card.interfaces'
+import { HazardCombo, HazardPoints, HazardCardName } from '../models/card.interfaces'
 
-export const HAZARDS: Hazard[] = [
+export const HAZARD_COMBOS: HazardCombo[] = [
   {
     freeCardAmount: 1,
     hazardPoints: HazardPoints.P_0_1_3,

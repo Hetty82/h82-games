@@ -4,26 +4,31 @@ export const ROBINSON_CARDS: RobinsonCardRemote[] = [
   {
     amount: 5,
     // DISTRACTED - -1
-    battleDataId: 4,
+    battleComboId: 4,
+    id: 1,
   },
   {
     amount: 1,
     // EATING - 0
-    battleDataId: 5,
+    battleComboId: 6,
+    id: 2,
   },
   {
     amount: 3,
     // FOCUSED - 1
-    battleDataId: 9,
+    battleComboId: 10,
+    id: 3,
   },
   {
     amount: 1,
     // GENIUS - 2
-    battleDataId: 13,
+    battleComboId: 14,
+    id: 4,
   },
   {
     amount: 8,
     // WEAK - 0
-    battleDataId: 35,
+    battleComboId: 36,
+    id: 5,
   },
 ]

@@ -1,10 +1,11 @@
-import { FridayGame, GameError } from '../../models/friday-game.model'
+import { Game } from '../../models/game.model'
+import { GameError } from '../../models/game.interfaces'
 
 import * as fromGames from '../actions/games.actions'
 
 
 interface GameEntities  {
-  [id: number]: FridayGame
+  [id: number]: Game
 }
 
 export interface State {
@@ -115,7 +116,7 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
     case fromGames.LOAD_GAMES_SUCCESS: {
       const games = action.payload
 
-      const entities = games.reduce((newEntities: GameEntities, game: FridayGame) => {
+      const entities = games.reduce((newEntities: GameEntities, game: Game) => {
           return {
             ...newEntities,
             [game.id]: game,

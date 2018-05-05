@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs/Subscription'
 
 import * as fromStore from '../../store'
 
-import { FridayGame, GameId, GameDifficulty } from '../../models/friday-game.model'
+import { Game } from '../../models/game.model'
+import { GameDifficulty } from '../../models/game.interfaces'
 import { User } from '../../../core/models/user.interface'
 
 
@@ -16,12 +17,11 @@ import { User } from '../../../core/models/user.interface'
   templateUrl: './games.component.html',
 })
 export class GamesComponent implements OnInit, OnDestroy {
-  activeGameId: GameId
   loading = false
   user: User
 
   games$ = this.store.pipe(select(fromStore.getGames))
-  subs$ = new Subscription()
+  subscriptions$ = new Subscription()
 
   constructor(private store: Store<fromStore.State>) {
     this.store.pipe(
@@ -33,11 +33,7 @@ export class GamesComponent implements OnInit, OnDestroy {
       if (user && !loaded) this.store.dispatch(new fromStore.LoadGames(this.user.id))
     })
 
-    this.subs$.add(this.store.pipe(
-      select(fromStore.getActiveGameId),
-    ).subscribe(activeId => this.activeGameId = activeId))
-
-    this.subs$.add(this.store.pipe(
+    this.subscriptions$.add(this.store.pipe(
       select(fromStore.getGamesLoading),
     ).subscribe(loading => this.loading = loading))
   }
@@ -46,7 +42,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   createGame(userId: number, difficulty: GameDifficulty) {
-    this.store.dispatch(new fromStore.CreateGame(new FridayGame(userId, difficulty)))
+    this.store.dispatch(new fromStore.CreateGame(new Game(userId, difficulty)))
   }
 
   deleteGame(gameId) {
@@ -55,9 +51,10 @@ export class GamesComponent implements OnInit, OnDestroy {
 
   reset() {
     this.store.dispatch(new fromStore.ResetGamesState())
+    this.store.dispatch(new fromStore.ResetCardsState())
   }
 
   ngOnDestroy() {
-    this.subs$.unsubscribe()
+    this.subscriptions$.unsubscribe()
   }
 }

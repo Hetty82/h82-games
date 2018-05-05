@@ -6,9 +6,11 @@ import { delay } from 'rxjs/operators'
 
 import { environment } from '../../../environments/environment'
 
-import { FridayGame, GameId } from '../models/friday-game.model'
-import { FridayGameDetails } from '../models/friday-game-details.model'
+import { Game } from '../models/game.model'
+import { GameDetails } from '../models/game-details.model'
+import { GameId } from '../models/game.interfaces'
 
+const fakeDelay = 500
 
 @Injectable()
 export class GamesService {
@@ -16,28 +18,28 @@ export class GamesService {
     private http: HttpClient,
   ) { }
 
-  createGame(game: FridayGame) {
+  createGame(game: Game) {
     const url = environment.api.friday.games
 
     return this.http.post(url, game).pipe(
-      delay(200),
-    ) as Observable<FridayGame>
+      delay(fakeDelay),
+    ) as Observable<Game>
   }
 
-  createGameDetails(game: FridayGame) {
+  createGameDetails(game: Game) {
     const url = environment.api.friday.gameDetails
-    const body = new FridayGameDetails(game)
+    const body = new GameDetails(game)
 
     return this.http.post(url, body).pipe(
-      delay(200),
-    ) as Observable<FridayGameDetails>
+      delay(fakeDelay),
+    ) as Observable<GameDetails>
   }
 
   deleteGame(gameId: GameId) {
     const url = environment.api.friday.games + '/' + gameId
 
     return this.http.delete(url).pipe(
-      delay(200),
+      delay(fakeDelay),
     ) as Observable<GameId>
   }
 
@@ -45,7 +47,7 @@ export class GamesService {
     const url = environment.api.friday.gameDetails + '/' + gameId
 
     return this.http.delete(url).pipe(
-      delay(200),
+      delay(fakeDelay),
     ) as Observable<GameId>
   }
 
@@ -53,24 +55,24 @@ export class GamesService {
     const url = environment.api.friday.games + `?userId=${userId}`
 
     return this.http.get(url).pipe(
-      delay(200),
-    ) as Observable<FridayGame[]>
+      delay(fakeDelay),
+    ) as Observable<Game[]>
   }
 
   getGameDetails(gameId: GameId) {
     const url = environment.api.friday.gameDetails + '/' + gameId
 
     return this.http.get(url).pipe(
-      delay(200),
-    ) as Observable<FridayGameDetails>
+      delay(fakeDelay),
+    ) as Observable<GameDetails>
   }
 
-  saveGameDetails(gameDetails: FridayGameDetails) {
+  saveGameDetails(gameDetails: GameDetails) {
     const url = environment.api.friday.gameDetails + '/' + gameDetails.id
     const body = gameDetails
 
     return this.http.put(url, body).pipe(
-      delay(200),
-    ) as Observable<FridayGameDetails>
+      delay(fakeDelay),
+    ) as Observable<GameDetails>
   }
 }

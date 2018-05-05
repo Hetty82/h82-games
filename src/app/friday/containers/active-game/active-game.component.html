@@ -1,31 +1,35 @@
 <section class="container active-game">
   <header class="header">
-    <h1 class="title">Friday Game {{ activeGameId }} - round {{ currentRound }}</h1>
+    <h1 class="title">Friday Game {{ activeGameId }} - round {{ currentRound$ | async }} - difficulty {{ difficulty }}</h1>
 
-    <span *ngIf="loading" class="loader">Loading...</span>
+    <span *ngIf="loading$ | async" class="loader">Loading...</span>
 
     <ng-container *ngIf="!loading && !playing" class="buttons">
-      <button *ngIf="!currentRound" (click)="start()" class="button">Start game #{{ loadedGameId }}</button>
-      <button *ngIf="currentRound" (click)="continue()" class="button">Continue game #{{ loadedGameId }}</button>
+      <button *ngIf="!currentRound$ | async" (click)="start()" class="button">Start game #{{ activeGameId }}</button>
+      <button *ngIf="currentRound$ | async" (click)="continue()" class="button">Continue game #{{ activeGameId }}</button>
     </ng-container>
 
     <a routerLink="/friday" class="link">Exit and save</a>
   </header>
 
-  <section *ngIf="playing" class="table">
+  <pre class="dev">
+    available actions: {{ availableActions | json }}
+  </pre>
+
+  <section *ngIf="playing$ | async" class="table">
     <section class="game-section round">
-      Round: {{ currentRound }}
+      Round: {{ currentRound$ | async }}
     </section>
 
     <section class="game-section lives">
-      Lives: {{ lives }}
+      Lives: {{ lives$ | async }}
     </section>
 
     <section class="game-section destroyed">
       <div class="pile">
         Destroyed:
         <div class="cards">
-          {{ piles.destroyedCards.length }}
+          {{ (destroyed$ | async).length }}
         </div>
       </div>
     </section>
@@ -34,15 +38,36 @@
       <div class="pile">
         Hazard Cards:
         <div class="cards">
-          {{ piles.hazardCardPile.length }}
+          {{ (hazards$ | async).length }}
         </div>
+
+        <button (click)="drawHazardCards()" class="button">
+          Draw hazard cards
+        </button>
       </div>
 
       <div class="pile">
         Discarded:
         <div class="cards">
-          {{ piles.hazardCardDiscardPile.length }}
+          {{ (hazardsDiscarded$ | async).length }}
         </div>
+      </div>
+
+      <div class="options">
+        Choose a hazard:
+        <ng-container *ngIf="(hazardOptions$ | async) as cardIds">
+          <ng-container *ngIf="(hazardEntities$ | async) as entities">
+            <figure *ngFor="let id of cardIds" class="hazard-option">
+              <img src="assets/images/hazard-front-{{id}}.png">
+              <figcaption>
+                {{ entities[id] | json }}
+                <button (click)="playHazardCard(id)" class="button">
+                  Play this hazard
+                </button>
+              </figcaption>
+            </figure>
+          </ng-container>
+        </ng-container>
       </div>
     </section>
 
@@ -50,14 +75,14 @@
       <div class="pile">
         Robinson Cards:
         <div class="cards">
-          {{ piles.robinsonCardPile.length }}
+          {{ (robinsons$ | async).length }}
         </div>
       </div>
 
       <div class="pile">
         Discarded:
         <div class="cards">
-          {{ piles.robinsonCardDiscardPile.length }}
+          {{ (robinsonsDiscarded$ | async).length }}
         </div>
       </div>
     </section>
@@ -66,33 +91,35 @@
       <div class="pile">
         Aging Cards:
         <div class="cards">
-          {{ piles.agingCardPile.length }}
+          {{ (agings$ | async).length }}
         </div>
       </div>
     </section>
 
     <section class="game-section pirates">
-      <figure *ngFor="let pirate of piles.pirateCards">
-        <img src="assets/images/pirate-front-{{pirate.id}}.png">
-        <figcaption class="hide">
-          {{ pirate | json }}
-        </figcaption>
-      </figure>
+      <ng-container *ngIf="(pirates$ | async) as pirates">
+        <figure *ngFor="let pirate of pirates" class="pirate">
+          <img src="assets/images/pirate-front-{{pirate}}.png">
+          <figcaption class="hide">
+            {{ pirate | json }}
+          </figcaption>
+        </figure>
+      </ng-container>
     </section>
 
     <section class="game-section battle">
       Battle Area:
       <p>
-        Hazard: {{ battle?.hazard | json }}
+        Hazard: {{ playedHazard$ | async | json }}
       </p>
       <p>
-        Battle Points: {{ battle?.battlePoints| json }}
+        <!-- Battle Points: {{ battle?.battlePoints| json }} -->
       </p>
       <p>
-        Free Battle Cards: {{ battle?.freeBattleCards | json }}
+        <!-- Free Battle Cards: {{ battle?.freeBattleCards | json }} -->
       </p>
       <p>
-        Payed Battle Cards: {{ battle?.payedBattleCards | json }}
+        <!-- Payed Battle Cards: {{ battle?.payedBattleCards | json }} -->
       </p>
     </section>
   </section>

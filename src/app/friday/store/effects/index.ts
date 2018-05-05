@@ -1,10 +1,13 @@
-import { ActiveGameEffects } from './active-game.effects'
 import { GamesEffects } from './games.effects'
+import { InnerGameEffects } from './inner-game.effects'
+import { OuterGameEffects } from './outer-game.effects'
 
 export const fridayEffects: any[] = [
-  ActiveGameEffects,
   GamesEffects,
+  InnerGameEffects,
+  OuterGameEffects,
 ]
 
-export * from './active-game.effects'
 export * from './games.effects'
+export * from './inner-game.effects'
+export * from './outer-game.effects'

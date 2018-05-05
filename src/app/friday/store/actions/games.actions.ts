@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store'
 
-import { FridayGame, GameError, GameId } from '../../models/friday-game.model'
-import { FridayGameDetails } from '../../models/friday-game-details.model'
+import { Game } from '../../models/game.model'
+import { GameDetails } from '../../models/game-details.model'
+import { GameError, GameId } from '../../models/game.interfaces'
 
 
 export type UserId = number
@@ -37,7 +38,7 @@ export const RESET_GAMES_STATE = '[Friday - Games] Reset games state'
 // Actions
 export class CreateGame implements Action {
   readonly type = CREATE_GAME
-  constructor(public payload: FridayGame) {}
+  constructor(public payload: Game) {}
 }
 export class CreateGameFail implements Action {
   readonly type = CREATE_GAME_FAIL
@@ -45,7 +46,7 @@ export class CreateGameFail implements Action {
 }
 export class CreateGameSuccess implements Action {
   readonly type = CREATE_GAME_SUCCESS
-  constructor(public payload: FridayGame) {}
+  constructor(public payload: Game) {}
 }
 
 export class CreateGameDetails implements Action {
@@ -58,7 +59,7 @@ export class CreateGameDetailsFail implements Action {
 }
 export class CreateGameDetailsSuccess implements Action {
   readonly type = CREATE_GAME_DETAILS_SUCCESS
-  constructor(public payload: FridayGameDetails) {}
+  constructor(public payload: GameDetails) {}
 }
 
 export class DeleteGame implements Action {
@@ -97,7 +98,7 @@ export class LoadGamesFail implements Action {
 }
 export class LoadGamesSuccess implements Action {
   readonly type = LOAD_GAMES_SUCCESS
-  constructor(public payload: FridayGame[]) {}
+  constructor(public payload: Game[]) {}
 }
 
 export class LoadGameDetails implements Action {
@@ -110,7 +111,7 @@ export class LoadGameDetailsFail implements Action {
 }
 export class LoadGameDetailsSuccess implements Action {
   readonly type = LOAD_GAME_DETAILS_SUCCESS
-  constructor(public payload: FridayGameDetails) {}
+  constructor(public payload: GameDetails) {}
 }
 
 export class ResetGamesState implements Action {

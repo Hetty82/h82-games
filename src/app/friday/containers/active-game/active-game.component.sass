@@ -18,7 +18,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr
   grid-template-rows: 1fr 3fr 1fr
   grid-gap: $spacing-xs
-  grid-template-areas: "destroyed pirates pirates aging" "hazard main main robinson" "round main main lives"
+  grid-template-areas: "round pirates pirates lives" "hazard main main robinson" "destroyed main main aging"
 
 .game-section
   display: flex
@@ -36,9 +36,11 @@
 
   &.hazard
     grid-area: hazard
+    flex-direction: column
 
   &.robinson
     grid-area: robinson
+    flex-direction: column
 
   &.aging
     grid-area: aging
@@ -54,7 +56,21 @@
   margin: 0 $spacing-sm $spacing-sm 0
 
 .cards
-  width: 2em
+  display: block
+  width: 100%
   padding: $spacing-sm 0
   text-align: center
   border: 1px solid $gray-darker-1
+
+button.cards
+  cursor: pointer
+  &:hover,
+  &:focus
+    background: rgba($white, 0.4)
+
+.pirate
+  img
+    display: block
+
+  + .pirate
+    margin-left: $spacing-sm
