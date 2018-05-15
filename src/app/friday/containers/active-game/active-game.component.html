@@ -52,23 +52,6 @@
           {{ (hazardsDiscarded$ | async).length }}
         </div>
       </div>
-
-      <div class="options">
-        Choose a hazard:
-        <ng-container *ngIf="(hazardOptions$ | async) as cardIds">
-          <ng-container *ngIf="(hazardEntities$ | async) as entities">
-            <figure *ngFor="let id of cardIds" class="hazard-option">
-              <img src="assets/images/hazard-front-{{id}}.png">
-              <figcaption>
-                {{ entities[id] | json }}
-                <button (click)="playHazardCard(id)" class="button">
-                  Play this hazard
-                </button>
-              </figcaption>
-            </figure>
-          </ng-container>
-        </ng-container>
-      </div>
     </section>
 
     <section class="game-section robinson">
@@ -97,21 +80,43 @@
     </section>
 
     <section class="game-section pirates">
-      <ng-container *ngIf="(pirates$ | async) as pirates">
-        <figure *ngFor="let pirate of pirates" class="pirate">
-          <img src="assets/images/pirate-front-{{pirate}}.png">
+      <ng-container *ngIf="(pirates$ | async) as pirateIds">
+        <figure *ngFor="let id of pirateIds" class="pirate">
+          <img src="assets/images/pirate-{{id}}.png">
           <figcaption class="hide">
-            {{ pirate | json }}
+            {{ id }}
           </figcaption>
         </figure>
       </ng-container>
     </section>
 
     <section class="game-section battle">
-      Battle Area:
-      <p>
-        Hazard: {{ playedHazard$ | async | json }}
-      </p>
+      Battle Area
+
+      <ng-container *ngIf="(hazardEntities$ | async) as entities">
+        <div *ngIf="(hazardOptions$ | async) as cardIds" class="hazard-options">
+          Choose a hazard:
+          <figure *ngFor="let id of cardIds" class="hazard-option">
+            <img src="assets/images/battle-{{ entities[id].battleComboId }}.png">
+            <figcaption>
+              {{ entities[id] | json }}
+              <button (click)="playHazardCard(id)" class="button">
+                Play this hazard
+              </button>
+            </figcaption>
+          </figure>
+        </div>
+
+        <p *ngIf="playedHazard$ | async as cardId">
+          Played hazard: {{ playedHazard$ | async | json }}
+          <figure class="played-hazard">
+            <img src="assets/images/battle-{{ entities[cardId].battleComboId }}.png">
+            <figcaption>
+              {{ entities[cardId] | json }}
+            </figcaption>
+          </figure>
+        </p>
+      </ng-container>
       <p>
         <!-- Battle Points: {{ battle?.battlePoints| json }} -->
       </p>
