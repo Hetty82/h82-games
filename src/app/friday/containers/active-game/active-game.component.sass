@@ -1,17 +1,6 @@
 @import '~styles/variables'
 @import '~styles/mixins/__index'
 
-.header
-  display: flex
-  justify-content: space-between
-  align-items: center
-  margin-bottom: $spacing-lg
-  padding-bottom: $spacing-default
-  border-bottom: $border-light
-
-.title
-  margin: 0
-
 .table
   display: grid
   height: 80vh
@@ -21,7 +10,6 @@
   grid-template-areas: "round pirates pirates lives" "hazard main main robinson" "destroyed main main aging"
 
 .game-section
-  display: flex
   padding: $spacing-sm
   background: lighten($green, 60%)
 
@@ -51,32 +39,3 @@
   &.battle
     grid-area: main
     background: lighten($red, 40%)
-
-.hazard-options
-  display: flex
-
-  img
-    transform: rotate(180deg)
-
-.pile
-  margin: 0 $spacing-sm $spacing-sm 0
-
-.cards
-  display: block
-  width: 100%
-  padding: $spacing-sm 0
-  text-align: center
-  border: 1px solid $gray-darker-1
-
-button.cards
-  cursor: pointer
-  &:hover,
-  &:focus
-    background: rgba($white, 0.4)
-
-.pirate
-  img
-    display: block
-
-  + .pirate
-    margin-left: $spacing-sm

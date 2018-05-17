@@ -1,0 +1,14 @@
+<header class="header">
+  <h1 class="title">Friday Game {{ activeGameId }} - round {{ currentRound }} - difficulty {{ difficulty }}</h1>
+
+  <span *ngIf="loading" class="loader">Loading...</span>
+
+  <ng-container *ngIf="!(loading || playing)" class="buttons">
+    <button *ngIf="!currentRound" (click)="start.emit(activeGameId)" class="button">Start game #{{ activeGameId }}</button>
+    <button *ngIf="currentRound" (click)="continue.emit(activeGameId)" class="button">Continue game #{{ activeGameId }}</button>
+  </ng-container>
+
+  <a routerLink="/friday" class="link">Exit and save</a>
+</header>
+
+<pre class="dev">available actions: {{ availableActions | json }}</pre>

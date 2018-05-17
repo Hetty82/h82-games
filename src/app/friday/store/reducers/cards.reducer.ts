@@ -11,23 +11,23 @@ import * as fromActions from '../actions'
 import { createEntities, createIdsArray } from '../../helpers/reducer.helper'
 
 
-interface BattleComboEntities  {
+export interface BattleComboEntities  {
   [id: number]: BattleCombo
 }
-interface HazardComboEntities  {
+export interface HazardComboEntities  {
   [id: number]: HazardCombo
 }
 
-interface AgingCardEntities  {
+export interface AgingCardEntities  {
   [id: number]: AgingCardRemote
 }
-interface HazardCardEntities  {
+export interface HazardCardEntities  {
   [id: number]: HazardCardRemote
 }
-interface PirateCardEntities  {
+export interface PirateCardEntities  {
   [id: number]: PirateCardRemote
 }
-interface RobinsonCardEntities  {
+export interface RobinsonCardEntities  {
   [id: number]: RobinsonCardRemote
 }
 

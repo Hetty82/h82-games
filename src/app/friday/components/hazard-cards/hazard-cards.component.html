@@ -1,0 +1,40 @@
+<h1 class="title">Hazard Cards</h1>
+
+<div class="pile">
+  <div class="cards">
+    <figure class="deck card">
+      <img *ngIf="deck.length" src="assets/images/battle-back.png">
+      <figcaption>
+        deck: {{ deck.length }}
+      </figcaption>
+    </figure>
+  </div>
+
+  <button (click)="drawHazardCards.emit()" class="button">
+    draw
+  </button>
+</div>
+
+<div class="pile">
+  <div class="cards">
+    <figure *ngIf="discarded[0] as id" class="discarded card">
+      <img src="assets/images/battle-{{ entities[id].battleComboId }}.png">
+      <figcaption>
+        discarded: {{ discarded.length }}
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<div *ngIf="optionIds.length" class="options">
+  Choose a hazard:
+  <figure *ngFor="let id of optionIds" class="option card">
+    <img src="assets/images/battle-{{ entities[id].battleComboId }}.png">
+    <figcaption>
+      {{ entities[id] | json }}
+      <button (click)="playHazardCard.emit(id)" class="button">
+        play this hazard
+      </button>
+    </figcaption>
+  </figure>
+</div>

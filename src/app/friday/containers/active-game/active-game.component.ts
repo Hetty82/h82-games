@@ -25,26 +25,26 @@ export class ActiveGameComponent implements OnInit, OnDestroy {
   lives$ = this.store.pipe(select(fromStore.getActiveGameLives))
   maxLives$ = this.store.pipe(select(fromStore.getActiveGameMaxLives))
 
-  hazardEntities$ = this.store.pipe(select(fromStore.getHazardCardEntities))
-  agingEntities$ = this.store.pipe(select(fromStore.getAgingCardEntities))
-  robinsonEntities$ = this.store.pipe(select(fromStore.getRobinsonCardEntities))
-  pirateEntities$ = this.store.pipe(select(fromStore.getPirateCardEntities))
+  hazardCardEntities$ = this.store.pipe(select(fromStore.getHazardCardEntities))
+  agingCardEntities$ = this.store.pipe(select(fromStore.getAgingCardEntities))
+  robinsonCardEntities$ = this.store.pipe(select(fromStore.getRobinsonCardEntities))
+  pirateCardEntities$ = this.store.pipe(select(fromStore.getPirateCardEntities))
 
   hazardComboEntities$ = this.store.pipe(select(fromStore.getHazardComboEntities))
   battleComboEntities$ = this.store.pipe(select(fromStore.getBattleComboEntities))
 
-  destroyed$ = this.store.pipe(select(fromStore.getDestroyedCardIds))
-  agings$ = this.store.pipe(select(fromStore.getAgingCardDeck))
-  robinsons$ = this.store.pipe(select(fromStore.getRobinsonCardDeck))
-  robinsonsDiscarded$ = this.store.pipe(select(fromStore.getRobinsonDiscardPile))
+  destroyedCardIds$ = this.store.pipe(select(fromStore.getDestroyedCardIds))
+  agingCardDeck$ = this.store.pipe(select(fromStore.getAgingCardDeck))
+  robinsoncardDeck$ = this.store.pipe(select(fromStore.getRobinsonCardDeck))
+  robinsonsDiscardPile$ = this.store.pipe(select(fromStore.getRobinsonDiscardPile))
 
   hazardOptions$ = this.store.pipe(select(fromStore.getHazardCardOptions))
-  hazards$ = this.store.pipe(select(fromStore.getHazardCardDeck))
-  hazardsDiscarded$ = this.store.pipe(select(fromStore.getHazardDiscardPile))
+  hazardCardDeck$ = this.store.pipe(select(fromStore.getHazardCardDeck))
+  hazardDiscardPile$ = this.store.pipe(select(fromStore.getHazardDiscardPile))
 
-  pirates$ = this.store.pipe(select(fromStore.getPirateCardIds))
+  pirateCardIds$ = this.store.pipe(select(fromStore.getPirateCardIds))
 
-  playedHazard$ = this.store.pipe(select(fromStore.getPlayedHazardCardId))
+  playedHazardCardId$ = this.store.pipe(select(fromStore.getPlayedHazardCardId))
 
   availableActions: string[] = []
 
