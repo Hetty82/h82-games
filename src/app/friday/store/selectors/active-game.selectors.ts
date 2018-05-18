@@ -24,6 +24,7 @@ export const getActiveGameLives = createSelector(getActiveGameState, fromActiveG
 export const getActiveGameRound = createSelector(getActiveGameState, fromActiveGame.getCurrentRound)
 
 // Status
+export const getActiveGameDestroying = createSelector(getActiveGameState, fromActiveGame.getDestroying)
 export const getActiveGamePlaying = createSelector(getActiveGameState, fromActiveGame.getPlaying)
 
 // Cards
@@ -43,6 +44,7 @@ export const getPirateCardIds = createSelector(getActiveGameState, fromActiveGam
 export const getPlayedFreeBattleComboIds = createSelector(getActiveGameState, fromActiveGame.getPlayedFreeBattleComboIds)
 export const getPlayedHazardCardId = createSelector(getActiveGameState, fromActiveGame.getPlayedHazardCardId)
 export const getPlayedPaidBattleComboIds = createSelector(getActiveGameState, fromActiveGame.getPlayedPaidBattleComboIds)
+export const getSelectedForDestructionIds = createSelector(getActiveGameState, fromActiveGame.getSelectedForDestructionIds)
 
 // Derived state selectors
 export const getActiveGameMaxLives = createSelector(getActiveGameDifficulty, (difficulty): number => {

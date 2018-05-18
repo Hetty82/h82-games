@@ -10,7 +10,7 @@
     </figure>
   </div>
 
-  <button (click)="drawHazardCards.emit()" class="button" [disabled]="!isDrawEnabled()">
+  <button (click)="drawHazardCards.emit()" class="button" [disabled]="isDrawDisabled()">
     draw
   </button>
 </div>
@@ -32,7 +32,7 @@
     <img src="assets/images/battle-{{ entities[id].battleComboId }}.png">
     <figcaption>
       {{ entities[id] | json }}
-      <button (click)="playHazardCard.emit(id)" class="button" [disabled]="!isPlayEnabled()">
+      <button (click)="playHazardCard.emit(id)" class="button" [disabled]="isPlayDisabled()">
         play this hazard
       </button>
     </figcaption>

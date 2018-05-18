@@ -15,17 +15,22 @@ export class RobinsonCardsComponent implements OnInit {
 
   @Output() playFreeCard = new EventEmitter()
   @Output() playPaidCard = new EventEmitter()
+  @Output() shuffleDeck = new EventEmitter()
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  isPlayFreeEnabled() {
-    return this.actions.includes(InnerGameActionTypes.PLAY_FREE_BATTLE_CARD)
+  isPlayFreeDisabled() {
+    return !this.actions.includes(InnerGameActionTypes.PLAY_FREE_BATTLE_CARD)
   }
 
-  isPlayPaidEnabled() {
-    return this.actions.includes(InnerGameActionTypes.PLAY_PAID_BATTLE_CARD)
+  isPlayPaidDisabled() {
+    return !this.actions.includes(InnerGameActionTypes.PLAY_PAID_BATTLE_CARD)
+  }
+
+  isShuffleDeckDisabled() {
+    return !this.actions.includes(InnerGameActionTypes.SHUFFLE_BATTLE_CARDS)
   }
 }

@@ -39,7 +39,7 @@ export class OuterGameEffects {
     ofType(fromOuterGameActions.OuterGameActionTypes.SAVE),
     withLatestFrom(this.store.pipe(select(fromStore.getActiveGameState)), (action, state) => state),
     mergeMap(activeGameState => {
-      const { playing, ...gameDetails } = activeGameState
+      const { playing, shuffling, ...gameDetails } = activeGameState
 
       return this.gamesService
         .saveGameDetails(gameDetails)

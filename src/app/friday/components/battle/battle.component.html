@@ -1,27 +1,61 @@
-Battle Area
+<header class="header">
+  <span class="free">
+    Remaining free cards: {{ remainingFreeCardsAmount }}
+  </span>
+  <span class="points">
+    Required battle points: {{ requiredBattlePoints }}
+  </span>
 
-<div *ngIf="playedHazardId as id">
-  Played hazard:
-  <figure class="played-hazard card">
-    <img src="assets/images/battle-{{ hazardCardEntities[id].battleComboId }}.png">
-    <figcaption></figcaption>
-  </figure>
-</div>
+  cards to destroy: {{ selectedForDestructionIds }}
 
-<div>
-  Played free cards:
-  <figure *ngFor="let id of playedFreeComboIds" class="played-free card">
-    <img src="assets/images/battle-{{ id }}.png">
-    <figcaption></figcaption>
-  </figure>
-</div>
+  <div class="actions">
+    <button (click)="lose.emit()" class="button" [disabled]="isLoseDisabled()">
+      lose
+    </button>
+    <button (click)="cancelLose.emit()" class="button" [disabled]="isCancelLoseDisabled()">
+      cancel lose
+    </button>
+    <button (click)="confirmLose.emit()" class="button" [disabled]="isConfirmLoseDisabled()">
+      confirm lose
+    </button>
+    <button (click)="win.emit(hazardCardEntities[playedHazardCardId].battleComboId)" class="button" [disabled]="isWinDisabled()">
+      win
+    </button>
+  </div>
+</header>
 
-<div>
-  Played paid cards:
-  <figure *ngFor="let id of playedPaidComboIds" class="played-paid card">
-    <img src="assets/images/battle-{{ id }}.png">
-    <figcaption></figcaption>
-  </figure>
-</div>
+<section class="cards-section">
+  <div class="cards">
+    <h1 class="title">Played free cards:</h1>
+    <figure *ngFor="let id of playedFreeComboIds" class="played-free card">
+      <img src="assets/images/battle-{{ id }}.png">
+      <figcaption>
+        <label *ngIf="isDestroyEnabled()">
+          <!-- <input type="checkbox" (change)="toggleForDestruction.emit(id)" [checked]="selectedForDestructionIds.includes(id)" [value]="id"> destroy -->
+          <input type="checkbox" (change)="updateSelected($event)" [value]="id"> destroy
+        </label>
+      </figcaption>
+    </figure>
+  </div>
 
-<!-- Battle Points: {{ battle?.battlePoints| json }} -->
+  <div *ngIf="playedHazardCardId as id" class="cards">
+    <h1 class="title">Played hazard:</h1>
+    <figure class="played-hazard card">
+      <img src="assets/images/battle-{{ hazardCardEntities[id].battleComboId }}.png">
+      <figcaption></figcaption>
+    </figure>
+  </div>
+
+  <div class="cards">
+    <h1 class="title">Played paid cards:</h1>
+    <figure *ngFor="let id of playedPaidComboIds" class="played-paid card">
+      <img src="assets/images/battle-{{ id }}.png">
+      <figcaption>
+        <label *ngIf="isDestroyEnabled()">
+          <!-- <input type="checkbox" (change)="toggleForDestruction.emit(id)" [checked]="selectedForDestructionIds.includes(id)" [value]="id"> destroy -->
+          <input type="checkbox" (change)="updateSelected($event)" [value]="id"> destroy
+        </label>
+      </figcaption>
+    </figure>
+  </div>
+</section>

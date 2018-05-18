@@ -8,7 +8,7 @@ import * as fromStore from '../../store'
 import * as fromInnerGameActions from '../actions/inner-game.actions'
 import * as fromOuterGameActions from '../actions/outer-game.actions'
 
-import { createDeck } from '../../helpers/card.helpers'
+import { createDeck, shuffle } from '../../helpers/card.helpers'
 
 
 @Injectable()
@@ -35,6 +35,15 @@ export class InnerGameEffects {
     map((action: fromInnerGameActions.InitGame) => action.payload),
     map(() => {
       return new fromOuterGameActions.Save()
+    }),
+  )
+
+  @Effect()
+  shuffleBattleCards$ = this.actions$.pipe(
+    ofType(fromInnerGameActions.InnerGameActionTypes.SHUFFLE_BATTLE_CARDS),
+    withLatestFrom(this.store.pipe(select(fromStore.getRobinsonDiscardPile)), (action, ids) => ids),
+    map(ids => {
+      return new fromInnerGameActions.ShuffleBattleCardsSuccess(shuffle(ids))
     }),
   )
 }

@@ -6,6 +6,7 @@ import { take, filter } from 'rxjs/operators'
 import * as fromStore from '../../store'
 
 import { GameDifficulty } from '../../models/game.interfaces'
+import { BattleComboId, HazardCardId } from '../../models/card.interfaces'
 
 
 @Component({
@@ -47,8 +48,11 @@ export class ActiveGameComponent implements OnInit, OnDestroy {
   playedHazardCardId$ = this.store.pipe(select(fromStore.getPlayedHazardCardId))
   playedFreeBattleComboIds$ = this.store.pipe(select(fromStore.getPlayedFreeBattleComboIds))
   playedPaidBattleComboIds$ = this.store.pipe(select(fromStore.getPlayedPaidBattleComboIds))
+  selectedForDestructionIds$ = this.store.pipe(select(fromStore.getSelectedForDestructionIds))
 
   availableActions: string[] = []
+  remainingFreeCardsAmount = this.store.pipe(select(fromStore.getRemainingFreeCardsAmount))
+  requiredBattlePoints: number
 
   subscriptions$ = new Subscription()
 
@@ -81,6 +85,10 @@ export class ActiveGameComponent implements OnInit, OnDestroy {
     this.subscriptions$.add(this.store.pipe(
       select(fromStore.getActiveGameDifficulty),
     ).subscribe(difficulty => this.difficulty = difficulty))
+
+    this.subscriptions$.add(this.store.pipe(
+      select(fromStore.getActiveBattleRequiredPoints),
+    ).subscribe(points => this.requiredBattlePoints = points))
  }
 
   ngOnInit() {
@@ -104,9 +112,51 @@ export class ActiveGameComponent implements OnInit, OnDestroy {
     }
   }
 
-  playHazardCard(id) {
+  playHazardCard(id: HazardCardId) {
     if (this.availableActions.includes(fromStore.InnerGameActionTypes.PLAY_HAZARD)) {
       this.store.dispatch(new fromStore.PlayHazard(id))
+    }
+  }
+
+  shuffleRobinsonCardDeck() {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.SHUFFLE_BATTLE_CARDS)) {
+      this.store.dispatch(new fromStore.ShuffleBattleCards())
+    }
+  }
+
+  loseBattle() {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.LOSE_BATTLE)) {
+      this.store.dispatch(new fromStore.LoseBattle())
+    }
+  }
+
+  loseBattleConfirm() {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.LOSE_BATTLE_CONFIRM)) {
+      this.store.dispatch(new fromStore.LoseBattleConfirm(this.requiredBattlePoints))
+    }
+  }
+
+  loseBattleCancel() {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.LOSE_BATTLE_CANCEL)) {
+      this.store.dispatch(new fromStore.LoseBattleCancel())
+    }
+  }
+
+  deselectForDestruction(id: BattleComboId) {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.DESELECT_FOR_DESTRUCTION)) {
+      this.store.dispatch(new fromStore.DeselectForDestruction(id))
+    }
+  }
+
+  selectForDestruction(id: BattleComboId) {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.SELECT_FOR_DESTRUCTION)) {
+      this.store.dispatch(new fromStore.SelectForDestruction(id))
+    }
+  }
+
+  winBattle(id: BattleComboId) {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.WIN_BATTLE)) {
+      this.store.dispatch(new fromStore.WinBattle(id))
     }
   }
 

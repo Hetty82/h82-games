@@ -15,7 +15,9 @@ export interface State {
   lives: number
 
   // Status
+  destroying: boolean
   playing: boolean
+  shuffling: boolean
 
   // Cards
   destroyedCardIds: BattleComboId[]
@@ -34,6 +36,7 @@ export interface State {
   playedFreeBattleCardIds: BattleComboId[]
   playedHazardCardId: HazardCardId
   playedPaidBattleCardIds: BattleComboId[]
+  selectedForDestructionIds: BattleComboId[]
 }
 
 const initialState: State = {
@@ -43,7 +46,9 @@ const initialState: State = {
   lives: null,
 
   // Status
+  destroying: false,
   playing: false,
+  shuffling: false,
 
   // Cards
   destroyedCardIds: [],
@@ -62,6 +67,7 @@ const initialState: State = {
   playedFreeBattleCardIds: [],
   playedHazardCardId: null,
   playedPaidBattleCardIds: [],
+  selectedForDestructionIds: [],
 }
 
 type GameAction = GamesActionsUnion | InnerGameActionsUnion | OuterGameActionsUnion
@@ -150,7 +156,7 @@ export function reducer(state: State = initialState, action: GameAction): State 
 
       return {
         ...state,
-        playedFreeBattleCardIds: [ playedId, ...state.playedFreeBattleCardIds ],
+        playedFreeBattleCardIds: [ ...state.playedFreeBattleCardIds, playedId ],
         robinsonCardDeck,
       }
     }
@@ -161,8 +167,103 @@ export function reducer(state: State = initialState, action: GameAction): State 
       return {
         ...state,
         lives: state.lives - 1,
-        playedPaidBattleCardIds: [ playedId, ...state.playedPaidBattleCardIds ],
+        playedPaidBattleCardIds: [ ...state.playedPaidBattleCardIds, playedId ],
         robinsonCardDeck,
+      }
+    }
+
+    case InnerGameActionTypes.SHUFFLE_BATTLE_CARDS: {
+      return {
+        ...state,
+        shuffling: true,
+      }
+    }
+
+    case InnerGameActionTypes.SHUFFLE_BATTLE_CARDS_SUCCESS: {
+      return {
+        ...state,
+        robinsonCardDeck: action.payload,
+        shuffling: false,
+      }
+    }
+
+    case InnerGameActionTypes.LOSE_BATTLE: {
+      return {
+        ...state,
+        destroying: true,
+      }
+    }
+
+    case InnerGameActionTypes.LOSE_BATTLE_CANCEL: {
+      return {
+        ...state,
+        destroying: false,
+        selectedForDestructionIds: [],
+      }
+    }
+
+    case InnerGameActionTypes.LOSE_BATTLE_CONFIRM: {
+      let played = [
+        ...state.playedFreeBattleCardIds,
+        ...state.playedPaidBattleCardIds,
+      ]
+
+      state.selectedForDestructionIds.forEach(id => {
+        const index = played.indexOf(id)
+        played = [
+          ...played.slice(0, index),
+          ...played.slice(index + 1),
+        ]
+      })
+
+      return {
+        ...state,
+        destroyedCardIds: [ ...state.selectedForDestructionIds, ...state.destroyedCardIds ],
+        destroying: false,
+        hazardDiscardPile: [ state.playedHazardCardId, ...state.hazardDiscardPile ],
+        lives: state.lives - action.payload,
+        playedFreeBattleCardIds: [],
+        playedHazardCardId: null,
+        playedPaidBattleCardIds: [],
+        robinsonDiscardPile: [ ...played, ...state.robinsonDiscardPile ],
+        selectedForDestructionIds: [],
+      }
+    }
+
+    case InnerGameActionTypes.SELECT_FOR_DESTRUCTION: {
+      return {
+        ...state,
+        selectedForDestructionIds: [ action.payload, ...state.selectedForDestructionIds ],
+      }
+    }
+
+    case InnerGameActionTypes.DESELECT_FOR_DESTRUCTION: {
+      const index = state.selectedForDestructionIds.indexOf(action.payload)
+      const selectedForDestructionIds = [
+        ...state.selectedForDestructionIds.slice(0, index),
+        ...state.selectedForDestructionIds.slice(index + 1),
+      ]
+
+      return {
+        ...state,
+        selectedForDestructionIds,
+      }
+    }
+
+    case InnerGameActionTypes.WIN_BATTLE: {
+      const robinsonDiscardPile = [
+        action.payload,
+        ...state.playedFreeBattleCardIds,
+        ...state.playedPaidBattleCardIds,
+        ...state.robinsonDiscardPile,
+      ]
+
+      return {
+        ...state,
+        playedFreeBattleCardIds: [],
+        playedHazardCardId: null,
+        playedPaidBattleCardIds: [],
+        robinsonDiscardPile,
       }
     }
 
@@ -190,6 +291,7 @@ export const getId = (state: State) => state.id
 export const getLives = (state: State) => state.lives
 
 // Status
+export const getDestroying = (state: State) => state.destroying
 export const getPlaying = (state: State) => state.playing
 
 // Cards
@@ -209,3 +311,4 @@ export const getPirateCardIds = (state: State) => state.pirateCardIds
 export const getPlayedFreeBattleComboIds = (state: State) => state.playedFreeBattleCardIds
 export const getPlayedHazardCardId = (state: State) => state.playedHazardCardId
 export const getPlayedPaidBattleComboIds = (state: State) => state.playedPaidBattleCardIds
+export const getSelectedForDestructionIds = (state: State) => state.selectedForDestructionIds

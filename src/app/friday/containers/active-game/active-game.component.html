@@ -39,6 +39,7 @@
       <app-fr-robinson-cards
         (playFreeCard)="playFreeBattleCard()"
         (playPaidCard)="playPaidBattleCard()"
+        (shuffleDeck)="shuffleRobinsonCardDeck()"
         [actions]="availableActions"
         [deck]="robinsoncardDeck$ | async"
         [discarded]="robinsonsDiscardPile$ | async"
@@ -55,10 +56,20 @@
 
     <section class="game-section battle">
       <app-fr-battle
+        (deselectForDestruction)="deselectForDestruction($event)"
+        (selectForDestruction)="selectForDestruction($event)"
+        (lose)="loseBattle()"
+        (confirmLose)="loseBattleConfirm()"
+        (cancelLose)="loseBattleCancel()"
+        (win)="winBattle()"
+        [actions]="availableActions"
         [hazardCardEntities]="hazardCardEntities$ | async"
-        [playedHazardId]="playedHazardCardId$ | async"
+        [playedHazardCardId]="playedHazardCardId$ | async"
         [playedFreeComboIds]="playedFreeBattleComboIds$ | async"
         [playedPaidComboIds]="playedPaidBattleComboIds$ | async"
+        [selectedForDestructionIds]="selectedForDestructionIds$ | async"
+        [remainingFreeCardsAmount]="remainingFreeCardsAmount | async"
+        [requiredBattlePoints]="requiredBattlePoints"
       ></app-fr-battle>
     </section>
   </section>

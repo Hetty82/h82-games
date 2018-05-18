@@ -24,11 +24,11 @@ export class HazardCardsComponent implements OnInit {
   ngOnInit() {
   }
 
-  isDrawEnabled() {
-    return this.actions.includes(InnerGameActionTypes.DRAW_HAZARDS)
+  isDrawDisabled() {
+    return !this.actions.includes(InnerGameActionTypes.DRAW_HAZARDS)
   }
 
-  isPlayEnabled() {
-    return this.actions.includes(InnerGameActionTypes.PLAY_HAZARD)
+  isPlayDisabled() {
+    return !this.actions.includes(InnerGameActionTypes.PLAY_HAZARD)
   }
 }

@@ -100,7 +100,7 @@ export interface AgingCardRemote extends CardRemote {
 }
 
 // Hazard cards
-export enum HazardPoints {
+export enum HazardPointsType {
   P_0_1_3 = 1,
   P_1_3_6 = 2,
   P_2_5_8 = 3,
@@ -118,7 +118,7 @@ export enum HazardCardName {
 
 export interface HazardCombo {
   readonly freeCardAmount: number
-  readonly hazardPoints: HazardPoints
+  readonly hazardPoints: HazardPointsType
   readonly id: number
   readonly name: HazardCardName
 }
