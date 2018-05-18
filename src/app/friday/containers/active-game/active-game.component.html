@@ -27,6 +27,7 @@
       <app-fr-hazard-cards
         (drawHazardCards)="drawHazardCards()"
         (playHazardCard)="playHazardCard($event)"
+        [actions]="availableActions"
         [deck]="hazardCardDeck$ | async"
         [discarded]="hazardDiscardPile$ | async"
         [entities]="hazardCardEntities$ | async"
@@ -36,6 +37,9 @@
 
     <section class="game-section robinson">
       <app-fr-robinson-cards
+        (playFreeCard)="playFreeBattleCard()"
+        (playPaidCard)="playPaidBattleCard()"
+        [actions]="availableActions"
         [deck]="robinsoncardDeck$ | async"
         [discarded]="robinsonsDiscardPile$ | async"
       ></app-fr-robinson-cards>
@@ -53,6 +57,8 @@
       <app-fr-battle
         [hazardCardEntities]="hazardCardEntities$ | async"
         [playedHazardId]="playedHazardCardId$ | async"
+        [playedFreeComboIds]="playedFreeBattleComboIds$ | async"
+        [playedPaidComboIds]="playedPaidBattleComboIds$ | async"
       ></app-fr-battle>
     </section>
   </section>

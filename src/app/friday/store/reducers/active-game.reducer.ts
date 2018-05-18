@@ -27,7 +27,9 @@ export interface State {
   pirateCardIds: PirateCardId[]
 
   // Battle
+  playedFreeBattleCardIds: BattleComboId[]
   playedHazardCardId: HazardCardId
+  playedPaidBattleCardIds: BattleComboId[]
 }
 
 const initialState: State = {
@@ -53,7 +55,9 @@ const initialState: State = {
   pirateCardIds: [],
 
   // Battle
+  playedFreeBattleCardIds: [],
   playedHazardCardId: null,
+  playedPaidBattleCardIds: [],
 }
 
 type GameAction = fromActions.GamesAction | fromActions.InnerGameAction | fromActions.OuterGameAction
@@ -101,10 +105,6 @@ export function reducer(state: State = initialState, action: GameAction): State 
       }
     }
 
-    case fromActions.RESET_ACTIVE_GAME: {
-      return initialState
-    }
-
     // in game actions
     case fromActions.DRAW_HAZARDS: {
       let newHazardCardDeck: HazardCardId[]
@@ -148,6 +148,31 @@ export function reducer(state: State = initialState, action: GameAction): State 
       }
     }
 
+    case fromActions.PLAY_FREE_BATTLE_CARD: {
+      const [ playedId, ...robinsonCardDeck ] = state.robinsonCardDeck
+
+      return {
+        ...state,
+        playedFreeBattleCardIds: [ playedId, ...state.playedFreeBattleCardIds ],
+        robinsonCardDeck,
+      }
+    }
+
+    case fromActions.PLAY_PAID_BATTLE_CARD: {
+      const [ playedId, ...robinsonCardDeck ] = state.robinsonCardDeck
+
+      return {
+        ...state,
+        lives: state.lives - 1,
+        playedPaidBattleCardIds: [ playedId, ...state.playedPaidBattleCardIds ],
+        robinsonCardDeck,
+      }
+    }
+
+    case fromActions.RESET_ACTIVE_GAME: {
+      return initialState
+    }
+
     default:
       return state
   }
@@ -176,4 +201,6 @@ export const getHazardDiscardPile = (state: State) => state.hazardDiscardPile
 export const getPirateCardIds = (state: State) => state.pirateCardIds
 
 // Battle
+export const getPlayedFreeBattleComboIds = (state: State) => state.playedFreeBattleCardIds
 export const getPlayedHazardCardId = (state: State) => state.playedHazardCardId
+export const getPlayedPaidBattleComboIds = (state: State) => state.playedPaidBattleCardIds

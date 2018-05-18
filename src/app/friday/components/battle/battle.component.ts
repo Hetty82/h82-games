@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core'
-import { HazardCardId } from '../../models/card.interfaces'
+import { HazardCardId, BattleComboId } from '../../models/card.interfaces'
 import { HazardCardEntities, HazardComboEntities, BattleComboEntities } from '../../store/reducers/cards.reducer'
 
 @Component({
@@ -9,6 +9,8 @@ import { HazardCardEntities, HazardComboEntities, BattleComboEntities } from '..
 })
 export class BattleComponent implements OnInit {
   @Input() playedHazardId: HazardCardId
+  @Input() playedFreeComboIds: BattleComboId[]
+  @Input() playedPaidComboIds: BattleComboId[]
 
   @Input() hazardCardEntities: HazardCardEntities
   // @Input() hazardComboEntities: HazardComboEntities

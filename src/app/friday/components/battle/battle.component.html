@@ -1,13 +1,27 @@
 Battle Area
 
-<p *ngIf="playedHazardId as id">
+<div *ngIf="playedHazardId as id">
   Played hazard:
   <figure class="played-hazard card">
     <img src="assets/images/battle-{{ hazardCardEntities[id].battleComboId }}.png">
     <figcaption></figcaption>
   </figure>
-</p>
+</div>
+
+<div>
+  Played free cards:
+  <figure *ngFor="let id of playedFreeComboIds" class="played-free card">
+    <img src="assets/images/battle-{{ id }}.png">
+    <figcaption></figcaption>
+  </figure>
+</div>
+
+<div>
+  Played paid cards:
+  <figure *ngFor="let id of playedPaidComboIds" class="played-paid card">
+    <img src="assets/images/battle-{{ id }}.png">
+    <figcaption></figcaption>
+  </figure>
+</div>
 
 <!-- Battle Points: {{ battle?.battlePoints| json }} -->
-<!-- Free Battle Cards: {{ battle?.freeBattleCards | json }} -->
-<!-- Payed Battle Cards: {{ battle?.payedBattleCards | json }} -->

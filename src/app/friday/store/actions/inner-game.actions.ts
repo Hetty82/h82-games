@@ -14,9 +14,9 @@ export const DRAW_HAZARDS = '[Friday - Game] Draw two hazards'
 export const PLAY_HAZARD = '[Friday - Game] Play a hazard'
 
 // Battle phase
-export const BUY_BATTLE_CARD = '[Friday - Game] Buy a battle card'
+export const PLAY_PAID_BATTLE_CARD = '[Friday - Game] Buy a battle card'
 export const DESTROY_BATTLE_CARDS = '[Friday - Game] Destroy battle cards with your payed lives'
-export const DRAW_FREE_BATTLE_CARD = '[Friday - Game] Draw a free battle card'
+export const PLAY_FREE_BATTLE_CARD = '[Friday - Game] Draw a free battle card'
 export const LOSE_BATTLE = '[Friday - Game] End the battle by losing, use remaining mandatory abilities, and pay with your lives'
 export const PICK_CARD_TO_USE_WITH_ABILITY = '[Friday - Game] Pick a card to use with this ability'
 export const USE_CARD_ABILITY = '[Friday - Game] Use any card\'s ability'
@@ -52,14 +52,14 @@ export class PlayHazard implements Action {
   constructor(public payload: HazardCardId) {}
 }
 
-export class BuyBattleCard implements Action {
-  readonly type = BUY_BATTLE_CARD
+export class PlayPaidBattleCard implements Action {
+  readonly type = PLAY_PAID_BATTLE_CARD
 }
 export class DestroyBattleCards implements Action {
   readonly type = DESTROY_BATTLE_CARDS
 }
-export class DrawFreeBattleCard implements Action {
-  readonly type = DRAW_FREE_BATTLE_CARD
+export class PlayFreeBattleCard implements Action {
+  readonly type = PLAY_FREE_BATTLE_CARD
 }
 export class LoseBattle implements Action {
   readonly type = LOSE_BATTLE
@@ -100,9 +100,9 @@ export type InnerGameAction =
   | DrawHazards
   | PlayHazard
 
-  | BuyBattleCard
+  | PlayPaidBattleCard
   | DestroyBattleCards
-  | DrawFreeBattleCard
+  | PlayFreeBattleCard
   | LoseBattle
   | PickCardToUseWithAbility
   | UseCardAbility

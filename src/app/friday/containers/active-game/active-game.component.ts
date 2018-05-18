@@ -6,6 +6,7 @@ import { take, filter } from 'rxjs/operators'
 import * as fromStore from '../../store'
 
 import { GameDifficulty } from '../../models/game.interfaces'
+import { getPlayedFreeBattleComboIds } from '../../store/reducers/active-game.reducer'
 
 
 @Component({
@@ -45,6 +46,8 @@ export class ActiveGameComponent implements OnInit, OnDestroy {
   pirateCardIds$ = this.store.pipe(select(fromStore.getPirateCardIds))
 
   playedHazardCardId$ = this.store.pipe(select(fromStore.getPlayedHazardCardId))
+  playedFreeBattleComboIds$ = this.store.pipe(select(fromStore.getPlayedFreeBattleComboIds))
+  playedPaidBattleComboIds$ = this.store.pipe(select(fromStore.getPlayedPaidBattleComboIds))
 
   availableActions: string[] = []
 
@@ -87,6 +90,18 @@ export class ActiveGameComponent implements OnInit, OnDestroy {
   drawHazardCards() {
     if (this.availableActions.includes(fromStore.DRAW_HAZARDS)) {
       this.store.dispatch(new fromStore.DrawHazards())
+    }
+  }
+
+  playFreeBattleCard() {
+    if (this.availableActions.includes(fromStore.PLAY_FREE_BATTLE_CARD)) {
+      this.store.dispatch(new fromStore.PlayFreeBattleCard())
+    }
+  }
+
+  playPaidBattleCard() {
+    if (this.availableActions.includes(fromStore.PLAY_PAID_BATTLE_CARD)) {
+      this.store.dispatch(new fromStore.PlayPaidBattleCard())
     }
   }
 
