@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { HazardCardId, BattleComboId } from '../../models/card.interfaces'
-import { HazardCardEntities, HazardComboEntities, BattleComboEntities } from '../../store/reducers/cards.reducer'
+import { HazardCardEntities } from '../../store/reducers/cards.reducer'
 
 @Component({
   selector: 'app-fr-battle',

@@ -1,6 +1,6 @@
 import { User } from '../../models/user.interface'
 
-import * as fromUser from '../actions/user.actions'
+import { UserActionsUnion, UserActionTypes } from '../actions/user.actions'
 
 interface UserEntities  {
   [id: number]: User
@@ -22,16 +22,16 @@ const initialState: State = {
   loading: false,
 }
 
-export function reducer(state: State = initialState, action: fromUser.UserAction): State {
+export function reducer(state: State = initialState, action: UserActionsUnion): State {
   switch (action.type) {
-    case fromUser.LOAD_USERS: {
+    case UserActionTypes.LOAD_USERS: {
       return {
         ...state,
         loading: true,
       }
     }
 
-    case fromUser.LOAD_USERS_SUCCESS: {
+    case UserActionTypes.LOAD_USERS_SUCCESS: {
       const users = action.payload
 
       const entities = users.reduce((newEntities: UserEntities, user: User) => {
@@ -53,7 +53,7 @@ export function reducer(state: State = initialState, action: fromUser.UserAction
       }
     }
 
-    case fromUser.LOAD_USERS_FAIL: {
+    case UserActionTypes.LOAD_USERS_FAIL: {
       return {
         ...state,
         loaded: false,
@@ -61,14 +61,14 @@ export function reducer(state: State = initialState, action: fromUser.UserAction
       }
     }
 
-    case fromUser.SELECT_USER: {
+    case UserActionTypes.SELECT_USER: {
       return {
         ...state,
         currentUserId: action.payload,
       }
     }
 
-    case fromUser.DESELECT_USER: {
+    case UserActionTypes.DESELECT_USER: {
       return {
         ...state,
         currentUserId: null,

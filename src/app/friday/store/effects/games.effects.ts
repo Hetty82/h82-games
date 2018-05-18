@@ -8,8 +8,8 @@ import { map, switchMap, catchError, mergeMap, withLatestFrom, filter } from 'rx
 
 import * as fromStore from '../../store'
 
-import * as gamesActions from '../actions/games.actions'
-import * as outerGameActions from '../actions/outer-game.actions'
+import * as fromGamesActions from '../actions/games.actions'
+import * as fromOuterGameActions from '../actions/outer-game.actions'
 import * as fromServices from '../../services'
 
 
@@ -23,93 +23,93 @@ export class GamesEffects {
 
   @Effect()
   createGame$ = this.actions$.pipe(
-    ofType(gamesActions.CREATE_GAME),
-    map((action: gamesActions.CreateGame) => action.payload),
+    ofType(fromGamesActions.GamesActionTypes.CREATE_GAME),
+    map((action: fromGamesActions.CreateGame) => action.payload),
     mergeMap((game) => {
       return this.gamesService
         .createGame(game)
         .pipe(
-          map(createdGame => new gamesActions.CreateGameSuccess(createdGame)),
-          catchError(error => of(new gamesActions.CreateGameFail(error))),
+          map(createdGame => new fromGamesActions.CreateGameSuccess(createdGame)),
+          catchError(error => of(new fromGamesActions.CreateGameFail(error))),
         )
     }),
   )
 
   @Effect()
   createGameSuccess$ = this.actions$.pipe(
-    ofType(gamesActions.CREATE_GAME_SUCCESS),
-    map((action: gamesActions.CreateGameSuccess) => action.payload),
+    ofType(fromGamesActions.GamesActionTypes.CREATE_GAME_SUCCESS),
+    map((action: fromGamesActions.CreateGameSuccess) => action.payload),
     mergeMap((game) => {
       return this.gamesService
         .createGameDetails(game)
         .pipe(
-          map(gameDetails => new gamesActions.CreateGameDetailsSuccess(gameDetails)),
-          catchError(error => of(new gamesActions.CreateGameDetailsFail(error))),
+          map(gameDetails => new fromGamesActions.CreateGameDetailsSuccess(gameDetails)),
+          catchError(error => of(new fromGamesActions.CreateGameDetailsFail(error))),
         )
     }),
   )
 
   @Effect()
   deleteGame$ = this.actions$.pipe(
-    ofType(gamesActions.DELETE_GAME),
-    map((action: gamesActions.DeleteGame) => action.payload),
+    ofType(fromGamesActions.GamesActionTypes.DELETE_GAME),
+    map((action: fromGamesActions.DeleteGame) => action.payload),
     mergeMap((gameId) => {
       return this.gamesService
         .deleteGame(gameId)
         .pipe(
-          map(() => new gamesActions.DeleteGameSuccess(gameId)),
-          catchError(error => of(new gamesActions.DeleteGameFail(error))),
+          map(() => new fromGamesActions.DeleteGameSuccess(gameId)),
+          catchError(error => of(new fromGamesActions.DeleteGameFail(error))),
         )
     }),
   )
 
   @Effect()
   deleteGameSuccess1$ = this.actions$.pipe(
-    ofType(gamesActions.DELETE_GAME_SUCCESS),
-    map((action: gamesActions.DeleteGameSuccess) => action.payload),
+    ofType(fromGamesActions.GamesActionTypes.DELETE_GAME_SUCCESS),
+    map((action: fromGamesActions.DeleteGameSuccess) => action.payload),
     mergeMap((gameId) => {
       return this.gamesService
         .deleteGameDetails(gameId)
         .pipe(
-          map(() => new gamesActions.DeleteGameDetailsSuccess(gameId)),
-          catchError(error => of(new gamesActions.DeleteGameDetailsFail(error))),
+          map(() => new fromGamesActions.DeleteGameDetailsSuccess(gameId)),
+          catchError(error => of(new fromGamesActions.DeleteGameDetailsFail(error))),
         )
     }),
   )
 
   @Effect()
   deleteGameSuccess2$ = this.actions$.pipe(
-    ofType(gamesActions.DELETE_GAME_SUCCESS),
-    map((action: gamesActions.DeleteGameSuccess) => action.payload),
+    ofType(fromGamesActions.GamesActionTypes.DELETE_GAME_SUCCESS),
+    map((action: fromGamesActions.DeleteGameSuccess) => action.payload),
     withLatestFrom(this.store.pipe(select(fromStore.getActiveGameId))),
     filter(([gameId, loadedGameId]) => gameId === loadedGameId),
-    map(() => new outerGameActions.ResetActiveGame()),
+    map(() => new fromOuterGameActions.ResetActiveGame()),
   )
 
   @Effect()
   loadGames$ = this.actions$.pipe(
-    ofType(gamesActions.LOAD_GAMES),
-    map((action: gamesActions.LoadGames) => action.payload),
+    ofType(fromGamesActions.GamesActionTypes.LOAD_GAMES),
+    map((action: fromGamesActions.LoadGames) => action.payload),
     switchMap((userId) => {
       return this.gamesService
         .getGamesByUser(userId)
         .pipe(
-          map(games => new gamesActions.LoadGamesSuccess(games)),
-          catchError(error => of(new gamesActions.LoadGamesFail(error))),
+          map(games => new fromGamesActions.LoadGamesSuccess(games)),
+          catchError(error => of(new fromGamesActions.LoadGamesFail(error))),
         )
     }),
   )
 
   @Effect()
   loadGameDetails$ = this.actions$.pipe(
-    ofType(gamesActions.LOAD_GAME_DETAILS),
-    map((action: gamesActions.LoadGameDetails) => action.payload),
+    ofType(fromGamesActions.GamesActionTypes.LOAD_GAME_DETAILS),
+    map((action: fromGamesActions.LoadGameDetails) => action.payload),
     switchMap((gameId) => {
       return this.gamesService
         .getGameDetails(gameId)
         .pipe(
-          map(gameDetails => new gamesActions.LoadGameDetailsSuccess(gameDetails)),
-          catchError(error => of(new gamesActions.LoadGameDetailsFail(error))),
+          map(gameDetails => new fromGamesActions.LoadGameDetailsSuccess(gameDetails)),
+          catchError(error => of(new fromGamesActions.LoadGameDetailsFail(error))),
         )
     }),
   )

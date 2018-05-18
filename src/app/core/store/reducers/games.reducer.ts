@@ -1,6 +1,6 @@
 import { Game } from '../../models/game.interface'
 
-import * as fromGames from '../actions/games.actions'
+import { GamesActionsUnion, GamesActionTypes } from '../actions/games.actions'
 
 interface GameEntities  {
   [id: number]: Game
@@ -20,16 +20,16 @@ const initialState: State = {
   loading: false,
 }
 
-export function reducer(state: State = initialState, action: fromGames.GamesAction): State {
+export function reducer(state: State = initialState, action: GamesActionsUnion): State {
   switch (action.type) {
-    case fromGames.LOAD_GAMES: {
+    case GamesActionTypes.LOAD_GAMES: {
       return {
         ...state,
         loading: true,
       }
     }
 
-    case fromGames.LOAD_GAMES_SUCCESS: {
+    case GamesActionTypes.LOAD_GAMES_SUCCESS: {
       const games = action.payload
 
       const entities = games.reduce((newEntities: GameEntities, game: Game) => {
@@ -51,7 +51,7 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
       }
     }
 
-    case fromGames.LOAD_GAMES_FAIL: {
+    case GamesActionTypes.LOAD_GAMES_FAIL: {
       return {
         ...state,
         loaded: false,

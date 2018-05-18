@@ -3,7 +3,8 @@ import { HazardCombo, BattleCombo } from '../../models/card.interfaces'
 
 import * as fromActiveGame from './active-game.selectors'
 import * as fromCards from './cards.selectors'
-import * as fromInnerGameActions from '../actions/inner-game.actions'
+
+import { InnerGameActionTypes } from '../actions/inner-game.actions'
 
 
 export const getActiveBattleHazardCombo = createSelector(
@@ -38,11 +39,11 @@ export const getActiveBattlePoints = createSelector(
 export const getAvailableHazardActions = createSelector(fromActiveGame.getActiveGameState, (game): string[] => {
   if (game && game.playing && !game.playedHazardCardId) {
     if (!game.hazardCardOptions.length) {
-      return [ fromInnerGameActions.DRAW_HAZARDS ]
+      return [ InnerGameActionTypes.DRAW_HAZARDS ]
     } else if (game.hazardCardOptions.length > 1) {
-      return [ fromInnerGameActions.PLAY_HAZARD ]
+      return [ InnerGameActionTypes.PLAY_HAZARD ]
     } else if (game.hazardCardOptions.length === 1) {
-      return [ fromInnerGameActions.PLAY_HAZARD, fromInnerGameActions.DISCARD_HAZARD ]
+      return [ InnerGameActionTypes.PLAY_HAZARD, InnerGameActionTypes.DISCARD_HAZARD ]
     }
   }
 
@@ -60,15 +61,15 @@ export const getAvailableBattleActions = createSelector(
       let actions = []
 
       if (playedHazard.freeCardAmount > freeCombos.length) {
-        actions = [ ...actions, fromInnerGameActions.PLAY_FREE_BATTLE_CARD ]
+        actions = [ ...actions, InnerGameActionTypes.PLAY_FREE_BATTLE_CARD ]
       } else if (game.lives) {
-        actions = [ ...actions, fromInnerGameActions.PLAY_PAID_BATTLE_CARD ]
+        actions = [ ...actions, InnerGameActionTypes.PLAY_PAID_BATTLE_CARD ]
       }
 
       if (points >= playedHazard.hazardPoints) {
-        actions = [ ...actions, fromInnerGameActions.WIN_BATTLE]
+        actions = [ ...actions, InnerGameActionTypes.WIN_BATTLE]
       } else {
-        actions = [ ...actions, fromInnerGameActions.LOSE_BATTLE]
+        actions = [ ...actions, InnerGameActionTypes.LOSE_BATTLE]
       }
 
       return actions

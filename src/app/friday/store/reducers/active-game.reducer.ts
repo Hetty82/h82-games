@@ -2,7 +2,11 @@
 import { GameDifficulty, GameId, GameRound } from '../../models/game.interfaces'
 import { BattleComboId, HazardCardId, PirateCardId } from '../../models/card.interfaces'
 
-import * as fromActions from '../actions'
+import {
+  GamesActionsUnion, GamesActionTypes,
+  InnerGameActionsUnion, InnerGameActionTypes,
+  OuterGameActionsUnion, OuterGameActionTypes,
+} from '../actions'
 
 export interface State {
   currentRound: GameRound
@@ -60,12 +64,23 @@ const initialState: State = {
   playedPaidBattleCardIds: [],
 }
 
-type GameAction = fromActions.GamesAction | fromActions.InnerGameAction | fromActions.OuterGameAction
+type GameAction = GamesActionsUnion | InnerGameActionsUnion | OuterGameActionsUnion
 
 export function reducer(state: State = initialState, action: GameAction): State {
   switch (action.type) {
 
-    case fromActions.INIT_GAME: {
+    case GamesActionTypes.LOAD_GAME_DETAILS_SUCCESS: {
+      const gameDetails = action.payload
+
+      return {
+        ...state,
+        ...gameDetails,
+        lives: gameDetails.currentRound ? gameDetails.lives : state.lives,
+      }
+    }
+
+    // Inner game actions
+    case InnerGameActionTypes.INIT_GAME: {
       const lives = action.payload === GameDifficulty.LEVEL_4 ? 18 : 20
 
       return {
@@ -74,7 +89,7 @@ export function reducer(state: State = initialState, action: GameAction): State 
       }
     }
 
-    case fromActions.INIT_GAME_SUCCESS: {
+    case InnerGameActionTypes.INIT_GAME_SUCCESS: {
       const deck = action.payload
 
       return {
@@ -88,25 +103,7 @@ export function reducer(state: State = initialState, action: GameAction): State 
       }
     }
 
-    case fromActions.LOAD_GAME_DETAILS_SUCCESS: {
-      const gameDetails = action.payload
-
-      return {
-        ...state,
-        ...gameDetails,
-        lives: gameDetails.currentRound ? gameDetails.lives : state.lives,
-      }
-    }
-
-    case fromActions.PLAY: {
-      return {
-        ...state,
-        playing: true,
-      }
-    }
-
-    // in game actions
-    case fromActions.DRAW_HAZARDS: {
+    case InnerGameActionTypes.DRAW_HAZARDS: {
       let newHazardCardDeck: HazardCardId[]
       let option1: HazardCardId
       let option2: HazardCardId
@@ -130,7 +127,7 @@ export function reducer(state: State = initialState, action: GameAction): State 
       }
     }
 
-    case fromActions.PLAY_HAZARD: {
+    case InnerGameActionTypes.PLAY_HAZARD: {
       const playedCardId = action.payload
       let newHazardDiscardPile: HazardCardId[]
       let discarded: HazardCardId
@@ -148,7 +145,7 @@ export function reducer(state: State = initialState, action: GameAction): State 
       }
     }
 
-    case fromActions.PLAY_FREE_BATTLE_CARD: {
+    case InnerGameActionTypes.PLAY_FREE_BATTLE_CARD: {
       const [ playedId, ...robinsonCardDeck ] = state.robinsonCardDeck
 
       return {
@@ -158,7 +155,7 @@ export function reducer(state: State = initialState, action: GameAction): State 
       }
     }
 
-    case fromActions.PLAY_PAID_BATTLE_CARD: {
+    case InnerGameActionTypes.PLAY_PAID_BATTLE_CARD: {
       const [ playedId, ...robinsonCardDeck ] = state.robinsonCardDeck
 
       return {
@@ -169,7 +166,15 @@ export function reducer(state: State = initialState, action: GameAction): State 
       }
     }
 
-    case fromActions.RESET_ACTIVE_GAME: {
+    // Outer game actions
+    case OuterGameActionTypes.PLAY: {
+      return {
+        ...state,
+        playing: true,
+      }
+    }
+
+    case OuterGameActionTypes.RESET_ACTIVE_GAME: {
       return initialState
     }
 

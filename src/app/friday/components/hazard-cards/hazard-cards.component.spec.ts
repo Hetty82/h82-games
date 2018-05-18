@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { HazardCardsComponent } from './hazard-cards.component';
+import { HazardCardsComponent } from './hazard-cards.component'
 
 describe('HazardCardsComponent', () => {
-  let component: HazardCardsComponent;
-  let fixture: ComponentFixture<HazardCardsComponent>;
+  let component: HazardCardsComponent
+  let fixture: ComponentFixture<HazardCardsComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HazardCardsComponent ]
+      declarations: [ HazardCardsComponent ],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HazardCardsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(HazardCardsComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

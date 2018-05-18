@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { BattleComboId } from '../../models/card.interfaces'
-
-import * as fromInnerGameActions from '../../store/actions/inner-game.actions'
+import { InnerGameActionTypes } from '../../store/actions/inner-game.actions'
 
 
 @Component({
@@ -23,10 +22,10 @@ export class RobinsonCardsComponent implements OnInit {
   }
 
   isPlayFreeEnabled() {
-    return this.actions.includes(fromInnerGameActions.PLAY_FREE_BATTLE_CARD)
+    return this.actions.includes(InnerGameActionTypes.PLAY_FREE_BATTLE_CARD)
   }
 
   isPlayPaidEnabled() {
-    return this.actions.includes(fromInnerGameActions.PLAY_PAID_BATTLE_CARD)
+    return this.actions.includes(InnerGameActionTypes.PLAY_PAID_BATTLE_CARD)
   }
 }

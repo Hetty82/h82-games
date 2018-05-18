@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { RoundComponent } from './round.component';
+import { RoundComponent } from './round.component'
 
 describe('RoundComponent', () => {
-  let component: RoundComponent;
-  let fixture: ComponentFixture<RoundComponent>;
+  let component: RoundComponent
+  let fixture: ComponentFixture<RoundComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RoundComponent ]
+      declarations: [ RoundComponent ],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RoundComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(RoundComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

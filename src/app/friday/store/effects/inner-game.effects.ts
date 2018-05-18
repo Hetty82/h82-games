@@ -5,8 +5,8 @@ import { select, Store } from '@ngrx/store'
 import { map, withLatestFrom } from 'rxjs/operators'
 
 import * as fromStore from '../../store'
-import * as innerGameActions from '../actions/inner-game.actions'
-import * as outerGameActions from '../actions/outer-game.actions'
+import * as fromInnerGameActions from '../actions/inner-game.actions'
+import * as fromOuterGameActions from '../actions/outer-game.actions'
 
 import { createDeck } from '../../helpers/card.helpers'
 
@@ -21,20 +21,20 @@ export class InnerGameEffects {
   // Init
   @Effect()
   initGame$ = this.actions$.pipe(
-    ofType(innerGameActions.INIT_GAME),
-    map((action: innerGameActions.InitGame) => action.payload),
+    ofType(fromInnerGameActions.InnerGameActionTypes.INIT_GAME),
+    map((action: fromInnerGameActions.InitGame) => action.payload),
     withLatestFrom(this.store.pipe(select(fromStore.getCardsState))),
     map(([ difficulty, cardsState ]) => {
-      return new innerGameActions.InitGameSuccess(createDeck(difficulty, cardsState))
+      return new fromInnerGameActions.InitGameSuccess(createDeck(difficulty, cardsState))
     }),
   )
 
   @Effect()
   initGameSuccess$ = this.actions$.pipe(
-    ofType(innerGameActions.INIT_GAME_SUCCESS),
-    map((action: innerGameActions.InitGame) => action.payload),
+    ofType(fromInnerGameActions.InnerGameActionTypes.INIT_GAME_SUCCESS),
+    map((action: fromInnerGameActions.InitGame) => action.payload),
     map(() => {
-      return new outerGameActions.Save()
+      return new fromOuterGameActions.Save()
     }),
   )
 }

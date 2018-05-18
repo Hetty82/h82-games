@@ -1,7 +1,7 @@
 import { Game } from '../../models/game.model'
 import { GameError } from '../../models/game.interfaces'
 
-import * as fromGames from '../actions/games.actions'
+import { GamesActionsUnion, GamesActionTypes } from '../actions/games.actions'
 
 
 interface GameEntities  {
@@ -24,16 +24,16 @@ const initialState: State = {
   loading: false,
 }
 
-export function reducer(state: State = initialState, action: fromGames.GamesAction): State {
+export function reducer(state: State = initialState, action: GamesActionsUnion): State {
   switch (action.type) {
-    case fromGames.CREATE_GAME: {
+    case GamesActionTypes.CREATE_GAME: {
       return {
         ...state,
         loading: true,
       }
     }
 
-    case fromGames.CREATE_GAME_FAIL: {
+    case GamesActionTypes.CREATE_GAME_FAIL: {
       return {
         ...state,
         error: action.payload,
@@ -41,7 +41,7 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
       }
     }
 
-    case fromGames.CREATE_GAME_SUCCESS: {
+    case GamesActionTypes.CREATE_GAME_SUCCESS: {
       const game = action.payload
 
       const entities = {
@@ -63,14 +63,14 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
       }
     }
 
-    case fromGames.DELETE_GAME: {
+    case GamesActionTypes.DELETE_GAME: {
       return {
         ...state,
         loading: true,
       }
     }
 
-    case fromGames.DELETE_GAME_FAIL: {
+    case GamesActionTypes.DELETE_GAME_FAIL: {
       return {
         ...state,
         error: action.payload,
@@ -78,7 +78,7 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
       }
     }
 
-    case fromGames.DELETE_GAME_SUCCESS: {
+    case GamesActionTypes.DELETE_GAME_SUCCESS: {
       const gameId = action.payload
 
       const {
@@ -97,14 +97,14 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
       }
     }
 
-    case fromGames.LOAD_GAMES: {
+    case GamesActionTypes.LOAD_GAMES: {
       return {
         ...state,
         loading: true,
       }
     }
 
-    case fromGames.LOAD_GAMES_FAIL: {
+    case GamesActionTypes.LOAD_GAMES_FAIL: {
       return {
         ...state,
         error: action.payload,
@@ -113,7 +113,7 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
       }
     }
 
-    case fromGames.LOAD_GAMES_SUCCESS: {
+    case GamesActionTypes.LOAD_GAMES_SUCCESS: {
       const games = action.payload
 
       const entities = games.reduce((newEntities: GameEntities, game: Game) => {
@@ -137,14 +137,14 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
     }
 
 
-    case fromGames.LOAD_GAME_DETAILS: {
+    case GamesActionTypes.LOAD_GAME_DETAILS: {
       return {
         ...state,
         loading: true,
       }
     }
 
-    case fromGames.LOAD_GAME_DETAILS_FAIL: {
+    case GamesActionTypes.LOAD_GAME_DETAILS_FAIL: {
       return {
         ...state,
         error: action.payload,
@@ -152,7 +152,7 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
       }
     }
 
-    case fromGames.LOAD_GAME_DETAILS_SUCCESS: {
+    case GamesActionTypes.LOAD_GAME_DETAILS_SUCCESS: {
       return {
         ...state,
         error: null,
@@ -160,7 +160,7 @@ export function reducer(state: State = initialState, action: fromGames.GamesActi
       }
     }
 
-    case fromGames.RESET_GAMES_STATE: {
+    case GamesActionTypes.RESET_GAMES_STATE: {
       return initialState
     }
 

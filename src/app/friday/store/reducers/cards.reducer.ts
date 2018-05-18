@@ -6,7 +6,7 @@ import {
   RobinsonCardId, RobinsonCardRemote,
 } from '../../models/card.interfaces'
 
-import * as fromActions from '../actions'
+import { OuterGameActionsUnion, OuterGameActionTypes } from '../actions/outer-game.actions'
 
 import { createEntities, createIdsArray } from '../../helpers/reducer.helper'
 
@@ -80,17 +80,17 @@ const initialState: State = {
   robinsonCardIds: [],
 }
 
-export function reducer(state: State = initialState, action: fromActions.OuterGameAction): State {
+export function reducer(state: State = initialState, action: OuterGameActionsUnion): State {
   switch (action.type) {
 
-    case fromActions.LOAD_CARDS: {
+    case OuterGameActionTypes.LOAD_CARDS: {
       return {
         ...state,
         loading: true,
       }
     }
 
-    case fromActions.LOAD_CARDS_SUCCESS: {
+    case OuterGameActionTypes.LOAD_CARDS_SUCCESS: {
       const cards = action.payload
 
       const agingCardsHard = cards.agingCards.filter(card => card.difficulty === AgingCardDifficulty.HARD)
@@ -123,7 +123,7 @@ export function reducer(state: State = initialState, action: fromActions.OuterGa
       }
     }
 
-    case fromActions.RESET_CARDS_STATE: {
+    case OuterGameActionTypes.RESET_CARDS_STATE: {
       return initialState
     }
 

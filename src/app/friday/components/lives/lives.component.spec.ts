@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { LivesComponent } from './lives.component';
+import { LivesComponent } from './lives.component'
 
 describe('LivesComponent', () => {
-  let component: LivesComponent;
-  let fixture: ComponentFixture<LivesComponent>;
+  let component: LivesComponent
+  let fixture: ComponentFixture<LivesComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LivesComponent ]
+      declarations: [ LivesComponent ],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LivesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(LivesComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

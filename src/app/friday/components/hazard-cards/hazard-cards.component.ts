@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { HazardCardId } from '../../models/card.interfaces'
 import { HazardCardEntities } from '../../store/reducers/cards.reducer'
-
-import * as fromInnerGameActions from '../../store/actions/inner-game.actions'
+import { InnerGameActionTypes } from '../../store/actions/inner-game.actions'
 
 
 @Component({
@@ -26,10 +25,10 @@ export class HazardCardsComponent implements OnInit {
   }
 
   isDrawEnabled() {
-    return this.actions.includes(fromInnerGameActions.DRAW_HAZARDS)
+    return this.actions.includes(InnerGameActionTypes.DRAW_HAZARDS)
   }
 
   isPlayEnabled() {
-    return this.actions.includes(fromInnerGameActions.PLAY_HAZARD)
+    return this.actions.includes(InnerGameActionTypes.PLAY_HAZARD)
   }
 }

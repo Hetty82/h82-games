@@ -6,7 +6,6 @@ import { take, filter } from 'rxjs/operators'
 import * as fromStore from '../../store'
 
 import { GameDifficulty } from '../../models/game.interfaces'
-import { getPlayedFreeBattleComboIds } from '../../store/reducers/active-game.reducer'
 
 
 @Component({
@@ -88,25 +87,25 @@ export class ActiveGameComponent implements OnInit, OnDestroy {
   }
 
   drawHazardCards() {
-    if (this.availableActions.includes(fromStore.DRAW_HAZARDS)) {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.DRAW_HAZARDS)) {
       this.store.dispatch(new fromStore.DrawHazards())
     }
   }
 
   playFreeBattleCard() {
-    if (this.availableActions.includes(fromStore.PLAY_FREE_BATTLE_CARD)) {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.PLAY_FREE_BATTLE_CARD)) {
       this.store.dispatch(new fromStore.PlayFreeBattleCard())
     }
   }
 
   playPaidBattleCard() {
-    if (this.availableActions.includes(fromStore.PLAY_PAID_BATTLE_CARD)) {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.PLAY_PAID_BATTLE_CARD)) {
       this.store.dispatch(new fromStore.PlayPaidBattleCard())
     }
   }
 
   playHazardCard(id) {
-    if (this.availableActions.includes(fromStore.PLAY_HAZARD)) {
+    if (this.availableActions.includes(fromStore.InnerGameActionTypes.PLAY_HAZARD)) {
       this.store.dispatch(new fromStore.PlayHazard(id))
     }
   }

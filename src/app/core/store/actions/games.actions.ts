@@ -6,37 +6,37 @@ import { Game } from '../../models/game.interface'
 export type GameError = any
 export type GameName = string
 
-// Load games
-export const LOAD_GAMES = '[Games] Load games'
-export const LOAD_GAMES_FAIL = '[Games] Load games fail'
-export const LOAD_GAMES_SUCCESS = '[Games] Load games success'
-// Select game
-export const SELECT_GAME = '[Games] Select game'
+export enum GamesActionTypes {
+  LOAD_GAMES = '[Games] Load games',
+  LOAD_GAMES_FAIL = '[Games] Load games fail',
+  LOAD_GAMES_SUCCESS = '[Games] Load games success',
+  SELECT_GAME = '[Games] Select game',
+}
 
 
 // Actions
 export class LoadGames implements Action {
-  readonly type = LOAD_GAMES
+  readonly type = GamesActionTypes.LOAD_GAMES
 }
 
 export class LoadGamesFail implements Action {
-  readonly type = LOAD_GAMES_FAIL
+  readonly type = GamesActionTypes.LOAD_GAMES_FAIL
   constructor(public payload: GameError) {}
 }
 
 export class LoadGamesSuccess implements Action {
-  readonly type = LOAD_GAMES_SUCCESS
+  readonly type = GamesActionTypes.LOAD_GAMES_SUCCESS
   constructor(public payload: Game[]) {}
 }
 
 export class SelectGame implements Action {
-  readonly type = SELECT_GAME
+  readonly type = GamesActionTypes.SELECT_GAME
   constructor(public payload: GameName) {}
 }
 
 
 // Action types
-export type GamesAction =
+export type GamesActionsUnion =
   | LoadGames
   | LoadGamesFail
   | LoadGamesSuccess

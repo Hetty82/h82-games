@@ -8,7 +8,7 @@ import { of } from 'rxjs/observable/of'
 
 import * as fromStore from '../../store'
 import * as fromServices from '../../services'
-import * as outerGameActions from '../actions/outer-game.actions'
+import * as fromOuterGameActions from '../actions/outer-game.actions'
 
 
 @Injectable()
@@ -23,12 +23,12 @@ export class OuterGameEffects {
   // Load
   @Effect()
   loadCards$ = this.actions$.pipe(
-    ofType(outerGameActions.LOAD_CARDS),
+    ofType(fromOuterGameActions.OuterGameActionTypes.LOAD_CARDS),
     mergeMap(() => {
       return this.cardService
       .getCards()
       .pipe(
-        map(set => new outerGameActions.LoadCardsSuccess(set)),
+        map(set => new fromOuterGameActions.LoadCardsSuccess(set)),
       )
     }),
   )
@@ -36,7 +36,7 @@ export class OuterGameEffects {
   // Save
   @Effect()
   save$ = this.actions$.pipe(
-    ofType(outerGameActions.SAVE),
+    ofType(fromOuterGameActions.OuterGameActionTypes.SAVE),
     withLatestFrom(this.store.pipe(select(fromStore.getActiveGameState)), (action, state) => state),
     mergeMap(activeGameState => {
       const { playing, ...gameDetails } = activeGameState
@@ -44,8 +44,8 @@ export class OuterGameEffects {
       return this.gamesService
         .saveGameDetails(gameDetails)
         .pipe(
-          map(() => new outerGameActions.SaveSuccess()),
-          catchError(error => of(new outerGameActions.SaveFail(error))),
+          map(() => new fromOuterGameActions.SaveSuccess()),
+          catchError(error => of(new fromOuterGameActions.SaveFail(error))),
         )
     }),
   )
