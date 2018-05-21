@@ -61,7 +61,7 @@
         (lose)="loseBattle()"
         (confirmLose)="loseBattleConfirm()"
         (cancelLose)="loseBattleCancel()"
-        (win)="winBattle()"
+        (win)="winBattle($event)"
         [actions]="availableActions"
         [hazardCardEntities]="hazardCardEntities$ | async"
         [playedHazardCardId]="playedHazardCardId$ | async"

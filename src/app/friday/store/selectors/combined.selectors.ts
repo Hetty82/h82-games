@@ -66,7 +66,7 @@ export const getActiveBattleHazardPoints = createSelector(
 export const getActiveBattleRequiredPoints = createSelector(
   getActiveBattleHazardPoints,
   getActiveBattlePoints,
-  (hazardPoints, battlePoints) => hazardPoints && hazardPoints - battlePoints,
+  (hazardPoints, battlePoints) => hazardPoints !== undefined && hazardPoints - battlePoints,
 )
 
 export const getRemainingFreeCardsAmount = createSelector(

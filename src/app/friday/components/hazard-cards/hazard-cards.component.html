@@ -27,11 +27,10 @@
 </div>
 
 <div *ngIf="optionIds.length" class="options">
-  Choose a hazard:
+  <h2>Choose a hazard:</h2>
   <figure *ngFor="let id of optionIds" class="option card">
     <img src="assets/images/battle-{{ entities[id].battleComboId }}.png">
     <figcaption>
-      {{ entities[id] | json }}
       <button (click)="playHazardCard.emit(id)" class="button" [disabled]="isPlayDisabled()">
         play this hazard
       </button>

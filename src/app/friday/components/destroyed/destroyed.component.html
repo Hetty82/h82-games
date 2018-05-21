@@ -1,6 +1,12 @@
+<h1 class="title">Destroyed Cards</h1>
+
 <div class="pile">
-  Destroyed:
   <div class="cards">
-    {{ ids.length }}
+    <figure class="deck card">
+      <img *ngIf="ids.length" src="assets/images/battle-{{ ids[0] }}.png">
+      <figcaption>
+        cards: {{ ids.length }}
+      </figcaption>
+    </figure>
   </div>
 </div>

@@ -1,6 +1,12 @@
+<h1 class="title">Aging Cards</h1>
+
 <div class="pile">
-  Aging Cards:
   <div class="cards">
-    {{ deck.length }}
+    <figure class="deck card">
+      <img *ngIf="deck.length" src="assets/images/battle-back.png">
+      <figcaption>
+        deck: {{ deck.length }}
+      </figcaption>
+    </figure>
   </div>
 </div>

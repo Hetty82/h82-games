@@ -183,6 +183,7 @@ export function reducer(state: State = initialState, action: GameAction): State 
       return {
         ...state,
         robinsonCardDeck: action.payload,
+        robinsonDiscardPile: [],
         shuffling: false,
       }
     }
