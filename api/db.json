@@ -1,0 +1,204 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Hetty",
+      "email": "devries@hetty82.com"
+    },
+    {
+      "id": 2,
+      "name": "Froukje",
+      "email": "froukjedekanter@msn.com"
+    }
+  ],
+  "games": [
+    {
+      "id": 1,
+      "name": "Friday",
+      "accessible": true
+    },
+    {
+      "id": 2,
+      "name": "Clash of Clans Memory",
+      "accessible": false
+    }
+  ],
+  "friday-games": [
+    {
+      "userId": 1,
+      "difficulty": 1,
+      "createdAt": "2018-05-15T15:50:22.821Z",
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "difficulty": 2,
+      "createdAt": "2018-05-15T15:50:23.901Z",
+      "id": 2
+    }
+  ],
+  "friday-game-details": [
+    {
+      "currentRound": 1,
+      "difficulty": 1,
+      "id": 1,
+      "lives": 20,
+      "destroyedCardIds": [],
+      "agingCardDeck": [
+        29,
+        29,
+        25,
+        15,
+        25,
+        33,
+        5,
+        18,
+        31,
+        30
+      ],
+      "robinsonCardDeck": [
+        36,
+        36,
+        10,
+        4,
+        6,
+        14,
+        36,
+        10,
+        4,
+        10,
+        4,
+        36,
+        4,
+        36,
+        36,
+        36,
+        36,
+        4
+      ],
+      "robinsonDiscardPile": [],
+      "hazardCardDeck": [
+        1,
+        5,
+        7,
+        10,
+        6,
+        20,
+        15,
+        16,
+        22,
+        4,
+        7,
+        6,
+        23,
+        8,
+        14,
+        24,
+        24,
+        9,
+        3,
+        5,
+        2,
+        17,
+        12,
+        13,
+        18,
+        13,
+        11,
+        21
+      ],
+      "hazardCardOptions": [],
+      "hazardDiscardPile": [
+        19
+      ],
+      "pirateCardIds": [
+        10,
+        7
+      ],
+      "playedFreeBattleCardIds": [],
+      "playedHazardCardId": 12,
+      "playedPaidBattleCardIds": [],
+      "destroyedCards": []
+    },
+    {
+      "currentRound": 1,
+      "difficulty": 2,
+      "id": 2,
+      "lives": 20,
+      "destroyedCardIds": [],
+      "agingCardDeck": [
+        25,
+        15,
+        29,
+        29,
+        25,
+        33,
+        30,
+        31,
+        18
+      ],
+      "robinsonCardDeck": [
+        36,
+        6,
+        36,
+        4,
+        36,
+        4,
+        36,
+        4,
+        5,
+        10,
+        4,
+        36,
+        4,
+        14,
+        36,
+        36,
+        36,
+        10,
+        10
+      ],
+      "robinsonDiscardPile": [],
+      "hazardCardDeck": [
+        23,
+        22,
+        24,
+        5,
+        16,
+        4,
+        3,
+        13,
+        21,
+        7,
+        18,
+        19,
+        24,
+        20,
+        12,
+        10,
+        2,
+        8,
+        12,
+        6,
+        14,
+        5,
+        9,
+        13,
+        17,
+        6,
+        15,
+        11,
+        1,
+        7
+      ],
+      "hazardCardOptions": [],
+      "hazardDiscardPile": [],
+      "pirateCardIds": [
+        2,
+        10
+      ],
+      "playedHazardCardId": null,
+      "destroyedCards": []
+    }
+  ]
+}
